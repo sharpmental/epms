@@ -1,32 +1,32 @@
 requirejs([ 'jquery', 'aci', 'bootstrap', 'bootstrapValidator', 'message' ],
 		function($, aci) {
 			/* For auto refresh control */
-			var reloadtime = 15000;
-			var startreload = 1;
-
-			function myrefresh() {
-				if (startreload > 0) {
-					$.scojs_message('自动刷新', $.scojs_message.TYPE_OK);
-					window.location.reload();
-				}
-			}
-
-			function mytogglerefresh() {
-				startreload = !startreload;
-
-				if (startreload > 0) {
-					$('#refreshBtn>span').text(' 停止刷新');
-					$('#refreshBtnF>span').text(' 停止刷新');
-				} else {
-					$('#refreshBtn>span').text(' 开始刷新');
-					$('#refreshBtnF>span').text(' 开始刷新');
-				}
-			}
-
-			setInterval(myrefresh, reloadtime);
-
-			$('#refreshBtn').click(mytogglerefresh);
-			$('#refreshBtnF').click(mytogglerefresh);
+//			var reloadtime = 15000;
+//			var startreload = 1;
+//
+//			function myrefresh() {
+//				if (startreload > 0) {
+//					$.scojs_message('自动刷新', $.scojs_message.TYPE_OK);
+//					window.location.reload();
+//				}
+//			}
+//
+//			function mytogglerefresh() {
+//				startreload = !startreload;
+//
+//				if (startreload > 0) {
+//					$('#refreshBtn>span').text(' 停止刷新');
+//					$('#refreshBtnF>span').text(' 停止刷新');
+//				} else {
+//					$('#refreshBtn>span').text(' 开始刷新');
+//					$('#refreshBtnF>span').text(' 开始刷新');
+//				}
+//			}
+//
+//			setInterval(myrefresh, reloadtime);
+//
+//			$('#refreshBtn').click(mytogglerefresh);
+//			$('#refreshBtnF').click(mytogglerefresh);
 
 			$('#searchform').bootstrapValidator({
 				message : '输入项不能为空',

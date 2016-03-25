@@ -496,7 +496,7 @@ class Admin_Controller extends Member_Controller
      *            $istag
      * @return unknown_type
      */
-    protected function admin_tpl($view_file, $page_data = false, $cache = false)
+    protected function admin_loginview($view_file, $page_data = false, $cache = false)
     {
         $view_file = $this->page_data['folder_name'] . DIRECTORY_SEPARATOR . $this->page_data['controller_name'] . DIRECTORY_SEPARATOR . $view_file;
         
@@ -526,8 +526,7 @@ class Admin_Controller extends Member_Controller
         $page_data['current_member_id'] = $this->user_id; // 当前用户id
         $page_data['current_member_groupid'] = $this->group_id;
         
-        // 加截菜单ADMIN
-        
+        //Load menu
         $menu_data = $this->nav_menu(0, 0, 1);
         
         $page_data['sub_menu_data'] = NULL;
@@ -565,7 +564,7 @@ class Admin_Controller extends Member_Controller
         
         // Setup notification data menu, wsm
         
-        $page_data['notification'] = 1;
+        $page_data['notification'] = array();
         
         $this->load->view('adminpanel/header', $page_data);
         $this->load->view('adminpanel/index', $page_data);

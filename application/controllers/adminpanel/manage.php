@@ -49,13 +49,13 @@ class Manage extends Admin_Controller
 
     function index($startnum = '0')
     {
-        // $data = $this->Prisonerinfo_model->getall();
         if (isset($_GET['keyword'])) {
             $keyword = $_GET['keyword'];
-            $data = $this->Prisonerinfo_model->getfromkeyword($keyword);
+            $data = $this->Member_model->getall();
         } else
-            $data = $this->Prisonerinfo_model->getfromview($startnum, 2000);
+            $data = $this->Member_model->getall();
         
+        //generate table
         $this->load->library('table');
         $template = array(
             'table_open' => '<table class="table table-hover dataTable">'
@@ -63,41 +63,7 @@ class Manage extends Admin_Controller
         $this->table->set_template($template);
         $this->table->set_heading('#', '编号', '姓名', '出入状态', '部门号码', '腕带编号', '腕带状态', '更新时间', '详情', '定位信息LOC', '定位信息MON', '活动轨迹');
         
-        $data_t = array();
-        foreach ($data->result_array() as $k => $v) {
-            // if ($v['status'] == '1')
-            // $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">返回</a>';
-            // else
-            // $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">外出</a>';
-            
-            if ($v['status'] == '1')
-                $btn_out = '在外';
-            else
-                $btn_out = '在监';
-            
-            if (isset($this->config->item('watch_status')[$v['watch_status']]))
-                $status = $this->config->item('watch_status')[$v['watch_status']];
-            else
-                $status = "Unknow!";
-            
-            $temp = array(
-                "<input type='checkbox' name='pid' class='pid_sel' value='" . $v['people_id'] . "' />",
-                $v['people_id'],
-                $v['people_name'],
-                $btn_out,
-                $v['dep_id'],
-                $v['watch_id'],
-                $status,
-                $v['update_timestamp'],
-                '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/detailinfo/' . $v['people_id'] . '" role="button">详情</a>',
-                $v['locarea_id'],
-                $v['monarea_id'],
-                '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/trace/' . $v['people_id'] . '" role="button">活动轨迹</a>'
-            );
-            array_push($data_t, $temp);
-        }
-        
-        $table_data = $this->table->generate($data_t);
+        $table_data = $this->table->generate($data);
         
         // create pageination
         $this->load->library('pagination');
@@ -129,23 +95,6 @@ class Manage extends Admin_Controller
             'table_data' => $table_data,
             'pagelink' => $pageslink
         ));
-    }
-
-    public function detailinfo($id = '0')
-    {
-        $this->load->model('People_detail_model');
-        $data_i = $this->People_detail_model->getbyid($id);
-        
-        if ($data_i->num_rows()) {
-            $this->view('detail', array(
-                'detail' => $data_i->result_array()[0]
-            ));
-        } else
-            $this->view('detail', array(
-                'detail' => array(
-                    'Error' => 'Can not find the detial information about this people'
-                )
-            ));
     }
     
     public function logout()
@@ -232,6 +181,7 @@ class Manage extends Admin_Controller
             $this->Times_model->delete(array(
                 'username' => $username
             ));
+            
             // if($r['is_lock'])
             // exit(json_encode(array('status'=>false,'tips'=>' 您的帐号已被锁定，暂时无法登录')));
             
@@ -266,7 +216,7 @@ class Manage extends Admin_Controller
             )));
         } else {
             
-            $this->admin_tpl('login', array(
+            $this->admin_loginview('login', array(
                 'require_js' => true
             ));
         }
