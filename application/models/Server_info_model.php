@@ -1,6 +1,6 @@
 <?php
 
-class Server_info_model extends \Base_Model
+class Server_info_model extends My_Model
 {
 
     public function __construct()

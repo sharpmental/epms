@@ -1,5 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Captcha_model extends Base_Model {
+class Captcha_model extends My_Model {
 	public function __construct() {
 		$this->table_name = 'captcha';
 		parent::__construct();

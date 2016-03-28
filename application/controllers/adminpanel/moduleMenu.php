@@ -251,7 +251,7 @@ class ModuleMenu extends Admin_Controller {
 		$datas = $this->Module_menu_model->select('','*',10000,'list_order ASC,menu_id asc');
 		$array = array();
 		foreach ($datas as $r) {
-			$r['url'] =base_url($r['folder'].'/'.$r['controller'].'/'.$r['method']) ;
+			$r['url'] = base_url($r['folder'].'/'.$r['controller'].'/'.$r['method']) ;
 			$menus[$r['menu_id']] = $r;
 		}
 		setcache('cache_module_menu_all', $menus);

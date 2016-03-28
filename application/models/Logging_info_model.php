@@ -1,6 +1,6 @@
 <?php
 
-class Logging_info_model extends \Base_Model
+class Logging_info_model extends My_Model
 {
 
     public function __construct()

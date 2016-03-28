@@ -1,5 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Member_model extends Base_Model {
+class Member_model extends My_Model {
 
 	var $page_size = 10;
 	public function __construct() {

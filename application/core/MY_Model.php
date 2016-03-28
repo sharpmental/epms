@@ -2,12 +2,8 @@
 
 if (! defined('BASEPATH'))
     exit('No direct script access allowed');
-class My_Model extends CI_Model
-{
-    
-}
 
-class Base_Model extends CI_Model
+class My_Model extends CI_Model
 {
 
     protected $table_name = '';

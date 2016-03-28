@@ -85,6 +85,7 @@ class Manage extends Admin_Controller
         $pconfig['cur_tag_close'] = '</a></li>';
         $pconfig['num_tag_open'] = '<li>';
         $pconfig['num_tag_close'] = '</li>';
+        $pconfig['uri_segment'] = 5;
         
         $this->pagination->initialize($pconfig);
         

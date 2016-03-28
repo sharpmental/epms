@@ -1,5 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Times_model extends Base_Model {
+class Times_model extends My_Model {
 	public function __construct() {
 		$this->table_name = 'tb_times';
 		parent::__construct();

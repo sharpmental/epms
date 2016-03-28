@@ -1,8 +1,9 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Module_menu_model extends Base_Model {
+class Module_menu_model extends My_Model {
+	
 	public function __construct() {
-		$this->table_name = 'module_menu';
 		parent::__construct();
+		$this->table_name = 'tb_module_menu';
 	}
 
 	function default_info(){
