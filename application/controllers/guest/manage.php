@@ -8,10 +8,7 @@ class Manage extends MY_Admin_Controller {
 				'Module_menu_model' 
 		) );
 	}
-	function cache() {
-		$this->reload_all_cache ();
-		$this->showmessage ( '全局缓存成功' );
-	}
+
 	function go($id = 0) {
 		if ($id == 0)
 			exit ();

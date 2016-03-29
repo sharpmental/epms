@@ -55,7 +55,7 @@
       		<div class="form-group">
 				<label  class="col-sm-2 control-label">全名</label>
 				<div class="col-sm-4">
-                  <input name="fullname" type="text" class="form-control" id="fullname" placeholder="请输入详细内容" value="<?php echo $data_info['operator_user']?>" size="45" />
+                  <input name="fullname" type="text" class="form-control" id="fullname" placeholder="请输入详细内容" value="<?php echo $data_info['operator_displayname']?>" size="45" />
 				</div>
 			</div>
 	      </fieldset>

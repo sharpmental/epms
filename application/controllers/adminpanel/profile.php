@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Profile extends Admin_Controller {
+class Profile extends MY_Admin_Controller {
 	
 	var $method_config;
 	function __construct()

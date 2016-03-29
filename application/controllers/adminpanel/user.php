@@ -3,7 +3,7 @@
 if (! defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class User extends Admin_Controller
+class User extends MY_Admin_Controller
 {
 
     var $method_config;
@@ -12,7 +12,8 @@ class User extends Admin_Controller
     {
         parent::__construct();
         $this->load->model(array(
-            'Times_model'
+            'Times_model',
+        	'Member_model'
         ));
         $this->load->helper(array(
             'member',
@@ -39,7 +40,7 @@ class User extends Admin_Controller
         if (isset($_GET['dosubmit'])) {
             $keyword = isset($_GET['keyword']) ? safe_replace(trim($_GET['keyword'])) : '';
             if ($keyword != "")
-                $where_arr[] = "concat(operator_name,operator_user) like '%{$keyword}%'";
+                $where_arr[] = "concat(operator_name, operator_displayname) like '%{$keyword}%'";
         }
         $where = implode(" and ", $where_arr);
         $data_list = $this->Member_model->listinfo($where, '*', $orderby, $page_no, $this->Member_model->page_size, '', $this->Member_model->page_size, page_list_url('member/staff/index', true));
@@ -57,13 +58,13 @@ class User extends Admin_Controller
         if (isset($_POST['username']) && $username == '') {
             $username = trim(safe_replace($_POST['username']));
             $c = $this->Member_model->count(array(
-                'operator_user' => $username
+                'operator_name' => $username
             ));
             echo ($c > 0) ? '{"valid":false}' : '{"valid":true}';
         } else {
             $username = trim(safe_replace($username));
             $c = $this->Member_model->count(array(
-                'operator_user' => $username
+                'operator_name' => $username
             ));
             return ($c > 0) ? true : false;
         }
@@ -175,7 +176,7 @@ class User extends Admin_Controller
             $status = $this->Member_model->update(array(
                 'operator_pwd' => $password,
                 'operator_role' => $group_id,
-                'operator_user' => $fullname
+                'operator_displayname' => $fullname
             ), array(
                 'operator_id' => $id
             ));
@@ -283,7 +284,7 @@ class User extends Admin_Controller
                 'operator_name' => $username,
                 'operator_pwd' => $password,
                 'operator_role' => $group_id,
-                'operator_user' => $fullname,
+                'operator_displayname' => $fullname,
                 'reg_time' => date('Y-m-d H:i:s'),
                 'encrypt' => "",
                 'reg_ip' => $this->input->ip_address(),

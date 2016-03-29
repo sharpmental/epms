@@ -85,6 +85,12 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 //customize
+define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
+define('SITE_URL', '/');#初始安装，请在这里修改
+define('SKIN_PATH', SITE_URL.'css/');
+define('SYS_STYLE',  'default');
+define('EXT',  '.php');
+
 define('BASE_CSS_PATH',  '/css/');
 define('BASE_JS_PATH', '/scripts/');
 define('IMG_PATH', '/images/');

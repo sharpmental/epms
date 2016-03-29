@@ -179,15 +179,6 @@ function index($startnum = '0') {
             $this->session->set_userdata('user_name', $username);
             $this->session->set_userdata('group_id', $r['operator_role']);
             
-            //get the group path
-            $this->load->model('Member_role_model');
-            $p = $this->Member_role_model->get_one('role_id',  $r['operator_role']);
-            
-            if (!isset($p) || !isset($p['xurl']))
-            	$dir_priv = 'guest';
-            else 
-            	$dir_priv = $p['xurl'];
-            
             //insert a new login record
             $this->load->model("Logging_info_model");
             $r = array(
@@ -204,7 +195,7 @@ function index($startnum = '0') {
             exit(json_encode(array(
                 'status' => true,
                 'tips' => ' 登录成功',
-                'next_url' => site_url($dir_priv)
+                'next_url' => site_url($this->page_data['folder_name'])
             )));
         } else {
             

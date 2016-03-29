@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Server_info extends Admin_Controller {
+class Server_info extends MY_Admin_Controller {
 	
 	function __construct()
 	{
@@ -28,7 +28,7 @@ class Server_info extends Admin_Controller {
 		//create pageination
 		$this->load->library('pagination');
 		
-		$pconfig['base_url'] = base_url().'adminpanel/server_info/index';
+		$pconfig['base_url'] = base_url(). $this->page_data['folder_name']. '/server_info/index';
 		$pconfig['total_rows'] = $data->num_rows();
 		$pconfig['per_page'] = 20;
 		$pconfig['full_tag_open'] = '<ul class="pagination">';

@@ -74,17 +74,17 @@ CREATE TABLE `tb_member_role` (
   `role_name` varchar(45) NOT NULL DEFAULT '' COMMENT '组名',
   `type_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '保留',
   `description` varchar(200) DEFAULT NULL COMMENT '描述',
-  `url` varchar(20) NOT NULL COMMENT '访问路径',
+  `xurl` varchar(20) NOT NULL COMMENT '访问路径',
   PRIMARY KEY (`role_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
 
 LOCK TABLES `tb_member_role` WRITE;
 /*!40000 ALTER TABLE `tb_member_role` DISABLE KEYS */;
 
-INSERT INTO `tb_member_role` (`role_id`, `role_name`, `type_id`, `description`, `url`)
+INSERT INTO `tb_member_role` 
 VALUES
 	(1,'超级管理员',1,'超级管理员','adminpanel'),
-	(2,'项目管理员',2,'项目管理员','projadmin'),
+	(2,'项目管理员',2,'项目管理员','projectadmin'),
 	(3,'业务员',3,'业务员','marketadmin'),
 	(4,'客户管理员',4,'客户管理员','useradmin'),
 	(5,'客户',5,'客户','user'),
@@ -102,77 +102,52 @@ CREATE TABLE `tb_module_menu` (
   `menu_id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
   `menu_name` char(40) NOT NULL DEFAULT '',
   `parent_id` smallint(6) NOT NULL DEFAULT '0',
-  `list_order` smallint(6) unsigned NOT NULL DEFAULT '0',
   `is_display` tinyint(1) NOT NULL DEFAULT '1',
   `controller` varchar(50) DEFAULT NULL,
-  `folder` varchar(50) DEFAULT NULL,
   `method` varchar(50) DEFAULT NULL,
   `flag_id` varchar(50) NOT NULL DEFAULT '0',
-  `is_side_menu` tinyint(1) DEFAULT '0',
-  `is_system` tinyint(1) DEFAULT '0',
-  `is_works` tinyint(1) DEFAULT '0',
-  `user_id` int(11) NOT NULL DEFAULT '0',
   `css_icon` varchar(50) DEFAULT NULL,
-  `arr_parentid` varchar(250) DEFAULT NULL,
-  `arr_childid` varchar(250) DEFAULT NULL,
-  `is_parent` tinyint(1) DEFAULT '0',
-  `show_where` tinyint(1) DEFAULT '1',
+  `priv` smallint DEFAULT 0,  /* priv >= role_id = OK */
   PRIMARY KEY (`menu_id`) USING BTREE,
-  KEY `list_order` (`list_order`),
   KEY `parent_id` (`parent_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*!40000 ALTER TABLE `tb_module_menu` DISABLE KEYS */;
 
-INSERT INTO `tb_module_menu` (`menu_id`, `menu_name`, `parent_id`, `list_order`, `is_display`, `controller`, `folder`, `method`, `flag_id`, `is_side_menu`, `is_system`, `is_works`, `user_id`, `css_icon`, `arr_parentid`, `arr_childid`, `is_parent`, `show_where`)
+INSERT INTO `tb_module_menu` 
 VALUES
-	(1,'首页',0,1,1,'manage','adminpanel','index','0',1,0,1,1,'home','0','1,5,40,41,6,7,8',1,1),
-	(2,'用户设置',0,2,1,'manage','adminpanel','go_2','0',1,0,1,1,'user','0','2,9,16,31,32,33,34,35,36,37,26,27,28,29,30',1,1),
-	(3,'设备信息',0,3,1,'manage','adminpanel','go_3','0',1,0,1,1,'suitcase','0','3',1,1),
-	(4,'报警信息',0,4,1,'manage','adminpanel','go_4','0',1,0,1,1,'warning','0','4,15,38',1,1),
-	(5,'管理员',1,5,1,'manage','adminpanel','go_5','0',1,0,1,1,'','0,1','5,40,41,6,7,8',1,1),
-	(6,'控制面板',5,6,1,'manage','adminpanel','controlpanel','0',1,0,1,1,'','0,1,5','6',0,1),
-	(7,'修改密码',5,7,1,'profile','adminpanel','change_pwd','0',1,0,1,1,'','0,1,5','7',0,1),
-	(8,'注销',5,8,1,'manage','adminpanel','logout','0',1,0,1,1,'','0,1,5','8',0,1),
-	(9,'网页用户设置',2,9,1,'manage','adminpanel','go_9','0',1,0,1,1,'','0,2','9,26,31,32,33,34,35,36,37',1,1),
-	(10,'服务器管理',0,10,1,'manage','adminpanel','go_10','0',1,0,1,1,'server','0','10,51,49,50',1,1),
-	(11,'人员信息',0,11,1,'manage','adminpanel','go_11','0',1,0,1,1,'user-times','0','11',1,1),
-	(12,'区域信息',0,12,1,'manage','adminpanel','go_12','0',1,0,1,1,'map-marker','0','12',1,1),
-	(13,'其他功能',0,13,1,'manage','adminpanel','go_13','0',1,0,1,1,'gears','0','13',1,1),
-	(14,'监狱地图',0,14,1,'manage','adminpanel','go_14','0',1,0,1,1,'photo','0','14',1,1),
-	(16,'栏目列表',0,16,0,'moduleMenu','adminpanel','index','0',1,0,1,1,'','0','16,17,18,19,20',1,1),
-	(17,'数据表',3,17,1,'edittable','adminpanel','index/0','0',1,0,1,1,'','0,3','',1,1),
-	(18,'数据表',4,18,1,'edittable','adminpanel','index/1','0',1,0,1,1,'','0,4','',1,1),
-	(19,'数据表',11,19,1,'edittable','adminpanel','index/3','0',1,0,1,1,'','0,11','',1,1),
-	(20,'数据表',12,20,1,'edittable','adminpanel','index/4','0',1,0,1,1,'','0,12','',1,1),
-	(26,'用户组列表',9,26,1,'role','adminpanel','index','0',1,0,1,1,'','0,2,9','26,27,28,29,30',1,1),
-	(27,'新增',26,27,1,'role','adminpanel','add','0',1,0,1,1,'','0,2,9,26','27',0,1),
-	(28,'编辑',26,28,1,'role','adminpanel','edit','0',1,0,1,1,'','0,2,9,26','28',0,1),
-	(29,'删除',26,29,1,'role','adminpanel','delete_one','0',1,0,1,1,'','0,2,9,26','29',0,1),
-	(30,'设置权限',26,30,1,'role','adminpanel','setting','0',1,0,1,1,'','0,2,9,26','30',0,1),
-	(31,'用户列表',9,31,1,'user','adminpanel','index','0',1,0,1,1,'','0,2,9','31,32,33,34,35,36,37',1,1),
-	(32,'新增',31,32,1,'user','adminpanel','add','0',1,0,1,1,'','0,2,9,31','32',0,1),
-	(33,'编辑',31,33,1,'user','adminpanel','edit','0',1,0,1,1,'','0,2,9,31','33',0,1),
-	(34,'检测用户名',31,34,1,'user','adminpanel','check_username','0',1,0,1,1,'','0,2,9,31','34',0,1),
-	(35,'删除',31,35,1,'user','adminpanel','delete','0',1,0,1,1,'','0,2,9,31','35',0,1),
-	(36,'锁定/解锁',31,36,1,'user','adminpanel','lock','0',1,0,1,1,'','0,2,9,31','36',0,1),
-	(37,'上传头像',31,37,1,'user','adminpanel','upload','0',1,0,1,1,'','0,2,9,31','37',0,1),
-	(38,'其他功能',13,38,1,'manage','adminpanel','go_38','0',1,0,1,1,'','0,13','38',0,1),
-	(40,'全局缓存',5,40,1,'manage','adminpanel','cache','0',1,0,1,1,'','0,1,5','40',0,1),
-	(41,'详细信息', 4, 41, 0, 'manage', 'adminpanel', 'detailinfo', '0', 1, 0, 1, 1, '', '0,4,41', '41', 0, 1),
-	(42,'外出', 4, 42, 0, 'manage', 'adminpanel', 'leave', '0', 1, 0, 1, 1, '', '0,4,42', '42', 0, 1),
-	(43,'轨迹', 4, 43, 0, 'manage', 'adminpanel', 'trace', '0', 1, 0, 1, 1, '', '0,4,43', '43', 0, 1),
-	(44,'显示数据表', 19, 44, 0, 'edittable', 'adminpanel', 'viewtable', '0', 1, 0, 1, 1, '', '0,4,19', '44', 0, 1),
-	(45,'添加People_info', 19, 45, 0, 'people_info', 'adminpanel', 'add', '0', 1, 0, 1, 1, '', '0,4,19', '45', 0, 1),
-	(46,'修改People_info', 19, 46, 0, 'people_info', 'adminpanel', 'modify', '0', 1, 0, 1, 1, '', '0,4,19', '46', 0, 1),
-	(47,'添加People_detail', 19, 47, 0, 'people_detail', 'adminpanel', 'add', '0', 1, 0, 1, 1, '', '0,4,19', '47', 0, 1),
-	(48,'修改People_detail', 19, 48, 0, 'people_detail', 'adminpanel', 'modify', '0', 1, 0, 1, 1, '', '0,4,19', '48', 0, 1),
-	(49,'服务器相关设置', 10, 49, 1, 'manage', 'adminpanel', 'go_49', '0', 1, 0, 1, 1, '', '0,10', '50,51', 0, 1),
-	(50,'服务器设置', 49, 50, 1, 'server_info', 'adminpanel', 'index', '0', 1, 0, 1, 1, '', '0,10,49', '50', 0, 1),
-	(51,'日志', 49, 51, 1, 'logging_info', 'adminpanel', 'index', '0', 1, 0, 1, 1, '', '0,10,49', '51', 1, 1),
-	(52,'主地图',14,52,1,'showmap','adminpanel','index','0',1,0,1,1,'','0,14','52',0,1),
-	(53,'出入记录查询',38,53,1,'people_inout','adminpanel','index','0',1,0,1,1,'','0,13,38','53',0,1),
-	(54,'登录记录查询',49,54,1,'Logging_info','adminpanel','search','0',1,0,1,1,'','0,10,49','54',0,1)
+	(1,'首页',0,1,'manage','index','0','home','10'),
+	(2,'公司项目',0,1,'manage','go_2','0','suitcase','10'),
+	(3,'报警管理',0,1,'manage','go_3','0','warning','0'),
+	(4,'用户管理',0,1,'manage','go_4','0','user','0'),
+	(5,'服务器管理',0,1,'manage','go_5','0','server','0'),
+	(6,'其他',0,1,'manage','go_6','0','user','10'),
+
+	(20,'查询项目',2,1,'project','index','0','user','0'),
+
+	(201,'工程概况',20,1,'project','general_info','0','user','0'),
+	(202,'边坡概况',20,1,'project','slop_info','0','user','0'),
+	(203,'建设情况',20,1,'project','construct_info','0','server','0'),
+	(204,'仪器数据',20,1,'project','device_info','0','user-times','0'),
+	(205,'预警报告',20,1,'project','alarm','0','map-marker','0'),
+
+	(1001,'检测数据和图表',104,1,'project','data_display','0','gears','0'),
+
+	(30,'项目管理',2,1,'project','list_project','0','photo','0'),
+
+	(301,'项目增加',30,1,'project','add_project','0','user','0'),
+	(302,'项目修改',30,1,'project','modify_project','0','user','0'),
+	(303,'项目删除',30,1,'project','delete_project','0','user','0'),
+
+	(40,'用户列表',4,1,'user','index','0','user','0'),
+	(401,'添加用户',4,1,'user','add','0','user','0'),
+	(402,'修改用户',4,1,'user','edit','0','user','0'),
+	(403,'删除用户',4,1,'user','delete','0','user','0'),
+
+	(50,'报警模型列表',3,1,'alarm','index','0','user','0'),
+	(501,'添加模型',3,1,'alarm','add','0','user','0'),
+	(502,'修改模型',3,1,'alarm','modify','0','user','0'),
+	(503,'删除模型',3,1,'alarm','delete','0','user','0')
 	;
 
 /*!40000 ALTER TABLE `tb_module_menu` ENABLE KEYS */;

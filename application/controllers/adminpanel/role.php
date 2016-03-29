@@ -1,6 +1,6 @@
 <?php 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Role extends Admin_Controller {
+class Role extends MY_Admin_Controller {
 	
     var $method_config;
     function __construct()

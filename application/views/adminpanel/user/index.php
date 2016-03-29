@@ -44,7 +44,7 @@
                                     class="glyphicon glyphicon-lock"></span><?php else: ?><span
                                     class="glyphicon glyphicon-user"></span><?php endif; ?></td>
                             <td><?php echo $v['operator_name'] ?></td>
-                            <td><?php echo $v['operator_user'] ?></td>
+                            <td><?php echo $v['operator_displayname'] ?></td>
                             <td><?php echo group_name($v['operator_role']) ?></td>
                             <td><?php echo $v['last_login_time'] ?></td>
                             <td>

@@ -285,13 +285,13 @@
 		{
 
 			global $CI;
-			if($CI->current_role_priv_arr){
+			if($CI->all_module_menu){
 				$found=false;
 				if($CI->group_id==SUPERADMIN_GROUP_ID)
 					$found= true;
 				if(!$found)
-					foreach($CI->current_role_priv_arr as $k=>$v){
-						if($v['method']==$method&&$v['controller']==$controller&&$v['folder']==$folder){
+					foreach($CI->all_module_menu as $k=>$v){
+						if($v['method']==$method && $v['controller']==$controller && $CI->page_data['folder_name']==$folder){
 							$found=true;
 							break;
 						}
@@ -332,13 +332,13 @@
 		function aci_ui_a($folder,$controller,$method,$args,$attr,$html,$is_return=false)
 		{
 			global $CI;
-			if($CI->current_role_priv_arr){
+			if($CI->all_module_menu){
 				$found=false;
 				if($CI->group_id==SUPERADMIN_GROUP_ID)
 					$found= true;
 				if(!$found)
-				foreach($CI->current_role_priv_arr as $k=>$v){
-					if($v['method']==$method&&$v['controller']==$controller&&$v['folder']==$folder){
+				foreach($CI->all_module_menu as $k=>$v){
+					if($v['method']==$method && $v['controller']==$controller && $CI->page_data['folder_name']==$folder){
 						$found=true;
 						break;
 					}

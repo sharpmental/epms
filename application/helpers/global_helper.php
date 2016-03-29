@@ -50,7 +50,9 @@ if ( ! function_exists('template'))
 	 */
 	function template($module = 'aci', $template = 'index', $style = 'aci',$return_full_path=true) {
 		global $CI;
-		if(!isset($CI))$CI =& get_instance();
+		if(!isset($CI))
+			$CI =& get_instance();
+		
 		if(!$style) $style = 'default';
 		$CI->load->library('template_cache','template_cache');
 		$template_cache = $CI->template_cache;
@@ -198,8 +200,10 @@ if ( ! function_exists('thumb'))
 		
 		
 		if ($pt){
-			//global $CI;
-			if(!isset($CI))$CI =& get_instance();
+
+			if(!isset($CI))
+				$CI =& get_instance();
+			
 			$CI->load->library('image_lib');
 			
 			
