@@ -54,7 +54,11 @@
                                     <div class="caption">
                                         <h4>超级管理员</h4>
                                         <p>描述</p>
-                                        <p><a href=<?php echo site_url('adminpanel');?> class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
+                                        <p><a href=<?php 
+                                        if (isset($this->session->userdata['xurl']) && $this->session->userdata['xurl'])
+                                        	echo site_url($this->session->userdata['xurl']);
+                                        else 
+                                        	echo site_url('adminpanel');?> class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
                                     </div>
                                 </div>
                             </div>

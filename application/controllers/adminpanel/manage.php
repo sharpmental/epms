@@ -181,16 +181,20 @@ function index($startnum = '0') {
             
             //get the group path
             $this->load->model('Member_role_model');
-            $p = $this->Member_role_model->get_one('role_id',  $r['operator_role']);
+            $p = $this->Member_role_model->get_one(array(
+            		'role_id' => $r['operator_role'])
+            		);
             
             if (!isset($p) || !isset($p['xurl']))
             	$dir_priv = 'guest';
             else 
             	$dir_priv = $p['xurl'];
             
+            $this->session->set_userdata('xurl', $dir_priv);
+            
             //insert a new login record
             $this->load->model("Logging_info_model");
-            $r = array(
+            $s = array(
                 "operator_id" => $r['operator_id'],
                 "name" => $r['operator_name'],
                 "user" => $username,
@@ -199,11 +203,11 @@ function index($startnum = '0') {
                 "ip" => $ip,
                 'login_time' => SYS_DATETIME
             );
-            $this->Logging_info_model->insert($r);
+            $this->Logging_info_model->insert($s);
             
             exit(json_encode(array(
                 'status' => true,
-                'tips' => ' 登录成功',
+                'tips' => 'successful',
                 'next_url' => site_url($dir_priv)
             )));
         } else {

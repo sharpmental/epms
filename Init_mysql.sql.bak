@@ -31,7 +31,7 @@ create table `tb_operator_info` (
   `operator_id` int(11) not null auto_increment, 
   `operator_name` varchar(64) not null, 
   `operator_pwd` varchar(64) not null, 
-  `operator_role` varchar(16) not null, 
+  `operator_role` int(10) not null, 
   `operator_displayname` varchar(64) not null,
   `reg_ip` varchar(64),  
   #注册时使用的IP地址
@@ -54,13 +54,13 @@ create table `tb_operator_info` (
 LOCK TABLES `tb_operator_info` WRITE;
 
 insert into `tb_operator_info` values 
-	(1, 'admin',  '0002', '1', '超级管理员',  '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:29:35'),
-	(2, 'projadmin',  '0002', '2', '项目管理员',  '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:30:28'),
-	(3, 'marketadmin',  '0002', '3', '业务员', '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:30:28'),
-	(4, 'useradmin',  '0002', '4', '客户管理员', '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:30:28'),
-	(5, 'useradmin',  '0002', '5', '客户', '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:30:28'),
-	(6, 'useradmin',  '0002', '6', '访客', '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:30:28'),
-	(9, 'sysadmin',  '9999', '1', '超级管理员', '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:31:11');
+	(1, 'admin',  '0002', 1, '超级管理员',  '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:29:35'),
+	(2, 'projadmin',  '0002', 2, '项目管理员',  '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:30:28'),
+	(3, 'marketadmin',  '0002', 3, '业务员', '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:30:28'),
+	(4, 'useradmin',  '0002', 4, '客户管理员', '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:30:28'),
+	(5, 'useradmin',  '0002', 5, '客户', '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:30:28'),
+	(6, 'useradmin',  '0002', 6, '访客', '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:30:28'),
+	(9, 'sysadmin',  '9999', 1, '超级管理员', '127.0.0.1', '2011-01-01 12:30:30', '',  '127.0.0.1', '2011-01-01 12:30:30', '2015-10-22 14:31:11');
 
 UNLOCK TABLES ;
 
@@ -74,14 +74,14 @@ CREATE TABLE `tb_member_role` (
   `role_name` varchar(45) NOT NULL DEFAULT '' COMMENT '组名',
   `type_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '保留',
   `description` varchar(200) DEFAULT NULL COMMENT '描述',
-  `url` varchar(20) NOT NULL COMMENT '访问路径',
+  `xurl` varchar(20) NOT NULL COMMENT '访问路径',
   PRIMARY KEY (`role_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
 
 LOCK TABLES `tb_member_role` WRITE;
 /*!40000 ALTER TABLE `tb_member_role` DISABLE KEYS */;
 
-INSERT INTO `tb_member_role` (`role_id`, `role_name`, `type_id`, `description`, `url`)
+INSERT INTO `tb_member_role` 
 VALUES
 	(1,'超级管理员',1,'超级管理员','adminpanel'),
 	(2,'项目管理员',2,'项目管理员','projectadmin'),

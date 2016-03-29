@@ -57,10 +57,12 @@ $route['member'] = "member/manage";
 $route['member/login'] = "member/manage/login";
 $route['member/logout'] = "member/manage/logout";
 
-
 $route['adminpanel'] = "adminpanel/manage";
 $route['adminpanel/manage/go_(:num)'] = "adminpanel/manage/go/$1";
 $route['adminpanel/login'] = "adminpanel/manage/login";
 
+$route['guest'] = "guest/manage";
+$route['guest/manage/go_(:num)'] = "guest/manage/go/$1";
+$route['guest/login'] = "guest/manage/login";
 
 $route['translate_uri_dashes'] = FALSE;

@@ -5,7 +5,8 @@ class MY_Controller extends CI_Controller {
 	public $aci_config;
 	public $aci_status;
 	public $all_module_menu;
-	protected $page_data = array ();
+	public $page_data = array ();
+	
 	function __construct() {
 		parent::__construct ();
 		$this->load->driver ( 'cache', array (
@@ -395,9 +396,9 @@ class MY_Admin_Controller extends MY_Member_Controller {
 				"returnjs" => $returnjs,
 				"dialog" => $dialog 
 		);
-		echo $this->load->view ( 'adminpanel/header', NULL, true );
-		echo $this->load->view ( 'adminpanel/message', $datainfo, true );
-		echo $this->load->view ( 'adminpanel/footer', NULL, true );
+		echo $this->load->view ( $this->page_data['folder_name'].'/header', NULL, true );
+		echo $this->load->view ( $this->page_data['folder_name'].'/message', $datainfo, true );
+		echo $this->load->view ( $this->page_data['folder_name'].'/footer', NULL, true );
 		
 		exit ();
 	}
@@ -484,10 +485,11 @@ class MY_Admin_Controller extends MY_Member_Controller {
 		
 		$pageview_data ['notification'] = array ();
 		
-		$this->load->view ( 'adminpanel/header', $pageview_data );
-		$this->load->view ( 'adminpanel/index', $pageview_data );
-		$this->load->view ( 'adminpanel/footer', $pageview_data );
+		$this->load->view ( $this->page_data['folder_name'].'/header', $pageview_data );
+		$this->load->view ( $this->page_data['folder_name'].'/index', $pageview_data );
+		$this->load->view ( $this->page_data['folder_name'].'/footer', $pageview_data );
 	}
+	
 	final public function reload_all_cache() {
 		$menus = array ();
 		$datas = $this->Module_menu_model->select ( '', '*', 10000, ' menu_id asc' );
