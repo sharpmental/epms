@@ -140,14 +140,14 @@ VALUES
 	(303,'项目删除',30,1,'project','delete_project','0','user','0'),
 
 	(40,'用户列表',4,1,'user','index','0','user','0'),
-	(401,'添加用户',4,1,'user','add','0','user','0'),
-	(402,'修改用户',4,1,'user','edit','0','user','0'),
-	(403,'删除用户',4,1,'user','delete','0','user','0'),
+	(401,'添加用户',40,1,'user','add','0','user','0'),
+	(402,'修改用户',40,1,'user','edit','0','user','0'),
+	(403,'删除用户',40,1,'user','delete','0','user','0'),
 
 	(50,'报警模型列表',3,1,'alarm','index','0','user','0'),
-	(501,'添加模型',3,1,'alarm','add','0','user','0'),
-	(502,'修改模型',3,1,'alarm','modify','0','user','0'),
-	(503,'删除模型',3,1,'alarm','delete','0','user','0')
+	(501,'添加模型',50,1,'alarm','add','0','user','0'),
+	(502,'修改模型',50,1,'alarm','modify','0','user','0'),
+	(503,'删除模型',50,1,'alarm','delete','0','user','0')
 	;
 
 /*!40000 ALTER TABLE `tb_module_menu` ENABLE KEYS */;

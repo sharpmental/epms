@@ -62,6 +62,7 @@
 				</div>
 				<div class="row">
 					Data Chart
+					<div id="datachart"></div>
 				</div>
 			</div>
 		</div>
@@ -76,4 +77,4 @@
 
 <script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
-    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/index.js']); </script>
+    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/data_display.js']); </script>
