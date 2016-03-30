@@ -227,9 +227,9 @@ class MY_Member_Controller extends MY_Controller {
 			return true;
 			
 			// Load from cache
-		if ($this->$all_module_menu) {
+		if ($this->all_module_menu) {
 			$found = false;
-			foreach ( $this->$all_module_menu as $k => $v ) {
+			foreach ( $this->all_module_menu as $k => $v ) {
 				if ($v ['method'] == $this->page_data ['method_name'] && $v ['controller'] == $this->page_data ['controller_name']) {
 					if (intval ( $v ['priv'] ) >= intval ( $this->group_id )) {
 						$found = true;
@@ -481,12 +481,17 @@ class MY_Admin_Controller extends MY_Member_Controller {
 		$pageview_data ['current_pos'] = $this->current_pos ( $menu_id );
 		$pageview_data ['sub_page'] = $this->load->view ( reduce_double_slashes ( $view_file ), $sub_page_data, true );
 		
+		
 		// Setup notification data menu, wsm
 		
 		$pageview_data ['notification'] = array ();
 		
 		$this->load->view ( $this->page_data['folder_name'].'/header', $pageview_data );
-		$this->load->view ( $this->page_data['folder_name'].'/index', $pageview_data );
+		if ($sub_page_data['show_sidemenu'])
+			$this->load->view ( $this->page_data['folder_name'].'/index', $pageview_data );
+		else
+			$this->load->view ( $this->page_data['folder_name'].'/index_nosidemenu', $pageview_data );
+		
 		$this->load->view ( $this->page_data['folder_name'].'/footer', $pageview_data );
 	}
 	

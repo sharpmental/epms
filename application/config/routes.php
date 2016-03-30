@@ -61,6 +61,22 @@ $route['adminpanel'] = "adminpanel/manage";
 $route['adminpanel/manage/go_(:num)'] = "adminpanel/manage/go/$1";
 $route['adminpanel/login'] = "adminpanel/manage/login";
 
+$route['projectadmin'] = "projectadmin/manage";
+$route['projectadmin/manage/go_(:num)'] = "projectadmin/manage/go/$1";
+$route['projectadmin/login'] = "projectadmin/manage/login";
+
+$route['marketadmin'] = "marketadmin/manage";
+$route['marketadmin/manage/go_(:num)'] = "marketadmin/manage/go/$1";
+$route['marketadmin/login'] = "marketadmin/manage/login";
+
+$route['useradmin'] = "useradmin/manage";
+$route['useradmin/manage/go_(:num)'] = "useradmin/manage/go/$1";
+$route['useradmin/login'] = "useradmin/manage/login";
+
+$route['user'] = "user/manage";
+$route['user/manage/go_(:num)'] = "user/manage/go/$1";
+$route['user/login'] = "user/manage/login";
+
 $route['guest'] = "guest/manage";
 $route['guest/manage/go_(:num)'] = "guest/manage/go/$1";
 $route['guest/login'] = "guest/manage/login";

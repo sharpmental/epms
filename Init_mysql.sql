@@ -131,7 +131,7 @@ VALUES
 	(204,'仪器数据',20,1,'project','device_info','0','user-times','0'),
 	(205,'预警报告',20,1,'project','alarm','0','map-marker','0'),
 
-	(1001,'检测数据和图表',104,1,'project','data_display','0','gears','0'),
+	(1001,'检测数据和图表',204,1,'project','data_display','0','gears','0'),
 
 	(30,'项目管理',2,1,'project','list_project','0','photo','0'),
 

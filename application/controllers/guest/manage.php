@@ -28,6 +28,8 @@ class Manage extends MY_Admin_Controller {
 	}
 
 function index($startnum = '0') {
+	$this->check_priv();
+	
 	if (isset ( $_GET ['keyword'] )) {
 		$keyword = $_GET ['keyword'];
 		$data = $this->Member_model->getall ();
