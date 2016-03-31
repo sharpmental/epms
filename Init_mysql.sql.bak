@@ -140,14 +140,17 @@ VALUES
 	(303,'项目删除',30,1,'project','delete_project','0','user','0'),
 
 	(40,'用户列表',4,1,'user','index','0','user','0'),
-	(401,'添加用户',4,1,'user','add','0','user','0'),
-	(402,'修改用户',4,1,'user','edit','0','user','0'),
-	(403,'删除用户',4,1,'user','delete','0','user','0'),
+	(401,'添加用户',40,1,'user','add','0','user','0'),
+	(402,'修改用户',40,1,'user','edit','0','user','0'),
+	(403,'删除用户',40,1,'user','delete','0','user','0'),
 
 	(50,'报警模型列表',3,1,'alarm','index','0','user','0'),
-	(501,'添加模型',3,1,'alarm','add','0','user','0'),
-	(502,'修改模型',3,1,'alarm','modify','0','user','0'),
-	(503,'删除模型',3,1,'alarm','delete','0','user','0')
+	(501,'添加模型',50,1,'alarm','add','0','user','0'),
+	(502,'修改模型',50,1,'alarm','modify','0','user','0'),
+	(503,'删除模型',50,1,'alarm','delete','0','user','0'),
+
+	(60,'服务器信息',5,1,'server_info','index','0','user','0'),
+	(61,'登录信息',5,1,'logging_info','index','0','user','0')
 	;
 
 /*!40000 ALTER TABLE `tb_module_menu` ENABLE KEYS */;
@@ -225,3 +228,19 @@ create table `tb_logging` (
 
 insert into `tb_logging` values (1, 1, '所长', '0001', '登录', '登录成功', '127.0.0.1', '2014-10-22 11:24:21', null, null);
 insert into `tb_logging` values (2, 2, '民警', '0002', '增加', '添加帐号流水为466', '192.168.1.125', '2014-10-27 09:30:19', null, null);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tb_server_info`
+--
+drop table if exists `tb_server_info`;
+
+create table `tb_server_info` (
+  `server_id` int(11) not null,
+  `server_type` tinyint(4) not null,
+  `server_name` varchar(64) not null,
+  `server_ip` varchar(64) not null,
+  `powerlow_times` int(11) not null default '2',
+  `update_timestamp` datetime not null default current_timestamp on update current_timestamp
+) engine=myisam default charset=utf8;\

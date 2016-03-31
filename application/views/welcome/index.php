@@ -54,11 +54,11 @@
                                     <div class="caption">
                                         <h4>超级管理员</h4>
                                         <p>描述</p>
-                                        <p><a href=<?php 
+                                        <p><a href="<?php 
                                         if (isset($this->session->userdata['xurl']) && $this->session->userdata['xurl'])
                                         	echo site_url($this->session->userdata['xurl']);
                                         else 
-                                        	echo site_url('adminpanel');?> class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
+                                        	echo site_url('adminpanel');?>" class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,11 @@
                                     <div class="caption">
                                         <h4>项目管理员</h4>
                                         <p>描述</p>
-                                        <p><a href="#" class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
+                                        <p><a href="<?php 
+                                        if (isset($this->session->userdata['xurl']) && $this->session->userdata['xurl'])
+                                        	echo site_url($this->session->userdata['xurl']);
+                                        else 
+                                        	echo site_url('projectadmin');?>" class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +82,11 @@
                                     <div class="caption">
                                         <h4>业务员</h4>
                                         <p>描述</p>
-                                        <p><a href="#" class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
+                                        <p><a href="<?php 
+                                        if (isset($this->session->userdata['xurl']) && $this->session->userdata['xurl'])
+                                        	echo site_url($this->session->userdata['xurl']);
+                                        else 
+                                        	echo site_url('marketadmin');?>" class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +96,11 @@
                                     <div class="caption">
                                         <h4>用户管理员</h4>
                                         <p>描述</p>
-                                        <p><a href="#" class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
+                                        <p><a href="<?php 
+                                        if (isset($this->session->userdata['xurl']) && $this->session->userdata['xurl'])
+                                        	echo site_url($this->session->userdata['xurl']);
+                                        else 
+                                        	echo site_url('useradmin');?>" class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +110,11 @@
                                     <div class="caption">
                                         <h4>客户</h4>
                                         <p>描述</p>
-                                        <p><a href="#" class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
+                                        <p><a href="<?php 
+                                        if (isset($this->session->userdata['xurl']) && $this->session->userdata['xurl'])
+                                        	echo site_url($this->session->userdata['xurl']);
+                                        else 
+                                        	echo site_url('user');?>" class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +124,11 @@
                                     <div class="caption">
                                         <h4>访客</h4>
                                         <p>描述</p>
-                                        <p><a href="#" class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
+                                        <p><a href="<?php 
+                                        if (isset($this->session->userdata['xurl']) && $this->session->userdata['xurl'])
+                                        	echo site_url($this->session->userdata['xurl']);
+                                        else 
+                                        	echo site_url('guest');?>" class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a></p>
                                     </div>
                                 </div>
                             </div>

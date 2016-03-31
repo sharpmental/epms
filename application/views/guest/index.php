@@ -75,13 +75,3 @@ body {
 </style>
 <?php echo $sub_page?>
 <?php endif; ?>
-
-<script type="text/javascript">
-var hid_ctrl = Array();
-<?php
-if ($notification)
-	foreach ( $notification as $k => $v ) :
-		?>
-hid_ctrl['<?php echo $k?>'] = '<?php echo $k ?>';
-<?php endforeach; ?>
-</script>

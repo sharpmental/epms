@@ -9,7 +9,7 @@ class Project extends MY_Admin_Controller{
 		
 		$this->view ( 'index', array (
 				'require_js' => true,
-				'show_sidemenu' => true
+				'show_sidemenu' => false
 		) );
 	}
 	

@@ -17,7 +17,8 @@ require.config({
 		"modal":"lib/sco.modal",
 		"headroom":"lib/headroom.min",
         "cookie":"lib/jquery.cookie",
-        "highcharts":"highchart/js/highcharts"
+        "highcharts":"highchart/js/highcharts",
+        "j360":"j360/j360",
     },
     shim: {
         "jquery-ui": {
@@ -56,6 +57,7 @@ require.config({
             deps: ['jquery']
         },
         "highcharts":['jquery'],
+        "j360":['jquery'],
     }
 
 });

@@ -341,7 +341,7 @@ class MY_Member_Controller extends MY_Controller {
 		
 		foreach ( $this->all_module_menu as $k => $v ) {
 			if ($v ['parent_id'] == $parent_id && $v ['is_display'] == 1) {
-				$result [] = $v;
+				$result [$v['menu_id']] = $v;
 			}
 		}
 		
@@ -351,8 +351,13 @@ class MY_Member_Controller extends MY_Controller {
 			}
 		}
 		
-		if ($this->group_id == SUPERADMIN_GROUP_ID)
-			return $result;
+		//add submenu
+		foreach($result as $k => $v){
+			foreach ($this->all_module_menu as $kk => $vv){
+				if ($v['menu_id'] == $vv['parent_id'])
+					$result[$v['menu_id']]['sub_menu'][] = $vv;
+			}
+		}
 		
 		return $result;
 	}
@@ -478,6 +483,8 @@ class MY_Admin_Controller extends MY_Member_Controller {
 			}
 		}
 		$pageview_data ['menu_data'] = $sub_page_data ['menu_data'] = $menu_data;
+
+// 		$pageview_data ['menu_data'] = $this->all_module_menu;
 		$pageview_data ['current_pos'] = $this->current_pos ( $menu_id );
 		$pageview_data ['sub_page'] = $this->load->view ( reduce_double_slashes ( $view_file ), $sub_page_data, true );
 		
@@ -487,10 +494,11 @@ class MY_Admin_Controller extends MY_Member_Controller {
 		$pageview_data ['notification'] = array ();
 		
 		$this->load->view ( $this->page_data['folder_name'].'/header', $pageview_data );
-		if ($sub_page_data['show_sidemenu'])
-			$this->load->view ( $this->page_data['folder_name'].'/index', $pageview_data );
-		else
+		
+		if (isset($sub_page_data['show_sidemenu']) && !$sub_page_data['show_sidemenu'])//default view is with side menu 
 			$this->load->view ( $this->page_data['folder_name'].'/index_nosidemenu', $pageview_data );
+		else
+			$this->load->view ( $this->page_data['folder_name'].'/index', $pageview_data );
 		
 		$this->load->view ( $this->page_data['folder_name'].'/footer', $pageview_data );
 	}

@@ -5,7 +5,6 @@
 	overflow: hidden
 }
 </style>
-<div class="white-bg">
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header navbar-icon-menu">
@@ -19,51 +18,36 @@
 				<p></p>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-icon-menu ">
-                <?php if ($menu_data) foreach ($menu_data as $k => $v): ?>
-                	<li><a href="<?php echo $v['url'] ?>"> <i
-							class="fa fa-<?php echo $v['css_icon'] ?>"></i> <span><?php echo $v['menu_name'] ?></span>
-					</a></li>
-                <?php endforeach; ?>
+			<ul class="nav navbar-nav ">
+                <?php if ($menu_data) foreach ($menu_data as $k => $v){ ?>
+                	<li class="dropdown">
+                		<a href="<?php echo $v['url'] ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+                	    <i class="fa fa-<?php echo $v['css_icon'] ?>"></i> 
+                	    <span><?php echo $v['menu_name'] ?></span>
+						</a>
+				   <?php if(isset($v['sub_menu'])) {
+				    echo "<ul class='dropdown-menu'>";
+				    foreach ($v['sub_menu'] as $kk=>$vv) {?>
+				   		<li><a href="<?php echo $vv['url']?>"><?php echo $vv['menu_name']?></a></li>
+				   <?php }?>
+				   </ul>
+				   <?php }?>
+				   </li>
+                <?php } ?>
                 </ul>
-			</div>
+                <ul class="nav navbar-nav navbar-right" >
+                <li>
+                	<a href="<?php echo base_url('adminpanel/manage/logout')?>"><i class="fa fa-user"></i> <?php echo $this->user_name?> [ <?php echo group_name($this->group_id)?>], 注销</a>
+                </li>
+				</ul>
+		</div>
 		</div>
 	</nav>
+	
+    <?php echo $sub_page?>
+            
 
-	<div class="container-fluid">
-		<div class="row">
-			<div style="padding: 0px; padding-top: 80px;">
-				<div class="text-right pull-right" style="padding-right: 10px;">
-					<i class="fa fa-user"></i> <?php echo $this->user_name?> [ <?php echo group_name($this->group_id)?>], <a
-						href="<?php echo base_url('adminpanel/manage/logout')?>">注销</a>
-				</div>
-
-				<ul class='breadcrumb' id='breadcrumb'>
-                         <?php echo $current_pos?>
-                    </ul>
-
-				<div style="padding: 0px 10px">
-                        <?php echo $sub_page?>
-                    </div>
-			</div>
-		</div>
-	</div>
-</div>
 <?php else: ?>
-<style type="text/css">
-body {
-	overflow: hidden;
-}
-</style>
+
 <?php echo $sub_page?>
 <?php endif; ?>
-
-<script type="text/javascript">
-var hid_ctrl = Array();
-<?php
-if ($notification)
-	foreach ( $notification as $k => $v ) :
-		?>
-hid_ctrl['<?php echo $k?>'] = '<?php echo $k ?>';
-<?php endforeach; ?>
-</script>

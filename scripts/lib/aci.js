@@ -50,11 +50,3 @@ define(function() {
 		}
 	}
 });
-
-/* For hide control */
-
-//for (m in hid_ctrl){
-//	$('#hidbtn_'+hid_ctrl[m]).click(function(){
-//		$('.hid_'+hid_ctrl[m]).hide();
-//	});
-//}

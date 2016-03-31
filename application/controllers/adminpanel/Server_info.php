@@ -51,7 +51,8 @@ class Server_info extends MY_Admin_Controller {
 		$pageslink = $this->pagination->create_links();
 		
 		$this->view('index', array(
-				'require_js'=>true, 
+				'require_js'=>true,
+				'show_sidemenu' => true,
 				'table_data'=>$table_data,
 				'pagelink' =>$pageslink
 				)

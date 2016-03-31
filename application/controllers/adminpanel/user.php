@@ -49,7 +49,8 @@ class User extends MY_Admin_Controller
             'data_list' => $data_list,
             'pages' => $this->Member_model->pages,
             'keyword' => $keyword,
-            'require_js' => true
+            'require_js' => true,
+        	'show_sidemenu' => true
         ));
     }
 

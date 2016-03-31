@@ -1,18 +1,20 @@
 <?php defined('IN_ADMIN') or exit('No permission resources.'); ?>
 <!DOCTYPE html>
-<html lang="zh-CN">
+<meta charset="UTF-8">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 <meta name="robots" content="noindex,nofollow" />
  
 <title><?php echo SITE_NAME?></title>
 <link href="<?php echo base_url('css/bootstrap.min.css')?>" rel="stylesheet">
 <link type="text/css" href="<?php echo base_url('css/font-awesome.min.css')?>" rel="stylesheet" />
 <link type="text/css" href="<?php echo base_url('css/jquery.dataTables.min.css')?>" rel="stylesheet" />
+
 <!--[if IE 7]>
 <link rel="stylesheet" href="<?php echo base_url('css/font-awesome-ie7.min.css')?>">
 <![endif]-->
+
 <link type="text/css" href="<?php echo base_url('css/jquery-ui.css')?>" rel="stylesheet" />
 <link rel="stylesheet" href="<?php echo base_url(ADMIN_CSS_PATH.'style.css')?>">
 
@@ -35,5 +37,4 @@
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body >
-<div id="dialog" style="padding:0px;"></div>
+<body>
