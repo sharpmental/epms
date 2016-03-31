@@ -1,7 +1,7 @@
 <?php defined('IN_ADMIN') or exit('No permission resources.'); ?>
-
+<div class="col-md-6" style="height:100%;">
 <div id="pmap" style="height:100%"></div>
-
+</div>
 <script type="text/javascript"
 	src="http://api.map.baidu.com/api?v=2.0&ak=GeYl5tOEg0Xl4VzFwWxIGGq7WHtNWXMB">
 //v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
