@@ -6,7 +6,7 @@
 }
 </style>
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header navbar-icon-menu">
 			<button type="button" class="navbar-toggle collapsed "
@@ -19,23 +19,24 @@
 			<p></p>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav ">
+			    <ul class="nav navbar-nav ">
                 <?php if ($menu_data) foreach ($menu_data as $k => $v){ ?>
-                	<li class="dropdown">
-                		<a href="<?php echo $v['url'] ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+                	<li class=<?php if(isset($v['sub_menu'])) echo 'dropdown'; ?> >
+                		<a href="<?php echo $v['url'] ?>" class="dropdown-toggle" data-toggle="dropdown" > 
                 	    <i class="fa fa-<?php echo $v['css_icon'] ?>"></i> 
                 	    <span><?php echo $v['menu_name'] ?></span>
+                	    <span class="glyphicon glyphicon-triangle-bottom"></span>
 						</a>
-				   <?php if(isset($v['sub_menu'])) {
-				    echo "<ul class='dropdown-menu'>";
-				    foreach ($v['sub_menu'] as $kk=>$vv) {?>
+					<ul class="dropdown-menu">
+					<li><a href="<?php echo $v['url']?>"><?php echo $v['menu_name']?></a></li>
+				   <?php if(isset($v['sub_menu'])) foreach ($v['sub_menu'] as $kk=>$vv) {?>
 				   		<li><a href="<?php echo $vv['url']?>"><?php echo $vv['menu_name']?></a></li>
 				   <?php }?>
 				   </ul>
-				   <?php }?>
 				   </li>
                 <?php } ?>
                 </ul>
+                
                 <ul class="nav navbar-nav navbar-right" >
                 <li>
                 	<a href="<?php echo base_url('adminpanel/manage/logout')?>"><i class="fa fa-user"></i> <?php echo $this->user_name?>(<?php echo group_name($this->group_id)?>), 注销</a>
@@ -45,8 +46,8 @@
 	</div>
 </nav>
 
-<div class="container-fluid">
-	<div class="row">
+<!-- div class="container-fluid" -->
+	<!--  div class="row" -->
 		<div class="col-sm-3 col-md-2 sidebar">
             <?php if ($sub_menu_data) foreach ($sub_menu_data as $k => $v): ?>
             	<div class="list-group">
@@ -70,8 +71,8 @@
              
             <?php echo $sub_page?>
 			</div>
-	</div>
-</div>
+	<!-- /div -->
+<!-- /div -->
 
 <?php else: ?>
 <style type="text/css">
