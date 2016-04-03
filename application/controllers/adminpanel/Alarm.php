@@ -5,7 +5,12 @@ class Alarm extends MY_Admin_Controller{
 	}
 	
 	function index(){
+		$this->check_priv ();
 		
+		$this->view ( 'index', array (
+				'require_js' => true,
+				'show_sidemenu' => true
+		) );
 	}
 	
 	function add(){

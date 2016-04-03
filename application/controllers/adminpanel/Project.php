@@ -63,7 +63,12 @@ class Project extends MY_Admin_Controller{
 	}
 	
 	function list_project(){
+		$this->check_priv ();
 		
+		$this->view ( 'list_project', array (
+				'require_js' => true,
+				'show_sidemenu' => true
+		) );
 	}
 	
 	function add_project(){
