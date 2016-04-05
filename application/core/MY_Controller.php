@@ -6,7 +6,6 @@ class MY_Controller extends CI_Controller {
 	public $aci_status;
 	public $all_module_menu;
 	public $page_data = array ();
-	
 	function __construct() {
 		parent::__construct ();
 		$this->load->driver ( 'cache', array (
@@ -341,7 +340,7 @@ class MY_Member_Controller extends MY_Controller {
 		
 		foreach ( $this->all_module_menu as $k => $v ) {
 			if ($v ['parent_id'] == $parent_id && $v ['is_display'] == 1) {
-				$result [$v['menu_id']] = $v;
+				$result [$v ['menu_id']] = $v;
 			}
 		}
 		
@@ -351,11 +350,11 @@ class MY_Member_Controller extends MY_Controller {
 			}
 		}
 		
-		//add submenu
-		foreach($result as $k => $v){
-			foreach ($this->all_module_menu as $kk => $vv){
-				if ($v['menu_id'] == $vv['parent_id'])
-					$result[$v['menu_id']]['sub_menu'][] = $vv;
+		// add submenu
+		foreach ( $result as $k => $v ) {
+			foreach ( $this->all_module_menu as $kk => $vv ) {
+				if ($v ['menu_id'] == $vv ['parent_id'])
+					$result [$v ['menu_id']] ['sub_menu'] [] = $vv;
 			}
 		}
 		
@@ -401,9 +400,9 @@ class MY_Admin_Controller extends MY_Member_Controller {
 				"returnjs" => $returnjs,
 				"dialog" => $dialog 
 		);
-		echo $this->load->view ( $this->page_data['folder_name'].'/header', NULL, true );
-		echo $this->load->view ( $this->page_data['folder_name'].'/message', $datainfo, true );
-		echo $this->load->view ( $this->page_data['folder_name'].'/footer', NULL, true );
+		echo $this->load->view ( $this->page_data ['folder_name'] . '/header', NULL, true );
+		echo $this->load->view ( $this->page_data ['folder_name'] . '/message', $datainfo, true );
+		echo $this->load->view ( $this->page_data ['folder_name'] . '/footer', NULL, true );
 		
 		exit ();
 	}
@@ -483,26 +482,24 @@ class MY_Admin_Controller extends MY_Member_Controller {
 			}
 		}
 		$pageview_data ['menu_data'] = $sub_page_data ['menu_data'] = $menu_data;
-
-// 		$pageview_data ['menu_data'] = $this->all_module_menu;
+		
+		// $pageview_data ['menu_data'] = $this->all_module_menu;
 		$pageview_data ['current_pos'] = $this->current_pos ( $menu_id );
 		$pageview_data ['sub_page'] = $this->load->view ( reduce_double_slashes ( $view_file ), $sub_page_data, true );
-		
 		
 		// Setup notification data menu, wsm
 		
 		$pageview_data ['notification'] = array ();
 		
-		$this->load->view ( $this->page_data['folder_name'].'/header', $pageview_data );
+		$this->load->view ( $this->page_data ['folder_name'] . '/header', $pageview_data );
 		
-		if (isset($sub_page_data['show_sidemenu']) && !$sub_page_data['show_sidemenu'])//default view is with side menu 
-			$this->load->view ( $this->page_data['folder_name'].'/index_nosidemenu', $pageview_data );
+		if (isset ( $sub_page_data ['show_sidemenu'] ) && ! $sub_page_data ['show_sidemenu']) // default view is with side menu
+			$this->load->view ( $this->page_data ['folder_name'] . '/index_nosidemenu', $pageview_data );
 		else
-			$this->load->view ( $this->page_data['folder_name'].'/index', $pageview_data );
+			$this->load->view ( $this->page_data ['folder_name'] . '/index', $pageview_data );
 		
-		$this->load->view ( $this->page_data['folder_name'].'/footer', $pageview_data );
+		$this->load->view ( $this->page_data ['folder_name'] . '/footer', $pageview_data );
 	}
-	
 	final public function reload_all_cache() {
 		$menus = array ();
 		$datas = $this->Module_menu_model->select ( '', '*', 10000, ' menu_id asc' );

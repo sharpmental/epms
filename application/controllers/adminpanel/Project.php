@@ -7,9 +7,19 @@ class Project extends MY_Admin_Controller{
 	function index(){
 		$this->check_priv ();
 		
+		$this->load->model(array('Project_model', 'Project_user_model', 'Slop_model'));
+		
+		$p = $this->Project_model->getall();
+		
+		$s = $this->Slop_model->getall();
+		
+		if ($s)
+			$map_data = json_encode($s);
+		
 		$this->view ( 'index', array (
 				'require_js' => true,
-				'show_sidemenu' => false
+				'show_sidemenu' => false,
+				'mapdata' => $map_data,
 		) );
 	}
 	

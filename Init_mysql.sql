@@ -246,5 +246,260 @@ create table `tb_server_info` (
   `server_name` varchar(64) not null,
   `server_ip` varchar(64) not null,
   `powerlow_times` int(11) not null default '2',
-  `update_timestamp` datetime not null default current_timestamp on update current_timestamp
+  `update_timestamp` datetime not null default current_timestamp on update current_timestamp,
+  primary key (`server_id`)
 ) engine=myisam default charset=utf8;
+
+insert into `tb_server_info` values(1, 1, 'server A', '192.168.0.1', 0, '2000-01-01');
+insert into `tb_server_info` values(2, 1, 'server B', '192.168.0.2', 0, '2000-01-01');
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tb_project_info`
+--
+
+drop table if exists `tb_project_info`;
+
+create table`tb_project_info`(
+	`project_id` int(11) not null,
+	`project_name` varchar(64) not null,
+	`project_description` varchar(128) not null,
+	`start_time` datetime default null,
+	`position_char` varchar(128) default null,
+	`picture_path` varchar(128) default null,
+	`construction_char` varchar(128) default null,
+	`construstion_picture_path` varchar(128) default null,
+	`general_slop` varchar(128) default null,
+	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
+	primary key (`project_id`)
+)engine=myisam default charset=utf8;
+
+insert into `tb_project_info` values (1, 'project A', 'AAA', '2011-01-01', 'Road A, street A, room A', '/upload/project_info/1/pic.jpg', 'building...', '/upload/project_info/1/const_pic.jpg', 'Slop General information', '2011-01-01');
+insert into `tb_project_info` values (2, 'project B', 'BBB', '2011-01-02', 'Road B, street B, room B', '/upload/project_info/2/pic.jpg', 'building...', '/upload/project_info/2/const_pic.jpg', 'Slop General information', '2011-01-02');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tb_slop_info`
+--
+
+drop table if exists `tb_slop_info`;
+
+create table`tb_slop_info`(
+	`slop_id` int(11) not null,
+	`slop_name` varchar(64) not null,
+	`slop_description` varchar(128) default null,
+	`start_time` datetime default null,
+	`position_char` varchar(128) default null,
+	`position_x` varchar(16) default 0,
+	`position_y` varchar(16) default 0,
+	`alarm_model` int(16) default 0,
+	
+	`property_1` int(16) default 0,
+	`property_2` int(16) default 0,
+	`property_3` int(16) default 0,
+
+	`design_picture_path` varchar(128) default null,
+	`solidate_picture_path` varchar(128) default null,
+	`conservation_picture_path` varchar(128) default null,
+	`panorama_picture_path` varchar(128) default null,
+	`install_picture_path` varchar(128) default null,
+	`decompose_picture_path` varchar(128) default null,
+	`3d_picture_path` varchar(128) default null,
+	`video_path` varchar(128) default null,
+
+	`project_id` int(16) default 0, /* 属于哪个项目*/
+	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
+	primary key (`slop_id`)
+)engine=myisam default charset=utf8;
+
+insert into `tb_slop_info` values (
+	1, 'slop A', 'Slop AAA', '2011-01-01', '火车东站','120.218107', '30.29573', 0,
+	0,0,0,
+	'/upload/slop_info/1/d.jpg',
+	'/upload/slop_info/1/s.jpg',
+	'/upload/slop_info/1/c.jpg',
+	'/upload/slop_info/1/p.jpg',
+	'/upload/slop_info/1/i.jpg',
+	'/upload/slop_info/1/decomp.jpg',
+	'/upload/slop_info/1/3d.jpg',
+	'/upload/slop_info/1/video.avi',
+	1,'2011-01-01'
+);
+
+insert into `tb_slop_info` values (
+	2, 'slop B', 'Slop BBB', '2011-01-02', '东方丽都','120.206734', '30.298255', 0,
+	0,0,0,
+	'/upload/slop_info/2/d.jpg',
+	'/upload/slop_info/2/s.jpg',
+	'/upload/slop_info/2/c.jpg',
+	'/upload/slop_info/2/p.jpg',
+	'/upload/slop_info/2/i.jpg',
+	'/upload/slop_info/2/decomp.jpg',
+	'/upload/slop_info/2/3d.jpg',
+	'/upload/slop_info/2/video.avi',
+	1,'2011-01-01'
+);
+
+insert into `tb_slop_info` values (
+	3, 'slop C', 'Slop CCC', '2011-01-03', '闸弄口','120.199152', '30.290553', 0,
+	0,0,0,
+	'/upload/slop_info/3/d.jpg',
+	'/upload/slop_info/3/s.jpg',
+	'/upload/slop_info/3/c.jpg',
+	'/upload/slop_info/3/p.jpg',
+	'/upload/slop_info/3/i.jpg',
+	'/upload/slop_info/3/decomp.jpg',
+	'/upload/slop_info/3/3d.jpg',
+	'/upload/slop_info/3/video.avi',
+	1,'2011-01-01'
+);
+
+insert into `tb_slop_info` values (
+	4, 'slop D', 'Slop DDD', '2011-01-04', '水岸雅苑','120.196457', '30.304523', 0,
+	0,0,0,
+	'/upload/slop_info/4/d.jpg',
+	'/upload/slop_info/4/s.jpg',
+	'/upload/slop_info/4/c.jpg',
+	'/upload/slop_info/4/p.jpg',
+	'/upload/slop_info/4/i.jpg',
+	'/upload/slop_info/4/decomp.jpg',
+	'/upload/slop_info/4/3d.jpg',
+	'/upload/slop_info/4/video.avi',
+	2,'2011-01-01'
+);
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tb_device_info`
+--
+
+drop table if exists `tb_device_info`;
+
+create table`tb_device_info`(
+	`device_id` int(11) not null,
+	`device_name` varchar(64) not null,
+	`device_description` varchar(128) not null,
+	`device_type` int(16) default 0,
+
+	`device_picture_path` varchar(128) default null,
+	`install_picture_path` varchar(128) default null,
+
+	`formular` varchar(128) default null,
+	`slop_id` int(16) default 0, /* 属于哪个边坡*/
+	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
+	primary key (`device_id`)
+)engine=myisam default charset=utf8;
+
+insert into `tb_device_info` values (
+	1, 'device A', 'AAA', 1,
+	'/upload/device_info/1/d.jpg',
+	'/upload/device_info/1/i.jpg',
+	'1+1',
+	1, '2011-01-01'
+);
+
+insert into `tb_device_info` values (
+	2, 'device B', 'BBB', 2,
+	'/upload/device_info/2/d.jpg',
+	'/upload/device_info/2/i.jpg',
+	'1+1',
+	1, '2011-01-01'
+);
+
+insert into `tb_device_info` values (
+	3, 'device C', 'CCC', 3,
+	'/upload/device_info/3/d.jpg',
+	'/upload/device_info/3/i.jpg',
+	'1+1',
+	1, '2011-01-01'
+);
+
+insert into `tb_device_info` values (
+	4, 'device D', 'DDD', 4,
+	'/upload/device_info/4/d.jpg',
+	'/upload/device_info/4/i.jpg',
+	'1+1',
+	2, '2011-01-01'
+);
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tb_device_data`
+-- 仪器数据表
+
+drop table if exists `tb_device_data`;
+
+create table`tb_device_data`(
+	`data_id` int(11) not null,
+	`device_id` int(16) not null,
+	`start_time` datetime default null,
+	`original_data` varchar(32) default null,
+	`calculation_result` varchar(32) default null,
+	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
+	primary key (`data_id`)
+)engine=myisam default charset=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tb_project_user`
+-- 用户项目关联表
+
+drop table if exists `tb_project_user`;
+
+create table `tb_project_user`(
+	`id` int(11) not null,
+	`project_id` int(16) not null,
+	`user_id` int(16) not null,
+	`flag` varchar(128) default null,
+	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
+	 primary key (`id`)
+)engine=myisam default charset=utf8;
+
+insert into `tb_project_user` values (1, 1, 1, 0, '2011-01-01');
+insert into `tb_project_user` values (2, 2, 1, 0, '2011-01-01');
+insert into `tb_project_user` values (3, 1, 2, 0, '2011-01-01');
+insert into `tb_project_user` values (4, 2, 3, 0, '2011-01-01');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tb_alarm_model`
+-- 
+
+drop table if exists `tb_alarm_model`;
+
+create table`tb_alarm_model`(
+	`model_id` int(11) not null,
+	`model_name` varchar(16) not null,
+	`description` varchar(128) not null,
+	`flag` varchar(128) default null,
+	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
+	 primary key (`model_id`)
+)engine=myisam default charset=utf8;
+
+insert into `tb_alarm_model` values(0, 'model A', 'AAA', 0, '2011-01-01');
+insert into `tb_alarm_model` values(1, 'model B', 'BBB', 0, '2011-01-01');
+insert into `tb_alarm_model` values(2, 'model C', 'CCC', 0, '2011-01-01');
+insert into `tb_alarm_model` values(4, 'model E', 'EEE', 0, '2011-01-01');
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tb_device_type`
+-- 
+
+drop table if exists `tb_device_type`;
+
+create table`tb_device_type`(
+	`type_id` int(11) not null,
+	`type_name` varchar(16) not null,
+	`description` varchar(128) not null,
+	`flag` varchar(128) default null,
+	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
+	 primary key (`type_id`)
+)engine=myisam default charset=utf8;
+
+insert into `tb_device_type` values(1, 'type A', 'AAAA', 0, '2010-01-01');
+insert into `tb_device_type` values(2, 'type B', 'BBBB', 0, '2010-01-01');
+insert into `tb_device_type` values(3, 'type C', 'CCCC', 0, '2010-01-01');
