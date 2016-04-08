@@ -56,7 +56,7 @@
 		<div class="col-sm-2 col-md-2 col-sm-offset-1 col-md-offset-1">
 			<div class="thumbnail">
 				<img src="" alt=""
-					style="height: 100px; width: 100%; display: block">
+					style="height: 160px; width: 100%; display: block">
 				<div class="caption">
 					<h4>查询项目</h4>
 					<a
@@ -73,7 +73,7 @@
 		<div class="col-xs-2 col-md-2">
 			<div class="thumbnail">
 				<img src="" alt=""
-					style="height: 100px; width: 100%; display: block">
+					style="height: 160px; width: 100%; display: block">
 				<div class="caption">
 					<h4>项目管理</h4>
 					<a
@@ -91,7 +91,7 @@
 		<div class="col-xs-2 col-md-2">
 			<div class="thumbnail">
 				<img src="" alt=""
-					style="height: 100px; width: 100%; display: block">
+					style="height: 160px; width: 100%; display: block">
 				<div class="caption">
 					<h4>用户管理</h4>
 					<a
@@ -108,7 +108,7 @@
 		<div class="col-xs-2 col-md-2">
 			<div class="thumbnail">
 				<img src="" alt=""
-					style="height: 100px; width: 100%; display: block">
+					style="height: 160px; width: 100%; display: block">
 				<div class="caption">
 					<h4>预警管理</h4>
 					<a
@@ -126,7 +126,7 @@
 		<div class="col-xs-2 col-md-2">
 			<div class="thumbnail">
 				<img src="" alt=""
-					style="height: 100px; width: 100%; display: block">
+					style="height: 160px; width: 100%; display: block">
 				<div class="caption">
 					<h4>技术支持</h4>
 					<a

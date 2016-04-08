@@ -2,7 +2,7 @@
 
 <div class="panel panel-default grid">
 	<div class='panel-heading'>
-		<i class='glyphicon glyphicon-th-list'></i>Function List
+		<i class='glyphicon glyphicon-th-list'></i>公司介绍
 		<div class='panel-tools'>
 			<div class='btn-group'>
 			<?php aci_ui_a($folder_name,'manage','index','',' class="btn "','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
@@ -12,17 +12,15 @@
 	</div>
 
 	<div class="panel-body">
-		<div class="row ">
-	            <?php if ($menu_data) foreach ($menu_data as $k => $v): ?>
-	            <div class="col-xs-4 col-md-2" style="text-align:center">
-				<a class="thumbnail" href="<?php echo $v['url'] ?>"> 
-				<img src=""	alt="150px 170px" data-holder-rendered="true"
-					style="height: 150px; width: 170px; display: block;"> 
-					<span ><?php echo $v['menu_name'] ?></span>
-				</a>
-			</div>
-                <?php endforeach; ?>
-	</div>
+		<div class="jumbotron">
+			<h1>公司介绍</h1>
+			<p>公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍</p>
+			<p>
+				<img style="height: :100px;width:120px">图片图片</img>
+				<img style="height: :100px;width:120px">图片图片</img>
+				<img style="height: :100px;width:120px">图片图片</img>
+			</p>
+		</div>
 	</div>
 	<div class="panel-footer">
 		<div class="pull-left">

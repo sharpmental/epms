@@ -268,7 +268,7 @@ create table`tb_project_info`(
 	`position_char` varchar(128) default null,
 	`picture_path` varchar(128) default null,
 	`construction_char` varchar(128) default null,
-	`construstion_picture_path` varchar(128) default null,
+	`construction_picture_path` varchar(128) default null,
 	`general_slop` varchar(128) default null,
 	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
 	primary key (`project_id`)
