@@ -7,25 +7,54 @@ requirejs(
 			$("#search")
 					.click(
 							function(e) {
-								var text = $("#search_text").val().toLowerCase();
+								var text = $("#search_text").val()
+										.toLowerCase();
 								$(".search-item").remove();
-								
+
 								if (text != "") {
 									for (i = 0; i < map_json.length; i++) {
-										if (map_json[i].slop_name.toLowerCase().indexOf(text) > -1
-												|| map_json[i].slop_description.toLowerCase().indexOf(text) > -1) {
-											var item = '<a href="#" class="list-group-item search-item"> -- '
+										if (map_json[i].slop_name.toLowerCase()
+												.indexOf(text) > -1
+												|| map_json[i].slop_description
+														.toLowerCase().indexOf(
+																text) > -1) {
+											var item = '<li class="list-group-item search-item">'
+													+ '<a class="btn btn-small btn-info" href="'
+													+ project_link
+													+ '/'
+													+ map_json[i].project_id
+													+ '"><span class="glyphicon glyphicon-tint"></span>项目:'
+													+ map_json[i].project_id
+													+ '</a>&nbsp'
+													+ '<a class="btn btn-small btn-default" href="'
+													+ slop_link
+													+ '/'
+													+ map_json[i].slop_id
+													+ '"><span class="glyphicon glyphicon-chevron-right"></span>边坡:'
 													+ map_json[i].slop_name
-													+ '</a>';
+													+ '</a>' + '</li>';
 											$("#list").after(item);
 										}
 									}
 								} else {
 									for (i = 0; i < map_json.length; i++) {
-										var item = '<a href="#" class="list-group-item search-item"> -- '
+										var item = '<li class="list-group-item search-item">'
+												+ '<a class="btn btn-small btn-info" href="'
+												+ project_link
+												+ '/'
+												+ map_json[i].project_id
+												+ '"><span class="glyphicon glyphicon-tint"></span>项目:'
+												+ map_json[i].project_id
+												+ '</a>&nbsp'
+												+ '<a class="btn btn-small btn-default" href="'
+												+ slop_link
+												+ '/'
+												+ map_json[i].slop_id
+												+ '"><span class="glyphicon glyphicon-chevron-right"></span>边坡:'
 												+ map_json[i].slop_name
-												+ '</a>';
+												+ '</a>' + '</li>';
 										$("#list").after(item);
+
 									}
 
 								}

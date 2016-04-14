@@ -42,17 +42,24 @@ class Project extends MY_Admin_Controller {
 				'mapdata' => $map_json 
 		) );
 	}
-	function general_info() {
+	function general_info($id = '0') {
 		$this->check_priv ();
 		$this->load->model ( array (
 				'Project_model',
 				'Project_user_model',
 				'Slop_model' 
 		) );
-		$p = $this->Project_user_model->select ( array (
-				'user_id' => $this->user_id 
-		) );
 		
+		if ($id == '0') {
+			$p = $this->Project_user_model->select ( array (
+					'user_id' => $this->user_id 
+			) );
+		} else {
+			$p = $this->Project_user_model->select ( array (
+					'user_id' => $this->user_id,
+					'project_id' => $id 
+			) );
+		}
 		$project_data = array ();
 		
 		if (isset ( $p ) && $p) {
@@ -73,11 +80,14 @@ class Project extends MY_Admin_Controller {
 		
 		// add operation button
 		foreach ( $project_data as $k => $v ) {
+			$num = $project_data[$k]['project_id'];
+			
 			$btnchange = '<a class="btn btn-default" href=' . base_url ( $this->page_data ['folder_name'] . '/project/modify_project/' . $v ['project_id'] ) . '>修改</a>';
 			$btndel = '<a class="btn btn-default" href=' . base_url ( $this->page_data ['folder_name'] . '/project/delete_project/' . $v ['project_id'] ) . '>删除</a>';
 			
 			$project_data [$k] ['change'] = $btnchange;
 			$project_data [$k] ['del'] = $btndel;
+			$project_data [$k] ['project_id'] = '<a class="btn btn-default btn-small" href="'.base_url($this->page_data['folder_name'].'/project/general_info/'.$num).'">'.$num.'</a>';
 		}
 		
 		// build table
@@ -134,29 +144,26 @@ class Project extends MY_Admin_Controller {
 				) 
 		);
 		
+		$p = $this->Project_user_model->get_one ( array (
+				"project_id" => $s ['project_id'],
+				"user_id" => $this->user_id 
+		) );
 		
-			$p = $this->Project_user_model->get_one ( array (
-					"project_id" => $s ['project_id'],
-					"user_id" => $this->user_id 
-			) );
+		if (isset ( $p ) && $p) {
+			// build information table
+			$table_data = "";
 			
-			if (isset ( $p ) && $p) {
-				// build information table
-				$table_data = "";
-				
-					$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $s ['slop_id'] . '" class="list-group-item active">' . "边坡名称:&nbsp" . $s ['slop_name'] . '</a>';
-					
-					$d = $this->Device_model->select ( array (
-							'slop_id' => $s ['slop_id'] 
-					) );
-					if (isset ( $d ) && $d) {
-						foreach ( $d as $kk => $vv ) {
-							$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info' ) . "/" . $vv ['device_id'] . '" class="list-group-item">' . "设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" . $vv ['device_name'] . '</a>';
-						}
-					}
-				
+			$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $s ['slop_id'] . '" class="list-group-item active">' . "边坡名称:&nbsp" . $s ['slop_name'] . '</a>';
+			
+			$d = $this->Device_model->select ( array (
+					'slop_id' => $s ['slop_id'] 
+			) );
+			if (isset ( $d ) && $d) {
+				foreach ( $d as $kk => $vv ) {
+					$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info' ) . "/" . $vv ['device_id'] . '" class="list-group-item">' . "设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" . $vv ['device_name'] . '</a>';
+				}
 			}
-		
+		}
 		
 		$project_data = array ();
 		
@@ -336,7 +343,8 @@ class Project extends MY_Admin_Controller {
 				'require_js' => true,
 				'show_sidemenu' => true,
 				'table_data' => $table_data,
-				'info_table' => $info_table_data 
+				'info_table' => $info_table_data,
+				'project_id' => $id
 		) );
 	}
 	function add_project() {

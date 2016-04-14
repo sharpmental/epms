@@ -59,7 +59,7 @@
 			<div class="form-group">
 				<label for="pic" class="col-sm-2 control-label">上传项目图片</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="pic" placeholder="上传项目图片">
+					<input type="file" class="form-control" id="pic" placeholder="上传项目图片">
 				</div>
 			</div>
 			<div class="form-group">
@@ -71,7 +71,7 @@
 			<div class="form-group">
 				<label for="construct_pic" class="col-sm-2 control-label">上传建造图片</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="construct_pic" placeholder="上传建造图片">
+					<input type="file" class="form-control" id="construct_pic" placeholder="上传建造图片">
 				</div>
 			</div>
 			<div class="form-group">
@@ -90,7 +90,7 @@
 
 	<div class="panel-footer">
 	<div class='btn-group' role="group">
-				<?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+				<?php aci_ui_a($folder_name,'project','list_project','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
             	</div>
 	</div>
 </div>

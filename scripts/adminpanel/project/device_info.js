@@ -1,4 +1,4 @@
-requirejs([ 'jquery', 'j360' ],
+requirejs([ 'jquery', 'bootstrap', 'j360' ],
 		function($, aci) {
 			$('#product').j360({
 				"path":"/upload/device_info/1"

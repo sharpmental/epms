@@ -353,7 +353,7 @@ class MY_Member_Controller extends MY_Controller {
 		// add submenu
 		foreach ( $result as $k => $v ) {
 			foreach ( $this->all_module_menu as $kk => $vv ) {
-				if ($v ['menu_id'] == $vv ['parent_id'])
+				if ($v ['menu_id'] == $vv ['parent_id'] && $vv ['is_display'] == 1)
 					$result [$v ['menu_id']] ['sub_menu'] [] = $vv;
 			}
 		}

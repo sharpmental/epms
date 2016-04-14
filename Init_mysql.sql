@@ -121,40 +121,47 @@ CREATE TABLE `tb_module_menu` (
 INSERT INTO `tb_module_menu` 
 VALUES
 	(1,'首页',0,1,'manage','index','0','home','10'),
-	(2,'查询项目',0,1,'project','index','0','globe','10'),
-	(3,'报警管理',0,1,'manage','go_3','0','warning','0'),
-	(4,'用户管理',0,1,'manage','go_4','0','user','0'),
-	(5,'服务器管理',0,1,'manage','go_5','0','server','0'),
-	(6,'客户支持',0,1,'customer','index','0','suitcase','0'),
-	(7,'其他',0,1,'manage','go_7','0','user','10'),
+	(2,'项目-边坡管理',0,1,'project','index','0','globe','10'),
+    (3,'项目管理',0,1,'project','list_project','0','photo','0'),
+	(4,'报警管理',0,1,'manage','go_4','0','warning','0'),
+	(5,'用户管理',0,1,'manage','go_5','0','user','0'),
+	(6,'服务器管理',0,1,'manage','go_6','0','server','0'),
+	(7,'客户支持',0,1,'customer','index','0','suitcase','0'),
+	(8,'其他',0,0,'manage','go_8','0','user','10'),
 
-	(101,'工程概况',2,1,'project','general_info','0','user','0'),
-	(102,'边坡概况',2,1,'project','slop_info','0','user','0'),
-	(103,'建设情况',2,1,'project','construct_info','0','map-marker','0'),
+	(101,'项目概况',2,1,'project','general_info','0','user','0'),
+	(103,'边坡概况',2,1,'project','slop_info','0','user','0'),
+	(102,'建设情况',2,1,'project','construct_info','0','map-marker','0'),
 	(104,'仪器数据',2,1,'project','device_info','0','map-marker','0'),
 	(105,'预警报告',2,1,'project','alarm','0','map-marker','0'),
-	(106,'边坡总介绍',2,1,'project','slop_general','0','user','0'),
+	(106,'边坡总介绍',2,0,'project','slop_general','0','user','0'),
 
 	(1001,'检测数据和图表',104,1,'project','data_display','0','gears','0'),
 
-	(30,'项目管理',2,1,'project','list_project','0','photo','0'),
+	(30,'项目增加',3,1,'project','add_project','0','user','0'),
+	(31,'项目修改',3,0,'project','modify_project','0','user','0'),
+	(32,'项目删除',3,0,'project','delete_project','0','user','0'),
+	(33,'边坡增加',3,1,'slop','add_slop','0','bars','0'),
+	(34,'边坡修改',3,0,'slop','modify_slop','0','bars','0'),
+	(35,'边坡删除',3,0,'slop','delete_slop','0','bars','0'),
+	(36,'设备增加',3,1,'device','add_device','0','cog','0'),
+	(37,'设备修改',3,0,'device','modify_device','0','cog','0'),
+	(38,'设备删除',3,0,'device','delete_device','0','cog','0'),
 
-	(301,'项目增加',30,1,'project','add_project','0','user','0'),
-	(302,'项目修改',30,1,'project','modify_project','0','user','0'),
-	(303,'项目删除',30,1,'project','delete_project','0','user','0'),
-
-	(40,'用户列表',4,1,'user','index','0','user','0'),
+	(40,'用户列表',5,1,'user','index','0','user','0'),
 	(401,'添加用户',40,1,'user','add','0','user','0'),
-	(402,'修改用户',40,1,'user','edit','0','user','0'),
-	(403,'删除用户',40,1,'user','delete','0','user','0'),
-
-	(50,'报警模型列表',3,1,'alarm','index','0','user','0'),
+	(402,'修改用户',40,0,'user','edit','0','user','0'),
+	(403,'删除用户',40,0,'user','delete','0','user','0'),
+    (404,'项目关联',40,1,'project_user','index','0','heart','0'),
+    (405,'修改关联',40,1,'project_user','update','0','wrench','0'),
+    
+	(50,'报警模型列表',4,1,'alarm','index','0','user','0'),
 	(501,'添加模型',50,1,'alarm','add','0','user','0'),
-	(502,'修改模型',50,1,'alarm','modify','0','user','0'),
-	(503,'删除模型',50,1,'alarm','delete','0','user','0'),
+	(502,'修改模型',50,0,'alarm','modify','0','user','0'),
+	(503,'删除模型',50,0,'alarm','delete','0','user','0'),
 
-	(60,'服务器信息',5,1,'server_info','index','0','user','0'),
-	(61,'登录信息',5,1,'logging_info','index','0','user','0')
+	(60,'服务器信息',6,1,'server_info','index','0','user','0'),
+	(61,'登录信息',6,1,'logging_info','index','0','user','0')
 	;
 
 /*!40000 ALTER TABLE `tb_module_menu` ENABLE KEYS */;

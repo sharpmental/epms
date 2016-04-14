@@ -51,7 +51,7 @@
 	<div class="panel-footer">
 		<div class="pull-left">
 			<div class="btn-group">
-				<a class="btn btn-default" href=#>新增项目</a>
+				<a class="btn btn-default" href='<?php echo base_url($this->page_data['folder_name']."/project/add_project")?>'>新增项目</a>
 			</div>
 			<div class='btn-group' role="group">
 			<?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
