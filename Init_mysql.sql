@@ -228,7 +228,7 @@ create table `tb_logging` (
   #登录时间
   `logout_time` datetime default null,
   #登出时间
-  `update_timestamp` datetime default null,
+  `update_timestamp` datetime not null default current_timestamp on update current_timestamp,
   #更新时间
   primary key (`log_id`)
 ) engine=myisam default charset=utf8 comment='登录记录表';
@@ -237,8 +237,8 @@ create table `tb_logging` (
 -- 导出表中的数据 `tb_logging`
 -- 
 
-insert into `tb_logging` values (1, 1, '所长', '0001', '登录', '登录成功', '127.0.0.1', '2014-10-22 11:24:21', null, null);
-insert into `tb_logging` values (2, 2, '民警', '0002', '增加', '添加帐号流水为466', '192.168.1.125', '2014-10-27 09:30:19', null, null);
+insert into `tb_logging` values (1, 1, '所长', '0001', '登录', '登录成功', '127.0.0.1', '2014-10-22 11:24:21', null, '2011-01-01');
+insert into `tb_logging` values (2, 2, '民警', '0002', '增加', '添加帐号流水为466', '192.168.1.125', '2014-10-27 09:30:19', null, '2011-01-01');
 
 -- --------------------------------------------------------
 
@@ -248,7 +248,7 @@ insert into `tb_logging` values (2, 2, '民警', '0002', '增加', '添加帐号
 drop table if exists `tb_server_info`;
 
 create table `tb_server_info` (
-  `server_id` int(11) not null,
+  `server_id` int(11) not null AUTO_INCREMENT,
   `server_type` tinyint(4) not null,
   `server_name` varchar(64) not null,
   `server_ip` varchar(64) not null,
@@ -268,7 +268,7 @@ insert into `tb_server_info` values(2, 1, 'server B', '192.168.0.2', 0, '2000-01
 drop table if exists `tb_project_info`;
 
 create table`tb_project_info`(
-	`project_id` int(11) not null,
+	`project_id` int(11) not null AUTO_INCREMENT,
 	`project_name` varchar(64) not null,
 	`project_description` varchar(128) not null,
 	`start_time` datetime default null,
@@ -293,7 +293,7 @@ insert into `tb_project_info` values (2, 'project B', 'BBB', '2011-01-02', 'Road
 drop table if exists `tb_slop_info`;
 
 create table`tb_slop_info`(
-	`slop_id` int(11) not null,
+	`slop_id` int(11) not null AUTO_INCREMENT,
 	`slop_name` varchar(64) not null,
 	`slop_description` varchar(128) default null,
 	`start_time` datetime default null,
@@ -384,7 +384,7 @@ insert into `tb_slop_info` values (
 drop table if exists `tb_device_info`;
 
 create table`tb_device_info`(
-	`device_id` int(11) not null,
+	`device_id` int(11) not null AUTO_INCREMENT,
 	`device_name` varchar(64) not null,
 	`device_description` varchar(128) not null,
 	`device_type` int(16) default 0,
@@ -456,7 +456,7 @@ create table`tb_device_data`(
 drop table if exists `tb_project_user`;
 
 create table `tb_project_user`(
-	`id` int(11) not null,
+	`id` int(11) not null AUTO_INCREMENT,
 	`project_id` int(16) not null,
 	`user_id` int(16) not null,
 	`flag` varchar(128) default null,
@@ -478,7 +478,7 @@ insert into `tb_project_user` values (4, 2, 3, 0, '2011-01-01');
 drop table if exists `tb_alarm_model`;
 
 create table`tb_alarm_model`(
-	`model_id` int(11) not null,
+	`model_id` int(11) not null AUTO_INCREMENT,
 	`model_name` varchar(16) not null,
 	`description` varchar(128) not null,
 	`flag` varchar(128) default null,

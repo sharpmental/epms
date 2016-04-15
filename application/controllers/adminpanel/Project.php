@@ -80,14 +80,14 @@ class Project extends MY_Admin_Controller {
 		
 		// add operation button
 		foreach ( $project_data as $k => $v ) {
-			$num = $project_data[$k]['project_id'];
+			$num = $project_data [$k] ['project_id'];
 			
 			$btnchange = '<a class="btn btn-default" href=' . base_url ( $this->page_data ['folder_name'] . '/project/modify_project/' . $v ['project_id'] ) . '>修改</a>';
 			$btndel = '<a class="btn btn-default" href=' . base_url ( $this->page_data ['folder_name'] . '/project/delete_project/' . $v ['project_id'] ) . '>删除</a>';
 			
 			$project_data [$k] ['change'] = $btnchange;
 			$project_data [$k] ['del'] = $btndel;
-			$project_data [$k] ['project_id'] = '<a class="btn btn-default btn-small" href="'.base_url($this->page_data['folder_name'].'/project/general_info/'.$num).'">'.$num.'</a>';
+			$project_data [$k] ['project_id'] = '<a class="btn btn-default btn-small" href="' . base_url ( $this->page_data ['folder_name'] . '/project/general_info/' . $num ) . '">' . $num . '</a>';
 		}
 		
 		// build table
@@ -344,22 +344,94 @@ class Project extends MY_Admin_Controller {
 				'show_sidemenu' => true,
 				'table_data' => $table_data,
 				'info_table' => $info_table_data,
-				'project_id' => $id
+				'project_id' => $id 
 		) );
 	}
 	function add_project() {
-		$config ['upload_path'] = './uploads/';
-		$config ['allowed_types'] = 'gif|jpg|png';
-		$config ['max_size'] = '200';
-		$config ['max_width'] = '2048';
-		$config ['max_height'] = '1024';
-		
-		$this->load->library ( 'upload', $config );
-		
 		$this->view ( 'add_project', array (
 				'require_js' => true,
 				'show_sidemenu' => true 
 		) );
+	}
+	function add_project_r() {
+		$this->load->helper ( 'file' );
+		
+		$this->load->model ( array (
+				'Project_model',
+				'Project_user_model',
+				'Member_model'
+		) );
+		
+		$r = $this->Project_model->insert ( array (
+				'project_name' => $this->input->post ( 'project_name' ),
+				'project_description' => $this->input->post ( 'project_des' ),
+				'start_time' => $this->input->post ( 'start_time' ),
+				'position_char' => $this->input->post ( 'address' ),
+				'construction_char' => $this->input->post ( 'construction' ),
+				'general_slop' => $this->input->post ( 'slop' ) 
+		)
+		 );
+		
+		if (! $r) {
+			$this->show_error ( "Failed to insert into project_info table" );
+		}
+		
+		$project_id = $this->Project_model->insert_id ();
+		
+		$pic_path = "./upload/project_info/" . $project_id;
+		$thumb_path = "./upload/project_info/thumb/" . $project_id;
+		
+		// check directory access
+		if (!is_dir($pic_path))
+			mkdir($pic_path);
+		if(!is_dir($thumb_path))
+			mkdir($thumb_path);
+		
+		// upload picture
+		$userfile_data = $_FILES ['userfile'];
+		
+		$config ['upload_path'] = $pic_path;
+		$config ['thumb_path'] = $thumb_path;
+		$config ['allowed_types'] = '*';
+		$config ['max_size'] = '1024';
+		$config ['max_width'] = '1024';
+		$config ['max_heigth'] = '768';
+		$config ['encrypt_name'] = 'FALSE';
+		
+		$name_list = array (
+				'project_pic',
+				'construction_pic' 
+		);
+		$r = $this->do_upload_ex ( $userfile_data, true, $config, $name_list );
+// 		var_dump($r);
+		
+		if (isset ( $r ['if_error'] ) && ! $r ['if_error'])
+			Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) );
+		else
+			$this->show_error ( $r );
+			
+		// update the picture path information
+		$this->Project_model->update ( array (
+				"picture_path" => $pic_path . '/'.$r [0] ['file_name'],
+				"construction_picture_path" => $thumb_path . '/'.$r [1] ['file_name'], 
+		), array (
+				"project_id" => $project_id 
+		) );
+		
+		//automatically add the relation for admin user
+		$user = $this->Member_model->select(array(
+				'operator_role' => 1,
+		));
+		
+		foreach($user as $k => $v){
+			
+				$this->Project_user_model->insert(array(
+						"project_id" => $project_id,
+						"user_id" => $v['operator_id'],
+						"flag" => 0
+				));
+		}
+		
 	}
 	function modify_project($id = '1') {
 		$this->view ( 'modify_project', array (
@@ -368,6 +440,13 @@ class Project extends MY_Admin_Controller {
 		) );
 	}
 	function delete_project() {
+	}
+	private function show_error($info) {
+		$this->view ( 'show_error', array (
+				'require_js' => true,
+				'show_sidemenu' => false,
+				'info' => $info 
+		) );
 	}
 	private function page_config($lines = 0) {
 		// create pageination
@@ -396,5 +475,47 @@ class Project extends MY_Admin_Controller {
 		$pconfig ['uri_segment'] = 5;
 		
 		$this->pagination->initialize ( $pconfig );
+	}
+	private function do_upload_ex($uploaddata, $Multi_file = false, $config, $name_list = "") {
+		$this->load->library ( "upload" );
+		
+		$imgname = array ();
+		
+		if (! isset ( $uploaddata ['name'] ) || ! $uploaddata ['name'])
+			exit ( 'The upload data is wrong. Sever can not find the file information. Go back and try again.' );
+		
+		$size = count ( $uploaddata ['name'] );
+		
+		if ($Multi_file) {
+			for($i = 0; $i < $size; $i ++) {
+				foreach ( $uploaddata as $k => $v ) {
+					$tempdata ['file'] [$k] = $v [$i];
+				}
+				
+				$_FILES = $tempdata;
+				// var_dump($tempdata);
+				
+				$config ['file_name'] = $name_list [$i];
+				$this->upload->initialize ( $config );
+				$r = $this->upload->do_upload ( 'file' );
+				if (! $r) {
+					$imgname ['if_error'] = true;
+					$imgname [] = $this->upload->display_errors ();
+				} else {
+					$imgname ['if_error'] = false;
+					$imgname [] = $this->upload->data ();
+				}
+			}
+		} else {
+			$r = $this->upload->do_upload ( 'file' );
+			if (! $r) {
+				$imgname ['if_error'] = true;
+				$imgname [] = $this->upload->display_errors ();
+			} else {
+				$imgname ['if_error'] = false;
+				$imgname [] = $this->upload->data ();
+			}
+		}
+		return $imgname;
 	}
 }

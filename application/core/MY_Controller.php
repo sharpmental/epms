@@ -56,18 +56,18 @@ class MY_Controller extends CI_Controller {
 		
 		$this->load->vars ( $this->page_data );
 	}
-	protected function showmessage($msg, $url_forward = '', $ms = 500, $dialog = '', $returnjs = '') {
-		if ($url_forward == '')
-			$url_forward = isset ( $_SERVER ['HTTP_REFERER'] ) ? $_SERVER ['HTTP_REFERER'] : site_url ();
-		$datainfo = array (
-				"msg" => $msg,
-				"url_forward" => $url_forward,
-				"ms" => $ms,
-				"returnjs" => $returnjs,
-				"dialog" => $dialog 
-		);
-		exit ( $msg );
-	}
+// 	protected function showmessage($msg, $url_forward = '', $ms = 500, $dialog = '', $returnjs = '') {
+// 		if ($url_forward == '')
+// 			$url_forward = isset ( $_SERVER ['HTTP_REFERER'] ) ? $_SERVER ['HTTP_REFERER'] : site_url ();
+// 		$datainfo = array (
+// 				"msg" => $msg,
+// 				"url_forward" => $url_forward,
+// 				"ms" => $ms,
+// 				"returnjs" => $returnjs,
+// 				"dialog" => $dialog 
+// 		);
+// 		exit ( $msg );
+// 	}
 	protected function view($view_file, $sub_page_data = NULL, $autoload_header_footer_view = true) {
 		$view_file = $this->page_data ['folder_name'] . DIRECTORY_SEPARATOR . $this->page_data ['controller_name'] . DIRECTORY_SEPARATOR . $view_file;
 		
@@ -262,9 +262,10 @@ class MY_Member_Controller extends MY_Controller {
 				"returnjs" => $returnjs,
 				"dialog" => $dialog 
 		);
-		echo $this->load->view ( 'member/header', NULL, true );
-		echo $this->load->view ( 'member/message', $datainfo, true );
-		echo $this->load->view ( 'member/footer', NULL, true );
+		echo $this->load->view ( $this->page_data ['folder_name'] . '/header', NULL, true );
+		echo $this->load->view ( $this->page_data ['folder_name'] . '/message', $datainfo, true );
+		echo $this->load->view ( $this->page_data ['folder_name'] . '/footer', NULL, true );
+		
 		exit ();
 	}
 	
@@ -389,23 +390,23 @@ class MY_Admin_Controller extends MY_Member_Controller {
 		define ( "IN_ADMIN", TRUE );
 		parent::__construct ();
 	}
-	protected function showmessage($msg, $url_forward = '', $ms = 500, $dialog = '', $returnjs = '') {
-		if ($url_forward == '')
-			$url_forward = isset ( $_SERVER ['HTTP_REFERER'] ) ? $_SERVER ['HTTP_REFERER'] : site_url ();
+// 	protected function showmessage($msg, $url_forward = '', $ms = 500, $dialog = '', $returnjs = '') {
+// 		if ($url_forward == '')
+// 			$url_forward = isset ( $_SERVER ['HTTP_REFERER'] ) ? $_SERVER ['HTTP_REFERER'] : site_url ();
 		
-		$datainfo = array (
-				"msg" => $msg,
-				"url_forward" => $url_forward,
-				"ms" => $ms,
-				"returnjs" => $returnjs,
-				"dialog" => $dialog 
-		);
-		echo $this->load->view ( $this->page_data ['folder_name'] . '/header', NULL, true );
-		echo $this->load->view ( $this->page_data ['folder_name'] . '/message', $datainfo, true );
-		echo $this->load->view ( $this->page_data ['folder_name'] . '/footer', NULL, true );
+// 		$datainfo = array (
+// 				"msg" => $msg,
+// 				"url_forward" => $url_forward,
+// 				"ms" => $ms,
+// 				"returnjs" => $returnjs,
+// 				"dialog" => $dialog 
+// 		);
+// 		echo $this->load->view ( $this->page_data ['folder_name'] . '/header', NULL, true );
+// 		echo $this->load->view ( $this->page_data ['folder_name'] . '/message', $datainfo, true );
+// 		echo $this->load->view ( $this->page_data ['folder_name'] . '/footer', NULL, true );
 		
-		exit ();
-	}
+// 		exit ();
+// 	}
 	
 	/**
 	 * 判断用户是否已经登陆
