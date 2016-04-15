@@ -1,27 +1,37 @@
 <?php defined('IN_ADMIN') or exit('No permission resources.'); ?>
 
 <div class="panel panel-default grid">
-	<div class='panel-heading'>
-		<i class='glyphicon glyphicon-th-list'></i>Project Info
-		<div class='panel-tools'>
-			<div class='btn-group'>
-			<?php aci_ui_a($folder_name,'project','index','',' class="btn "','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
-            </div>
+	<div class='panel-heading row'>
+		<h4 class="col-sm-2 col-md-2">项目信息</h4>
+		<div class="col-sm-8 col-md-8 ">
+			<div class="btn-group btn-group-justified" role="group"
+				aria-label="...">
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-primary"
+						href="<?php echo base_url($this->page_data['folder_name'].'/project/index')?>">项目概况</a>
+				</div>
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-success"
+						href="<?php echo base_url($this->page_data['folder_name'].'/project/construct_info')?>">建设情况</a>
+				</div>
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-info"
+						href="<?php echo base_url($this->page_data['folder_name'].'/project/slop_info')?>">边坡概况</a>
+				</div>
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-warning"
+						href="<?php echo base_url($this->page_data['folder_name'].'/project/device_info')?>">仪器数据</a>
+				</div>
+				<div class="btn-group" role="group">
+					<a type="button" class="btn btn-danger"
+						href="<?php echo base_url($this->page_data['folder_name'].'/project/alarm')?>">预警信息</a>
+				</div>
+			</div>
 		</div>
+
 	</div>
 
 	<div class="panel-body">
-		<div class="row text-center">Project detail information</div>
-		<div class="row">
-			    <ul class="nav navbar-nav navbar-icon-menu ">
-                <?php if ($menu_data) foreach ($menu_data as $k => $v): ?>
-                	<li><a href="<?php echo $v['url'] ?>"> 
-                	<i class="fa fa-<?php echo $v['css_icon'] ?>"></i> 
-                	<span><?php echo $v['menu_name'] ?></span>
-					</a></li>
-                <?php endforeach; ?>
-                </ul>
-		</div>
 		<div class="row">
 		<div class="col-sm-6 col-md-6 btn text-center">Project general information
 			<div style="width:100%">
