@@ -13,4 +13,12 @@ class Project_model extends My_Model {
 		return $data;
 	}
 	
+	public function check_data($data){
+		$field = $this->db->list_fields($this->table_name);
+		
+		foreach ($field as $k => $v){
+			$data[$v] = isset($data[$v])?$data[$v]:"";
+		}
+		return $data;
+	}
 }

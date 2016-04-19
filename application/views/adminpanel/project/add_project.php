@@ -62,7 +62,7 @@
 			<div class="form-group">
 				<label for="pic" class="col-sm-2 control-label">上传项目图片</label>
 				<div class="col-sm-7">
-					<input type="file" class="form-control" id="pic" name="userfile[]"
+					<input type="file" class="form-control" id="pic" name="userfile[]" accept="image/*"
 						placeholder="上传项目图片">
 				</div>
 			</div>
@@ -76,7 +76,7 @@
 			<div class="form-group">
 				<label for="construct_pic" class="col-sm-2 control-label">上传建造图片</label>
 				<div class="col-sm-7">
-					<input type="file" class="form-control" id="construct_pic" name="userfile[]"
+					<input type="file" class="form-control" id="construct_pic" name="userfile[]" accept="image/*"
 						placeholder="上传建造图片">
 				</div>
 			</div>

@@ -33,21 +33,23 @@
 
 <div class="panel-body">
 	<div class="row">
-		<div class="col-sm-3 col-md-3 text-center">
+		<div class="col-sm-3 col-md-3 text-center ">
 			<h5>项目列表</h5>
 			<div class="list-group text-left">
 					<?php echo $table_data?>
 				</div>
 		</div>
-		<div class="col-sm-4 col-md-4 text-center ">
+		<div class="col-sm-4 col-md-4 text-center panel panel-default">
 			<h5>项目信息</h5>
-			<div class="text-left">
+			<div class="text-left ">
 				<?php echo $info_table?>
 				</div>
 		</div>
 		<div class="col-sm-4 col-md-4 text-center ">
 			<h5>工程概况图片</h5>
-			<img src="" alt="A" style="height: 220px; width: 100%">
+			<img src="<?php echo './upload/project_info/'.$project_id.'/project_pic.jpg'?>" 
+				alt="Picture Lost? Check directory: <?php echo '/upload/project_info/'.$project_id.'/'?>" 
+				style="height: 280px; width: 100%">
 		</div>
 	</div>
 </div>
@@ -57,7 +59,7 @@
 		<div class="btn-group">
 			<a class="btn btn-default" href='<?php echo base_url($this->page_data['folder_name']."/project/add_project")?>'>新增项目</a>
 			<a class="btn btn-default" href='<?php echo base_url($this->page_data['folder_name']."/project/modify_project/".$project_id)?>'>修改项目</a>
-			<a class="btn btn-default" href='<?php echo base_url($this->page_data['folder_name']."/project/delete_project/".$project_id)?>'>删除项目</a>
+			<a class="btn btn-default" id="btn-delete" href='<?php echo base_url($this->page_data['folder_name']."/project/delete_project/".$project_id)?>'>删除项目</a>
 		</div>
 		
 		<div class='btn-group' role="group">
@@ -67,6 +69,8 @@
 </div>
 </div>
 
-<script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
+<script language="javascript" type="text/javascript"> 
+    var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
-    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/index.js']); </script>
+    var project_id = "<?php echo $project_id?>";
+    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/list_project.js']); </script>

@@ -359,7 +359,7 @@ class Project extends MY_Admin_Controller {
 		$this->load->model ( array (
 				'Project_model',
 				'Project_user_model',
-				'Member_model'
+				'Member_model' 
 		) );
 		
 		$r = $this->Project_model->insert ( array (
@@ -369,8 +369,7 @@ class Project extends MY_Admin_Controller {
 				'position_char' => $this->input->post ( 'address' ),
 				'construction_char' => $this->input->post ( 'construction' ),
 				'general_slop' => $this->input->post ( 'slop' ) 
-		)
-		 );
+		) );
 		
 		if (! $r) {
 			$this->show_error ( "Failed to insert into project_info table" );
@@ -378,66 +377,191 @@ class Project extends MY_Admin_Controller {
 		
 		$project_id = $this->Project_model->insert_id ();
 		
-		$pic_path = "./upload/project_info/" . $project_id;
-		$thumb_path = "./upload/project_info/thumb/" . $project_id;
-		
-		// check directory access
-		if (!is_dir($pic_path))
-			mkdir($pic_path);
-		if(!is_dir($thumb_path))
-			mkdir($thumb_path);
-		
 		// upload picture
-		$userfile_data = $_FILES ['userfile'];
-		
-		$config ['upload_path'] = $pic_path;
-		$config ['thumb_path'] = $thumb_path;
-		$config ['allowed_types'] = '*';
-		$config ['max_size'] = '1024';
-		$config ['max_width'] = '1024';
-		$config ['max_heigth'] = '768';
-		$config ['encrypt_name'] = 'FALSE';
-		
-		$name_list = array (
-				'project_pic',
-				'construction_pic' 
-		);
-		$r = $this->do_upload_ex ( $userfile_data, true, $config, $name_list );
-// 		var_dump($r);
-		
-		if (isset ( $r ['if_error'] ) && ! $r ['if_error'])
-			Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) );
-		else
-			$this->show_error ( $r );
+		if (isset ( $_FILES ['userfile'] ) && $_FILES ['userfile']) {
+			$pic_path = "./upload/project_info/" . $project_id;
+			$thumb_path = "./upload/project_info/thumb/" . $project_id;
 			
-		// update the picture path information
-		$this->Project_model->update ( array (
-				"picture_path" => $pic_path . '/'.$r [0] ['file_name'],
-				"construction_picture_path" => $thumb_path . '/'.$r [1] ['file_name'], 
-		), array (
-				"project_id" => $project_id 
+			// check directory access
+			if (! is_dir ( $pic_path ))
+				mkdir ( $pic_path );
+			if (! is_dir ( $thumb_path ))
+				mkdir ( $thumb_path );
+			
+			$userfile_data = $_FILES ['userfile'];
+			
+			$config ['upload_path'] = $pic_path;
+			$config ['thumb_path'] = $thumb_path;
+			$config ['allowed_types'] = '*';
+			$config ['max_size'] = '1024';
+			$config ['max_width'] = '1024';
+			$config ['max_heigth'] = '768';
+			$config ['encrypt_name'] = 'FALSE';
+			
+			$name_list = array (
+					'project_pic',
+					'construction_pic' 
+			);
+			$r = $this->do_upload_ex ( $userfile_data, true, $config, $name_list );
+			// var_dump($r);
+			
+			if (! isset ( $r ['if_error'] ) && $r ['if_error']) {
+				$this->show_error ( $r );
+			}
+			
+			// update the picture path information
+			$r = $this->Project_model->update ( array (
+					"picture_path" => $pic_path . '/' . $r [0] ['file_name'],
+					"construction_picture_path" => $thumb_path . '/' . $r [1] ['file_name'] 
+			), array (
+					"project_id" => $project_id 
+			) );
+			
+			if (! isset ( $r ) || ! $r) {
+				$this->show_error ( "Update project picture path failed. You may modify the project information again." );
+			}
+		}
+		$r = true;
+		// automatically add the relation for admin user
+		$user = $this->Member_model->select ( array (
+				'operator_role' => 1 
 		) );
 		
-		//automatically add the relation for admin user
-		$user = $this->Member_model->select(array(
-				'operator_role' => 1,
-		));
-		
-		foreach($user as $k => $v){
+		foreach ( $user as $k => $v ) {
 			
-				$this->Project_user_model->insert(array(
-						"project_id" => $project_id,
-						"user_id" => $v['operator_id'],
-						"flag" => 0
-				));
+			$r = $r && $this->Project_user_model->insert ( array (
+					"project_id" => $project_id,
+					"user_id" => $v ['operator_id'],
+					"flag" => 0 
+			) );
 		}
-		
+		if (! $r)
+			$this->show_error ( "There is error during binding all admin with this project, you may check the database." );
+		else
+			Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) );
 	}
 	function modify_project($id = '1') {
-		$this->view ( 'modify_project', array (
-				'require_js' => true,
-				'show_sidemenu' => true 
+		$this->load->model ( array (
+				'Project_model',
+				'Project_user_model' 
 		) );
+		
+		$r = $this->Project_user_model->select ( array (
+				'project_id' => $id,
+				'user_id' => $this->user_id 
+		) );
+		
+		if (! $r)
+			$this->show_error ( 'You are no authorized to change this project!' );
+		
+		$p = $this->Project_model->get_one ( array (
+				'project_id' => $id 
+		) );
+		
+		if (! isset ( $p ) || ! $p)
+			$this->show_error ( 'Can not find this project id!' );
+		else {
+			$p = $this->Project_model->check_data ( $p );
+			$this->view ( 'modify_project', array (
+					'require_js' => true,
+					'show_sidemenu' => true,
+					'data' => $p 
+			) );
+		}
+	}
+	function modify_project_r($project_id) {
+		$this->load->helper ( 'file' );
+		
+		$this->load->model ( array (
+				'Project_model',
+				'Project_user_model' 
+		) );
+		
+		$r = $this->Project_user_model->get_one ( array (
+				'project_id' => $project_id,
+				'user_id' => $this->user_id 
+		) );
+		
+		if (! isset ( $r ) || ! $r) {
+			$this->show_error ( "You are no authorized to change this project!" );
+			exit ();
+		}
+		
+		$r = $this->Project_model->update ( array (
+				'project_id' => $id 
+		), array (
+				'project_name' => $this->input->post ( 'project_name' ),
+				'project_description' => $this->input->post ( 'project_des' ),
+				'start_time' => $this->input->post ( 'start_time' ),
+				'position_char' => $this->input->post ( 'address' ),
+				'construction_char' => $this->input->post ( 'construction' ),
+				'general_slop' => $this->input->post ( 'slop' ) 
+		) );
+		
+		if (! $r) {
+			$this->show_error ( "Failed to insert into project_info table" );
+		}
+		
+		// upload picture
+		if (isset ( $_FILES ['userfile'] ) && $_FILES ['userfile']) {
+			$pic_path = "./upload/project_info/" . $project_id;
+			$thumb_path = "./upload/project_info/thumb/" . $project_id;
+			
+			// check directory access
+			if (! is_dir ( $pic_path ))
+				mkdir ( $pic_path );
+			
+			if (! is_dir ( $thumb_path ))
+				mkdir ( $thumb_path );
+			
+			$userfile_data = $_FILES ['userfile'];
+			
+			$config ['upload_path'] = $pic_path;
+			$config ['thumb_path'] = $thumb_path;
+			$config ['allowed_types'] = '*';
+			$config ['max_size'] = '1024';
+			$config ['max_width'] = '1024';
+			$config ['max_heigth'] = '768';
+			$config ['encrypt_name'] = 'FALSE';
+			
+			$name_list = array (
+					'project_pic',
+					'construction_pic' 
+			);
+			$r = $this->do_upload_ex ( $userfile_data, true, $config, $name_list );
+			// var_dump($r);
+			
+			if (! isset ( $r ['if_error'] ) && $r ['if_error'])
+				$this->show_error ( $r );
+				
+				// update the picture path information
+			$r = $this->Project_model->update ( array (
+					"picture_path" => $pic_path . '/' . $r [0] ['file_name'],
+					"construction_picture_path" => $thumb_path . '/' . $r [1] ['file_name'] 
+			), array (
+					"project_id" => $project_id 
+			) );
+			
+			if (! isset ( $r ) || ! $r)
+				$this->show_error ( "Update project picture path failed. You may modify the project information again." );
+		}
+		
+		$r = true;
+		// automatically add the relation for admin user
+		$user = $this->Member_model->select ( array (
+				'operator_role' => 1 
+		) );
+		
+		foreach ( $user as $k => $v ) {
+			
+			$r = $r && $this->Project_user_model->insert ( array (
+					"project_id" => $project_id,
+					"user_id" => $v ['operator_id'],
+					"flag" => 0 
+			) );
+		}
+		
+		Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) );
 	}
 	function delete_project() {
 	}
@@ -447,6 +571,7 @@ class Project extends MY_Admin_Controller {
 				'show_sidemenu' => false,
 				'info' => $info 
 		) );
+		exit ();
 	}
 	private function page_config($lines = 0) {
 		// create pageination
