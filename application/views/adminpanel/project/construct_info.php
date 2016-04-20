@@ -33,20 +33,22 @@
 	<div class="panel-body">
 		<div class="col-sm-4 col-md-4 btn text-center">
 			<div class="page-header">
-				<h2>建造情况</h2>
-				<h4 class="text-left panel-body"><?php echo $information?></h4>
+				<h3>建造情况</h3>
+				<h4 class="well text-left"><?php echo $information?></h4>
 			</div>
 			<div>
 				<div class="list-group text-left">
-				<a href="#" class="list-group-item active"></a>
+				<a href="#" class="list-group-item active">边坡列表</a>
 					<?php echo $table_data?>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-6 col-md-6 btn text-center">
-			Project picture
+			<h4>建造状况图片</h4>
 			<div style="width: 100%" >
-				<img src="" alt="A" style="height: 320px; width: 100%">
+				<img src="<?php echo './upload/project_info/'.$project_id.'/construction_pic.jpg'?>"
+						alt="Picture Lost? Check directory: <?php echo '/upload/project_info/'.$project_id.'/'?>"
+						 style="height: 320px; width: 100%">
 			</div>
 		</div>
 	</div>

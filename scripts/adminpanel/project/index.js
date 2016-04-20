@@ -102,7 +102,7 @@ function initialize_baidumap() {
 		marker_array[i] = new BMap.Marker(new BMap.Point(
 				map_json[i].position_x, map_json[i].position_y)); // 创建点
 
-		var content = "<h4  class='bg-primary'>" + map_json[i].slop_name
+		var content = "<div class='panel panel-default'><h4  class='bg-primary'>" + map_json[i].slop_name
 				+ "</h4>" + "<p class='text-info'>"
 				+ map_json[i].slop_description + "</p>" + "</div>";
 
@@ -124,4 +124,30 @@ function openInfo(content, e) {
 	var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
 	var infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象 
 	map.openInfoWindow(infoWindow, point); //开启信息窗口
+	
+	$(".search-item").remove();
+	var t = $(content).find('h4').text();
+	
+	//find the slop in mapjson
+	for (i = 0; i < map_json.length; i++) {
+		if(t == map_json[i].slop_name)
+			break;
+	}
+	
+	var item = '<li class="list-group-item search-item">'
+		+ '<a class="btn btn-small btn-info" href="'
+		+ project_link
+		+ '/'
+		+ map_json[i].project_id
+		+ '"><span class="glyphicon glyphicon-tint"></span>项目:'
+		+ map_json[i].project_id
+		+ '</a>&nbsp'
+		+ '<a class="btn btn-small btn-default" href="'
+		+ slop_link
+		+ '/'
+		+ map_json[i].slop_id
+		+ '"><span class="glyphicon glyphicon-chevron-right"></span>边坡:'
+		+ t
+		+ '</a>' + '</li>';
+	$("#list").after(item);
 }

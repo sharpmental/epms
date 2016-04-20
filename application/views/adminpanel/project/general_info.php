@@ -42,7 +42,10 @@
 			<div class="col-sm-5 col-md-5 text-center">
 				<h5>工程概况图片</h5>
 				<div>
-					<img src="" alt="A" style="height: 220px; width: 100%">
+					<img
+						src="<?php echo './upload/project_info/'.$project_id.'/project_pic.jpg'?>"
+						alt="Picture Lost? Check directory: <?php echo '/upload/project_info/'.$project_id.'/'?>"
+						style="height: 220px; width: 100%">
 				</div>
 			</div>
 		</div>
@@ -51,7 +54,8 @@
 	<div class="panel-footer">
 		<div class="pull-left">
 			<div class="btn-group">
-				<a class="btn btn-default" href='<?php echo base_url($this->page_data['folder_name']."/project/add_project")?>'>新增项目</a>
+				<a class="btn btn-default"
+					href='<?php echo base_url($this->page_data['folder_name']."/project/add_project")?>'>新增项目</a>
 			</div>
 			<div class='btn-group' role="group">
 			<?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>

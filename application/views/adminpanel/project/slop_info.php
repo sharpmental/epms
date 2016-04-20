@@ -2,7 +2,7 @@
 
 <div class="panel panel-default grid">
 	<div class='panel-heading row'>
-		<h4 class="col-sm-2 col-md-2">建设情况</h4>
+		<h4 class="col-sm-2 col-md-2">边坡概况</h4>
 		<div class="col-sm-7 col-md-7 ">
 			<div class="btn-group btn-group-justified" role="group"
 				aria-label="...">
@@ -31,7 +31,7 @@
 	</div>
 
 	<div class="panel-body text-center">
-		<h2>边坡概况</h2>
+		<h3>边坡概况</h3>
 		<div class="row">
 			<div class="col-sm-2 col-md-2 btn text-center">
 				<h4>边坡概况</h4>
@@ -40,23 +40,31 @@
 			</div>
 			</div>
 			<div class="col-sm-5 col-md-5 btn text-center">
-				Project picture
+				<h4>边坡图片</h4>
 				<div style="width: 100%">
-					<img src="" alt="A" style="height: 120px; width: 100%">
+					<img src="<?php echo './upload/slop_info/'.$slop_id.'/slop_pic.jpg'?>"
+						alt="Picture Lost? Check directory: <?php echo '/upload/slop_info/'.$slop_id.'/'?>"
+						 style="height: 120px; width: 100%">
 				</div>
 				<p></p>
 				<div style="width: 100%">
-					<img src="" alt="B" style="height: 120px; width: 100%">
+					<img src="<?php echo './upload/slop_info/'.$slop_id.'/slop_pic.jpg'?>"
+						alt="Picture Lost? Check directory: <?php echo '/upload/slop_info/'.$slop_id.'/'?>"
+						 style="height: 120px; width: 100%">
 				</div>
 			</div>
 			<div class="col-sm-5 col-md-5 btn text-center">
-				Project picture
+				<h4>边坡图片</h4>
 				<div style="width: 100%">
-					<img src="" alt="A" style="height: 120px; width: 100%">
+					<img src="<?php echo './upload/slop_info/'.$slop_id.'/slop_pic.jpg'?>"
+						alt="Picture Lost? Check directory: <?php echo '/upload/slop_info/'.$slop_id.'/'?>" 
+						style="height: 120px; width: 100%">
 				</div>
 				<p></p>
 				<div style="width: 100%">
-					<img src="" alt="B" style="height: 120px; width: 100%">
+					<img src="<?php echo './upload/slop_info/'.$slop_id.'/slop_pic.jpg'?>"
+						alt="Picture Lost? Check directory: <?php echo '/upload/slop_info/'.$slop_id.'/'?>" 
+						style="height: 120px; width: 100%">
 				</div>
 			</div>
 		</div>

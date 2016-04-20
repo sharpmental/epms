@@ -2,7 +2,7 @@
 
 <div class="panel panel-default grid">
 	<div class='panel-heading row'>
-		<h4 class="col-sm-2 col-md-2">项目信息</h4>
+		<h4 class="col-sm-2 col-md-2">仪器数据</h4>
 		<div class="col-sm-8 col-md-8 ">
 			<div class="btn-group btn-group-justified" role="group"
 				aria-label="...">
@@ -34,16 +34,17 @@
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-sm-2 col-md-2 btn text-center">
-				Project general information
+				<h4>仪器列表</h4>
 				<div class="list-group">
-					<a href="#" class="list-group-item active"> Device install info </a> 
+					<a href="#" class="list-group-item active"> 边坡ID </a> 
 					<a href="#" class="list-group-item">Device A</a> 
 					<a href="#" class="list-group-item">Device B</a> 
 					<a href="#"	class="list-group-item">Device C</a> 
 					<a href="#"	class="list-group-item">Device D</a>
 				</div>
 			</div>
-			<div class="col-sm-4 col-md-4 text-center">	Project picture
+			<div class="col-sm-4 col-md-4 text-center">	
+			<h4>仪器图片</h4>
 				<div style="width:100%">
 				<img src="" alt="A" style="height:120px;width:100%">
 				</div>
@@ -52,7 +53,8 @@
 				<img src="" alt="B" style="height:120px;width:100%">
 				</div>
 			</div>
-			<div class="col-sm-4 col-md-4 text-center">	Project picture
+			<div class="col-sm-4 col-md-4 text-center">	
+			<h4>全景图</h4>
 			<center>
 				<div id="product" style="width: 640px; height: 480px; overflow: hidden;">
                 <img src="/upload/device_info/1/01.jpg" />

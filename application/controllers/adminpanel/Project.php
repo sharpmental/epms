@@ -108,7 +108,8 @@ class Project extends MY_Admin_Controller {
 				'require_js' => true,
 				'show_sidemenu' => true,
 				'table_data' => $table_data,
-				'pageslink' => $pageslink 
+				'pageslink' => $pageslink,
+				'project_id' => $id
 		) );
 	}
 	function slop_info($id = '0') {
@@ -170,7 +171,8 @@ class Project extends MY_Admin_Controller {
 		$this->view ( 'slop_info', array (
 				'require_js' => true,
 				'show_sidemenu' => true,
-				'table_data' => $table_data 
+				'table_data' => $table_data,
+				'slop_id' => $id,
 		) );
 	}
 	function construct_info($id = '0') {
@@ -219,7 +221,8 @@ class Project extends MY_Admin_Controller {
 				'require_js' => true,
 				'show_sidemenu' => true,
 				'table_data' => $table_data,
-				'information' => $information 
+				'information' => $information,
+				'project_id' => $id,
 		) );
 	}
 	function device_info() {
