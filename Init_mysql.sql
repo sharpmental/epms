@@ -294,28 +294,28 @@ drop table if exists `tb_slop_info`;
 
 create table`tb_slop_info`(
 	`slop_id` int(11) not null AUTO_INCREMENT,
-	`slop_name` varchar(64) not null,
-	`slop_description` varchar(128) default null,
-	`start_time` datetime default null,
-	`position_char` varchar(128) default null,
-	`position_x` varchar(16) default 0,
-	`position_y` varchar(16) default 0,
-	`alarm_model` int(16) default 0,
+	`slop_name` varchar(64) not null, /* 边坡名称 */
+	`slop_description` varchar(128) default null, /* 边坡描述 */
+	`start_time` datetime default null, /* 起始时间 */
+	`position_char` varchar(128) default null, /* 位置描述 */
+	`position_x` varchar(16) default 0, /* 地图X坐标值 */
+	`position_y` varchar(16) default 0, /* 地图Y坐标值 */
+	`alarm_model` int(16) default 0, /* 报警模型 */
 	
-	`property_1` int(16) default 0,
+	`property_1` int(16) default 0, /* 属性1 */
 	`property_2` int(16) default 0,
 	`property_3` int(16) default 0,
 
-	`design_picture_path` varchar(128) default null,
-	`solidate_picture_path` varchar(128) default null,
-	`conservation_picture_path` varchar(128) default null,
-	`panorama_picture_path` varchar(128) default null,
-	`install_picture_path` varchar(128) default null,
-	`decompose_picture_path` varchar(128) default null,
-	`3d_picture_path` varchar(128) default null,
-	`video_path` varchar(128) default null,
+	`design_picture_path` varchar(128) default null, /* 设计图片 */
+	`solidate_picture_path` varchar(128) default null, /* 加固图片 */
+	`conservation_picture_path` varchar(128) default null, /* 保护图片 */
+	`panorama_picture_path` varchar(128) default null, /* 全景图 */
+	`install_picture_path` varchar(128) default null, /* 安装图片 */
+	`decompose_picture_path` varchar(128) default null, /* 拆解图 */
+	`3d_picture_path` varchar(128) default null, /* 3D展示图 */
+	`video_path` varchar(128) default null, /* 上传视频 */
 
-	`project_id` int(16) default 0, /* 属于哪个项目*/
+	`project_id` int(16) default 0, /* 所属项目*/
 	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
 	primary key (`slop_id`)
 )engine=myisam default charset=utf8;

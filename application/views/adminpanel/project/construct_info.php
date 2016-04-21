@@ -38,7 +38,7 @@
 			</div>
 			<div>
 				<div class="list-group text-left">
-				<a href="#" class="list-group-item active">边坡列表</a>
+				<li href="#" class="list-group-item active">边坡列表</li>
 					<?php echo $table_data?>
 				</div>
 			</div>
@@ -56,6 +56,7 @@
 	<div class="panel-footer">
 		<div class="pull-left">
 			<div class='btn-group' role="group">
+				<?php aci_ui_a($folder_name,'slop','add_slop/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 新建边坡')?>
 				<?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
             	</div>
 		</div>

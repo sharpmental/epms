@@ -42,28 +42,28 @@
 			<div class="col-sm-5 col-md-5 btn text-center">
 				<h4>边坡图片</h4>
 				<div style="width: 100%">
-					<img src="<?php echo './upload/slop_info/'.$slop_id.'/slop_pic.jpg'?>"
-						alt="Picture Lost? Check directory: <?php echo '/upload/slop_info/'.$slop_id.'/'?>"
+					<img src="<?php echo $slop['design_picture_path']?>"
+						alt="Picture Lost? Check directory: <?php echo $slop['design_picture_path']?>"
 						 style="height: 120px; width: 100%">
 				</div>
 				<p></p>
 				<div style="width: 100%">
-					<img src="<?php echo './upload/slop_info/'.$slop_id.'/slop_pic.jpg'?>"
-						alt="Picture Lost? Check directory: <?php echo '/upload/slop_info/'.$slop_id.'/'?>"
+					<img src="<?php echo $slop['solidate_picture_path']?>"
+						alt="Picture Lost? Check directory: <?php echo $slop['solidate_picture_path']?>"
 						 style="height: 120px; width: 100%">
 				</div>
 			</div>
 			<div class="col-sm-5 col-md-5 btn text-center">
 				<h4>边坡图片</h4>
 				<div style="width: 100%">
-					<img src="<?php echo './upload/slop_info/'.$slop_id.'/slop_pic.jpg'?>"
-						alt="Picture Lost? Check directory: <?php echo '/upload/slop_info/'.$slop_id.'/'?>" 
+					<img src="<?php echo $slop['conservation_picture_path']?>"
+						alt="Picture Lost? Check directory: <?php echo $slop['conservation_picture_path']?>" 
 						style="height: 120px; width: 100%">
 				</div>
 				<p></p>
 				<div style="width: 100%">
-					<img src="<?php echo './upload/slop_info/'.$slop_id.'/slop_pic.jpg'?>"
-						alt="Picture Lost? Check directory: <?php echo '/upload/slop_info/'.$slop_id.'/'?>" 
+					<img src="<?php echo $slop['panorama_picture_path']?>"
+						alt="Picture Lost? Check directory: <?php echo $slop['panorama_picture_path']?>" 
 						style="height: 120px; width: 100%">
 				</div>
 			</div>
