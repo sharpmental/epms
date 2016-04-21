@@ -109,8 +109,7 @@ class Project extends MY_Admin_Controller {
 				'show_sidemenu' => true,
 				'table_data' => $table_data,
 				'pageslink' => $pageslink,
-				'project_id' => $id,
-				
+				'project_id' => $id 
 		) );
 	}
 	function slop_info($id = '0') {
@@ -173,7 +172,7 @@ class Project extends MY_Admin_Controller {
 				'require_js' => true,
 				'show_sidemenu' => true,
 				'table_data' => $table_data,
-				'slop' => $s,
+				'slop' => $s 
 		) );
 	}
 	function construct_info($id = '0') {
@@ -214,10 +213,7 @@ class Project extends MY_Admin_Controller {
 		// build table
 		$table_data = "";
 		foreach ( $slop as $k => $v ) {
-			$item = '<li class="list-group-item"><a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $v ['slop_id'] . '" class="btn btn-default">' . "边坡名称: " . $v ['slop_name'] . '</a>' .
-			'<a class="btn btn-default pull-right" href="'. base_url ( $this->page_data ['folder_name'] . '/slop/delete_slop' ) . "/" . $v ['slop_id'] .'">删除</a>'.
-			'<a class="btn btn-default pull-right" href="'. base_url ( $this->page_data ['folder_name'] . '/slop/modify_slop' ) . "/" . $v ['slop_id'] .'">修改</a>'.
-			'</li>';
+			$item = '<li class="list-group-item"><a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $v ['slop_id'] . '" class="btn btn-default">' . "边坡名称: " . $v ['slop_name'] . '</a>' . '<a class="btn btn-default pull-right" href="' . base_url ( $this->page_data ['folder_name'] . '/slop/delete_slop' ) . "/" . $v ['slop_id'] . '">删除</a>' . '<a class="btn btn-default pull-right" href="' . base_url ( $this->page_data ['folder_name'] . '/slop/modify_slop' ) . "/" . $v ['slop_id'] . '">修改</a>' . '</li>';
 			$table_data = $table_data . $item;
 		}
 		
@@ -227,7 +223,7 @@ class Project extends MY_Admin_Controller {
 				'show_sidemenu' => true,
 				'table_data' => $table_data,
 				'information' => $information,
-				'project_id' => $id,
+				'project_id' => $id 
 		) );
 	}
 	function device_info() {
@@ -571,7 +567,43 @@ class Project extends MY_Admin_Controller {
 		
 		Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) );
 	}
-	function delete_project() {
+	function delete_project($project_id) {
+		$this->check_priv ();
+		$this->load->model ( array (
+				'Project_model',
+				'Project_user_model',
+				'Slop_model' 
+		) );
+		$r = $this->Project_user_model->get_one ( array (
+				'project_id' => $project_id,
+				'user_id' => $this->user_id 
+		) );
+		if (! isset ( $r ) || ! $r)
+			$this->show_error ( "You are not authorized to access this project!" );
+		
+		$p = $this->Project_model->get_one ( array (
+				'project_id' => $project_id 
+		) );
+		
+		if (! isset ( $p ) || ! $p)
+			$this->show_error ( "Can not find this project!" );
+			
+			// delete from project_info
+		$s = $this->Project_model->delete ( array (
+				'project_id' => $project_id 
+		) );
+		if (! isset ( $s ) || ! $s)
+			$this->show_error ( "Failed to delete this project!" );
+			
+			// delete all relations and related slop
+		$dr = $this->Project_user_model->delete ( array (
+				'project_id' => $project_id 
+		) );
+		// $ds= $this->Slop_model->delete(array('project_id' => $project_id));
+		if (! isset ( $dr ) || ! $dr)
+			$this->show_error ( "Some error happens when delete project-user relation." );
+		
+		Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) );
 	}
 	private function show_error($info) {
 		$this->view ( 'show_error', array (
