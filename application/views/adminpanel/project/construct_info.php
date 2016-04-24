@@ -30,10 +30,11 @@
 		</div>
 	</div>
 
-	<div class="panel-body">
+	<div class="panel-body text-center">
+		<h3>项目ID：<?php echo $project_id?></h3>
 		<div class="col-sm-4 col-md-4 btn text-center">
-			<div class="page-header">
-				<h3>建造情况</h3>
+			<div class="">
+				<h4>建造情况</h4>
 				<h4 class="well text-left"><?php echo $information?></h4>
 			</div>
 			<div>
@@ -65,4 +66,4 @@
 
 <script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
-    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/index.js']); </script>
+    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/construct_info.js']); </script>

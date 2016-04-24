@@ -2,7 +2,7 @@
 
 <div class="panel panel-default grid">
 	<div class='panel-heading row'>
-		<h4 class="col-sm-2 col-md-2">项目信息</h4>
+		<h4 class="col-sm-2 col-md-2">设备数据</h4>
 		<div class="col-sm-8 col-md-8 ">
 			<div class="btn-group btn-group-justified" role="group"
 				aria-label="...">
@@ -34,7 +34,7 @@
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-sm-4 col-md-4 btn text-center">
-				Project general information
+				<h4>设备列表</h4>
 				<div class="list-group">
 					<a href="#" class="list-group-item active"> Device install info </a>
 					<a href="#" class="list-group-item">Device A</a> <a href="#"
@@ -44,35 +44,35 @@
 				</div>
 			</div>
 			<div class="col-sm-7 col-md-7 text-center">
-				Project picture
-				<div class="row"> 
-				<table class="table table-condensed">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Username</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-						</tr>
-					</tbody>
-				</table>
+				<h4>数据表格</h4>
+				<div class="row">
+					<table class="table table-condensed">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Username</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>Mark</td>
+								<td>Otto</td>
+								<td>@mdo</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>Jacob</td>
+								<td>Thornton</td>
+								<td>@fat</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				<div class="row">
-					Data Chart
+					<h4>数据曲线图</h4>
 					<div id="datachart"></div>
 				</div>
 			</div>

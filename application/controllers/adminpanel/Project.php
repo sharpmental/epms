@@ -60,9 +60,11 @@ class Project extends MY_Admin_Controller {
 					'project_id' => $id 
 			) );
 		}
+		
 		$project_data = array ();
 		
 		if (isset ( $p ) && $p) {
+			$id = reset ( $p ) ['project_id'];
 			foreach ( $p as $k => $v ) {
 				$s = $this->Project_model->select ( array (
 						"project_id" => $v ['project_id'] 
@@ -82,11 +84,11 @@ class Project extends MY_Admin_Controller {
 		foreach ( $project_data as $k => $v ) {
 			$num = $project_data [$k] ['project_id'];
 			
-			$btnchange = '<a class="btn btn-default" href=' . base_url ( $this->page_data ['folder_name'] . '/project/modify_project/' . $v ['project_id'] ) . '>修改</a>';
-			$btndel = '<a class="btn btn-default" href=' . base_url ( $this->page_data ['folder_name'] . '/project/delete_project/' . $v ['project_id'] ) . '>删除</a>';
+			// $btnchange = '<a class="btn btn-default" href=' . base_url ( $this->page_data ['folder_name'] . '/project/modify_project/' . $v ['project_id'] ) . '>修改</a>';
+			// $btndel = '<a class="btn btn-default" href=' . base_url ( $this->page_data ['folder_name'] . '/project/delete_project/' . $v ['project_id'] ) . '>删除</a>';
 			
-			$project_data [$k] ['change'] = $btnchange;
-			$project_data [$k] ['del'] = $btndel;
+			// $project_data [$k] ['change'] = $btnchange;
+			// $project_data [$k] ['del'] = $btndel;
 			$project_data [$k] ['project_id'] = '<a class="btn btn-default btn-small" href="' . base_url ( $this->page_data ['folder_name'] . '/project/general_info/' . $num ) . '">' . $num . '</a>';
 		}
 		
@@ -96,7 +98,8 @@ class Project extends MY_Admin_Controller {
 				'table_open' => '<table class="table table-hover">' 
 		);
 		$this->table->set_template ( $template );
-		$this->table->set_heading ( '项目编号', '项目名称', '项目描述', '启动时间', '项目地址', '操作', '操作' );
+		$this->table->set_heading ( '项目编号', '项目名称', '项目描述', '启动时间', '项目地址' );
+		// $this->table->set_heading ( '项目编号', '项目名称', '项目描述', '启动时间', '项目地址', '操作', '操作' );
 		
 		$table_data = $this->table->generate ( $project_data );
 		
@@ -154,14 +157,15 @@ class Project extends MY_Admin_Controller {
 			// build information table
 			$table_data = "";
 			
-			$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $s ['slop_id'] . '" class="list-group-item active">' . "边坡名称:&nbsp" . $s ['slop_name'] . '</a>';
+			// $table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $s ['slop_id'] . '" class="list-group-item active">' . "边坡名称:&nbsp" . $s ['slop_name'] . '</a>';
+			// $table_data = $table_data . '<a href="" class="list-group-item active">' . "边坡名称:&nbsp" . $s ['slop_name'] . '</a>';
 			
 			$d = $this->Device_model->select ( array (
 					'slop_id' => $s ['slop_id'] 
 			) );
 			if (isset ( $d ) && $d) {
 				foreach ( $d as $kk => $vv ) {
-					$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info' ) . "/" . $vv ['device_id'] . '" class="list-group-item">' . "设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" . $vv ['device_name'] . '</a>';
+					$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info' ) . "/" . $vv ['device_id'] . '" class="list-group-item">' . "设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp" . $vv ['device_name'] . '</a>';
 				}
 			}
 		}
@@ -226,19 +230,105 @@ class Project extends MY_Admin_Controller {
 				'project_id' => $id 
 		) );
 	}
-	function device_info() {
+	function device_info($device_id = '0') {
 		$this->check_priv ();
+		$this->load->model ( array (
+				"Slop_model",
+				"Device_model",
+				'Project_user_model' 
+		) );
+		if ($device_id == '0') {
+			$d = $this->Device_model->get_one ();
+		} else {
+			$d = $this->Device_model->get_one ( array (
+					'device_id' => $device_id 
+			) );
+		}
+		if (! isset ( $d ) || ! $d)
+			$this->show_error ( "Can not find the device" );
 		
+		$device_id = $d ['device_id']; // incase we ramdonly choose one device
+		$s = $this->Slop_model->get_one ( array (
+				'slop_id' => $d ['slop_id'] 
+		) );
+		if (! isset ( $s ) || ! $s) {
+			$idel = true;
+			$note = "This device does not belong to any slop.";
+		} else {
+			$idel = false;
+			$note = "";
+		}
+		
+		if (! $idel) {
+			$p = $this->Project_user_model->get_one ( array (
+					'project_id' => $s ['project_id'],
+					'user_id' => $this->user_id 
+			) );
+			if (! isset ( $p ) || ! $p)
+				$this->show_error ( "You are not authorized to access this device!" );
+			
+			$ls = $this->Device_model->select ( array (
+					'slop_id' => $s ['slop_id'] 
+			) );
+		} else {
+			$ls = $d;
+		}
+		$d_pic = $d ['device_picture_path'];
+		$i_pic = $d ['install_picture_path'];
 		$this->view ( 'device_info', array (
 				'require_js' => true,
-				'show_sidemenu' => true 
+				'show_sidemenu' => true,
+				'idel' => $idel,
+				'note' => $note,
+				'slop' => $s,
+				'device_list' => $ls,
+				'd_pic' => $d_pic,
+				'i_pic' => $i_pic 
 		) );
 	}
-	function alarm() {
-	}
-	function data_display() {
-		$this->check_priv ();
+	function alarm(){
 		
+	}
+	function data_display($device_id='0') {
+		$this->check_priv ();
+		$this->load->model(array('Project_user_model','Slop_model','Device_model'));
+		if ($device_id == '0') {
+			$d = $this->Device_model->get_one ();
+		} else {
+			$d = $this->Device_model->get_one ( array (
+					'device_id' => $device_id
+			) );
+		}
+		if (! isset ( $d ) || ! $d)
+			$this->show_error ( "Can not find the device" );
+		
+			$device_id = $d ['device_id']; // incase we ramdonly choose one device
+			$s = $this->Slop_model->get_one ( array (
+					'slop_id' => $d ['slop_id']
+			) );
+			if (! isset ( $s ) || ! $s) {
+				$idel = true;
+				$note = "This device does not belong to any slop.";
+			} else {
+				$idel = false;
+				$note = "";
+			}
+		
+			if (! $idel) {
+				$p = $this->Project_user_model->get_one ( array (
+						'project_id' => $s ['project_id'],
+						'user_id' => $this->user_id
+				) );
+				if (! isset ( $p ) || ! $p)
+					$this->show_error ( "You are not authorized to access this device!" );
+						
+					$ls = $this->Device_model->select ( array (
+							'slop_id' => $s ['slop_id']
+					) );
+			} else {
+				$ls = $d;
+			}
+			
 		$this->view ( 'data_display', array (
 				'require_js' => true,
 				'show_sidemenu' => true 

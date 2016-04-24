@@ -33,37 +33,38 @@
 	<div class="panel-body text-center">
 		<h3>边坡概况</h3>
 		<div class="row">
-			<div class="col-sm-2 col-md-2 btn text-center">
+			<div class="col-sm-3 col-md-3 btn text-center">
 				<h4>边坡概况</h4>
-				<div class="text-left">
+				<div class="list-group text-left">
+					<a href="" class="list-group-item active"><?php echo "边坡名称:&nbsp" . $slop ['slop_name']?></a>
 			<?php echo $table_data?>
 			</div>
 			</div>
-			<div class="col-sm-5 col-md-5 btn text-center">
+			<div class="col-sm-4 col-md-4 btn text-center">
 				<h4>边坡图片</h4>
 				<div style="width: 100%">
 					<img src="<?php echo $slop['design_picture_path']?>"
 						alt="Picture Lost? Check directory: <?php echo $slop['design_picture_path']?>"
-						 style="height: 120px; width: 100%">
+						style="height: 120px; width: 100%">
 				</div>
 				<p></p>
 				<div style="width: 100%">
 					<img src="<?php echo $slop['solidate_picture_path']?>"
 						alt="Picture Lost? Check directory: <?php echo $slop['solidate_picture_path']?>"
-						 style="height: 120px; width: 100%">
+						style="height: 120px; width: 100%">
 				</div>
 			</div>
-			<div class="col-sm-5 col-md-5 btn text-center">
+			<div class="col-sm-4 col-md-4 btn text-center">
 				<h4>边坡图片</h4>
 				<div style="width: 100%">
 					<img src="<?php echo $slop['conservation_picture_path']?>"
-						alt="Picture Lost? Check directory: <?php echo $slop['conservation_picture_path']?>" 
+						alt="Picture Lost? Check directory: <?php echo $slop['conservation_picture_path']?>"
 						style="height: 120px; width: 100%">
 				</div>
 				<p></p>
 				<div style="width: 100%">
 					<img src="<?php echo $slop['panorama_picture_path']?>"
-						alt="Picture Lost? Check directory: <?php echo $slop['panorama_picture_path']?>" 
+						alt="Picture Lost? Check directory: <?php echo $slop['panorama_picture_path']?>"
 						style="height: 120px; width: 100%">
 				</div>
 			</div>
@@ -73,7 +74,10 @@
 	<div class="panel-footer">
 		<div class="pull-left">
 			<div class='btn-group' role="group">
-				<?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+				<?php aci_ui_a($folder_name,'slop','modify_slop/'.$slop['slop_id'],'',' class="btn btn-default"','<span class="glyphicon glyphicon-pencil"></span> 修改边坡')?>
+            	<?php aci_ui_a($folder_name,'slop','delete_slop/'.$slop['slop_id'],'',' class="btn btn-default"','<span class="glyphicon glyphicon-remove"></span> 删除边坡')?>
+            	</div>
+			<div class='btn-group' role="group"><?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
             	</div>
 		</div>
 	</div>
@@ -81,4 +85,4 @@
 
 <script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
-    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/index.js']); </script>
+    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/slop_info.js']); </script>

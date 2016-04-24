@@ -54,11 +54,14 @@
 	<div class="panel-footer">
 		<div class="pull-left">
 			<div class="btn-group">
-				<a class="btn btn-default"
-					href='<?php echo base_url($this->page_data['folder_name']."/project/add_project")?>'>新增项目</a>
+				<?php aci_ui_a($folder_name,'project','add_project/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-plus"></span> 新增项目')?>
+            	<?php aci_ui_a($folder_name,'project','modify_project/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-pencil"></span> 修改项目')?>
+            	<?php aci_ui_a($folder_name,'project','delete_project/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-remove"></span> 删除项目')?>
+            	
 			</div>
 			<div class='btn-group' role="group">
-			<?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+			<?php aci_ui_a($folder_name,'project','construct_info/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-road"></span> 建造情况')?>
+            <?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
             </div>
 		</div>
 	</div>
