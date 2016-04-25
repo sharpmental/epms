@@ -275,7 +275,7 @@ create table`tb_project_info`(
 	`position_char` varchar(128) default null,
 	`picture_path` varchar(128) default null,
 	`construction_char` varchar(128) default null,
-	`construction_picture_path` varchar(128) default null,
+	`construction_picture_path` varchar(256) default null,
 	`general_slop` varchar(128) default null,
 	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
 	primary key (`project_id`)
@@ -429,23 +429,6 @@ insert into `tb_device_info` values (
 	'1+1',
 	2, '2011-01-01'
 );
--- --------------------------------------------------------
-
---
--- 表的结构 `tb_device_data`
--- 仪器数据表
-
-drop table if exists `tb_device_data`;
-
-create table`tb_device_data`(
-	`data_id` int(11) not null,
-	`device_id` int(16) not null,
-	`start_time` datetime default null,
-	`original_data` varchar(32) default null,
-	`calculation_result` varchar(32) default null,
-	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
-	primary key (`data_id`)
-)engine=myisam default charset=utf8;
 
 -- --------------------------------------------------------
 
@@ -510,3 +493,27 @@ create table`tb_device_type`(
 insert into `tb_device_type` values(1, 'type A', 'AAAA', 0, '2010-01-01');
 insert into `tb_device_type` values(2, 'type B', 'BBBB', 0, '2010-01-01');
 insert into `tb_device_type` values(3, 'type C', 'CCCC', 0, '2010-01-01');
+
+
+drop table if exists `tb_device_data`;
+
+/* create table`tb_device_data`(
+	`id` int(11) not null,
+	`device_id` varchar(16) not null,
+	`collection` varchar(16) default null,
+	`flag` varchar(128) default null,
+	`data` varchar(128) default null,
+	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
+	 primary key (`id`)
+)engine=myisam default charset=utf8; */
+
+create table`tb_device_data`(
+	`id` int(11) not null,
+	`device_id` varchar(16) not null,
+	`flag` varchar(128) default null,
+	`path` varchar(256) default null,
+	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
+	 primary key (`id`)
+)engine=myisam default charset=utf8;
+
+insert into `tb_device_data` values(1, 1, 0, '/upload/device_data/1-2016-01-24.csv');

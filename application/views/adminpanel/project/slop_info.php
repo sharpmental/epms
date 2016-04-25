@@ -31,7 +31,10 @@
 	</div>
 
 	<div class="panel-body text-center">
-		<h3>边坡概况</h3>
+		<div class="text-left">
+			<h5>
+				<span class="glyphicon glyphicon-info-sign"></span>&nbsp边坡ID：<?php echo $slop['slop_id']?></h5>
+		</div>
 		<div class="row">
 			<div class="col-sm-3 col-md-3 btn text-center">
 				<h4>边坡概况</h4>
@@ -77,7 +80,7 @@
 				<?php aci_ui_a($folder_name,'slop','modify_slop/'.$slop['slop_id'],'',' class="btn btn-default"','<span class="glyphicon glyphicon-pencil"></span> 修改边坡')?>
             	<?php aci_ui_a($folder_name,'slop','delete_slop/'.$slop['slop_id'],'',' class="btn btn-default"','<span class="glyphicon glyphicon-remove"></span> 删除边坡')?>
             	</div>
-			<div class='btn-group' role="group"><?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+			<div class='btn-group' role="group"><?php aci_ui_a($folder_name,'project','construct_info','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
             	</div>
 		</div>
 	</div>

@@ -17,6 +17,9 @@
 <link
 	href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"
 	rel="stylesheet">
+<link type="text/css"
+	href="<?php echo base_url('css/font-awesome.min.css')?>"
+	rel="stylesheet" />
 
 <!-- Custom styles for this template -->
 <link href="css/steup.css" rel="stylesheet">
@@ -54,11 +57,13 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-2 col-md-2 col-sm-offset-1 col-md-offset-1">
-			<div class="thumbnail">
-				<img src="" alt=""
-					style="height: 160px; width: 100%; display: block">
+			<div class="btn btn-lg btn-block btn-default">
+				<p></p>
+				<i class="fa fa-search fa-5x"></i>
 				<div class="caption">
+
 					<h4>查询项目</h4>
+
 					<a
 						href="<?php
 						if (isset ( $this->session->userdata ['xurl'] ) && $this->session->userdata ['xurl'])
@@ -67,31 +72,32 @@
 							echo site_url ( 'adminpanel' );
 						?>"
 						class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a>
+					<p></p>
 				</div>
 			</div>
 		</div>
 		<div class="col-xs-2 col-md-2">
-			<div class="thumbnail">
-				<img src="" alt=""
-					style="height: 160px; width: 100%; display: block">
+			<div class="btn btn-lg btn-block btn-default">
+				<p></p>
+				<i class="fa fa-gears fa-5x"></i>
 				<div class="caption">
 					<h4>项目管理</h4>
 					<a
 						href="<?php
 						if (isset ( $this->session->userdata ['xurl'] ) && $this->session->userdata ['xurl'])
-							echo site_url ( $this->session->userdata ['xurl'] . '/project/list_project');
+							echo site_url ( $this->session->userdata ['xurl'] . '/project/list_project' );
 						else
 							echo site_url ( 'adminpanel' );
 						?>"
 						class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a>
-
+					<p></p>
 				</div>
 			</div>
 		</div>
 		<div class="col-xs-2 col-md-2">
-			<div class="thumbnail">
-				<img src="" alt=""
-					style="height: 160px; width: 100%; display: block">
+			<div class="btn btn-lg btn-block btn-default">
+				<p></p>
+				<i class="fa fa-user-plus fa-5x"></i>
 				<div class="caption">
 					<h4>用户管理</h4>
 					<a
@@ -102,41 +108,44 @@
 							echo site_url ( 'adminpanel' );
 						?>"
 						class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a>
+					<p></p>
 				</div>
 			</div>
 		</div>
 		<div class="col-xs-2 col-md-2">
-			<div class="thumbnail">
-				<img src="" alt=""
-					style="height: 160px; width: 100%; display: block">
+			<div class="btn btn-lg btn-block btn-default">
+				<p></p>
+				<i class="fa fa-warning fa-5x"></i>
 				<div class="caption">
 					<h4>预警管理</h4>
 					<a
 						href="<?php
 						if (isset ( $this->session->userdata ['xurl'] ) && $this->session->userdata ['xurl'])
-							echo site_url ( $this->session->userdata ['xurl'] .'/alarm' );
+							echo site_url ( $this->session->userdata ['xurl'] . '/alarm' );
 						else
 							echo site_url ( 'adminpanel' );
 						?>"
 						class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a>
+					<p></p>
 
 				</div>
 			</div>
 		</div>
 		<div class="col-xs-2 col-md-2">
-			<div class="thumbnail">
-				<img src="" alt=""
-					style="height: 160px; width: 100%; display: block">
+			<div class="btn btn-lg btn-block btn-default">
+				<p></p>
+				<i class="fa fa-support fa-5x"></i>
 				<div class="caption">
 					<h4>技术支持</h4>
 					<a
 						href="<?php
 						if (isset ( $this->session->userdata ['xurl'] ) && $this->session->userdata ['xurl'])
-							echo site_url ( $this->session->userdata ['xurl'] . '/customer');
+							echo site_url ( $this->session->userdata ['xurl'] . '/customer' );
 						else
 							echo site_url ( 'adminpanel' );
 						?>"
 						class="btn btn-info btn-md" role="button">&nbsp;&nbsp;进入&nbsp;&nbsp;</a>
+					<p></p>
 
 				</div>
 			</div>

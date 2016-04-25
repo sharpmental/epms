@@ -32,15 +32,25 @@
 	</div>
 
 	<div class="panel-body">
+	<div class="text-left">
+			<h5>
+				<span class="glyphicon glyphicon-info-sign"></span>&nbsp仪器ID：<?php echo $device_id?></h5>
+		</div>
 		<div class="row">
 			<div class="col-sm-4 col-md-4 btn text-center">
 				<h4>设备列表</h4>
-				<div class="list-group">
-					<a href="#" class="list-group-item active"> Device install info </a>
-					<a href="#" class="list-group-item">Device A</a> <a href="#"
-						class="list-group-item">Device B</a> <a href="#"
-						class="list-group-item">Device C</a> <a href="#"
-						class="list-group-item">Device D</a>
+				<div class="list-group text-left">
+					<a href="" class="list-group-item active"> <?php if (!$idel) echo '边坡ID:'.$slop['slop_id']; else echo $note ?> </a> 
+					<?php
+					
+					if (! $idel) {
+						foreach ( $device_list as $k => $v ) {
+							echo '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $v ['device_id'] ) . '" class="list-group-item"> 设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp' . $v ['device_name'] . '</a> ';
+						}
+					} else {
+						echo '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $device_list ['device_id'] ) . '" class="list-group-item"> 设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp' . $device_list ['device_name'] . '</a>';
+					}
+					?>
 				</div>
 			</div>
 			<div class="col-sm-7 col-md-7 text-center">
@@ -81,7 +91,9 @@
 
 	<div class="panel-footer">
 		<div class="pull-left">
-			<div class="btn-group"></div>
+			<div class="btn-group">
+				<?php aci_ui_a($folder_name,'project','slop_info','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+			</div>
 		</div>
 	</div>
 </div>

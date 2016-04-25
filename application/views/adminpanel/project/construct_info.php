@@ -31,7 +31,10 @@
 	</div>
 
 	<div class="panel-body text-center">
-		<h3>项目ID：<?php echo $project_id?></h3>
+		<div class="text-left">
+			<h5>
+				<span class="glyphicon glyphicon-info-sign"></span>&nbsp项目ID：<?php echo $project_id?></h5>
+		</div>
 		<div class="col-sm-4 col-md-4 btn text-center">
 			<div class="">
 				<h4>建造情况</h4>
@@ -39,17 +42,17 @@
 			</div>
 			<div>
 				<div class="list-group text-left">
-				<li href="#" class="list-group-item active">边坡列表</li>
+					<li href="#" class="list-group-item active">边坡列表</li>
 					<?php echo $table_data?>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-6 col-md-6 btn text-center">
 			<h4>建造状况图片</h4>
-			<div style="width: 100%" >
-				<img src="<?php echo './upload/project_info/'.$project_id.'/construction_pic.jpg'?>"
-						alt="Picture Lost? Check directory: <?php echo '/upload/project_info/'.$project_id.'/'?>"
-						 style="height: 320px; width: 100%">
+			<div class="thumbnail">
+				<img src="<?php echo $pic_path?>"
+					alt="Picture Lost? Check directory: <?php echo $pic_path?>"
+					style="height: 320px; width: 100%">
 			</div>
 		</div>
 	</div>
@@ -58,7 +61,7 @@
 		<div class="pull-left">
 			<div class='btn-group' role="group">
 				<?php aci_ui_a($folder_name,'slop','add_slop/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 新建边坡')?>
-				<?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+				<?php aci_ui_a($folder_name,'project','general_info','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
             	</div>
 		</div>
 	</div>

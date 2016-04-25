@@ -41,10 +41,10 @@
 			</div>
 			<div class="col-sm-5 col-md-5 text-center">
 				<h5>工程概况图片</h5>
-				<div>
+				<div class="thumbnail">
 					<img
-						src="<?php echo './upload/project_info/'.$project_id.'/project_pic.jpg'?>"
-						alt="Picture Lost? Check directory: <?php echo '/upload/project_info/'.$project_id.'/'?>"
+						src="<?php echo $pic_path?>"
+						alt="Picture Lost? Check directory: <?php echo $pic_path?>"
 						style="height: 220px; width: 100%">
 				</div>
 			</div>
@@ -61,7 +61,7 @@
 			</div>
 			<div class='btn-group' role="group">
 			<?php aci_ui_a($folder_name,'project','construct_info/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-road"></span> 建造情况')?>
-            <?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+            <?php aci_ui_a($folder_name,'project','general_info','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
             </div>
 		</div>
 	</div>

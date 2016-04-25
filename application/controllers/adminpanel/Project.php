@@ -62,11 +62,13 @@ class Project extends MY_Admin_Controller {
 		}
 		
 		$project_data = array ();
+		$pic = "";
 		
 		if (isset ( $p ) && $p) {
 			$id = reset ( $p ) ['project_id'];
+			
 			foreach ( $p as $k => $v ) {
-				$s = $this->Project_model->select ( array (
+				$s = $this->Project_model->get_one ( array (
 						"project_id" => $v ['project_id'] 
 				), array (
 						"project_id",
@@ -75,8 +77,18 @@ class Project extends MY_Admin_Controller {
 						"start_time",
 						"position_char" 
 				) );
-				if (isset ( $s ) && $s)
-					$project_data = array_merge ( $project_data, $s );
+				if (isset ( $s ) && $s) {
+					$project_data [] = $s;
+				}
+			}
+			
+			$s = $this->Project_model->get_one ( array (
+					"project_id" => $id, 
+			), array (
+					"picture_path" 
+			) );
+			if (isset ( $s ) && $s) {
+				$pic = $s ['picture_path'];
 			}
 		}
 		
@@ -112,7 +124,8 @@ class Project extends MY_Admin_Controller {
 				'show_sidemenu' => true,
 				'table_data' => $table_data,
 				'pageslink' => $pageslink,
-				'project_id' => $id 
+				'project_id' => $id,
+				'pic_path' => $pic 
 		) );
 	}
 	function slop_info($id = '0') {
@@ -198,14 +211,16 @@ class Project extends MY_Admin_Controller {
 					'project_id' => $id 
 			) );
 		}
-		
+		$pic="";
 		if (isset ( $p ) && $p) {
 			$project_id = $p ['project_id'];
 			$s = $this->Project_model->get_one ( array (
 					"project_id" => $project_id 
 			) );
-			if (isset ( $s ) && $s)
+			if (isset ( $s ) && $s){
 				$information = $s ['construction_char'];
+				$pic=$s['construction_picture_path'];
+			}
 		} else {
 			$information = "Can not find the project, or you are not authorized to access!";
 		}
@@ -227,7 +242,8 @@ class Project extends MY_Admin_Controller {
 				'show_sidemenu' => true,
 				'table_data' => $table_data,
 				'information' => $information,
-				'project_id' => $id 
+				'project_id' => $project_id ,
+				'pic_path' => $pic
 		) );
 	}
 	function device_info($device_id = '0') {
@@ -283,55 +299,64 @@ class Project extends MY_Admin_Controller {
 				'slop' => $s,
 				'device_list' => $ls,
 				'd_pic' => $d_pic,
-				'i_pic' => $i_pic 
+				'i_pic' => $i_pic,
+				'device_id' => $device_id
 		) );
 	}
-	function alarm(){
-		
+	function alarm() {
 	}
-	function data_display($device_id='0') {
+	function data_display($device_id = '0') {
 		$this->check_priv ();
-		$this->load->model(array('Project_user_model','Slop_model','Device_model'));
+		$this->load->model ( array (
+				'Project_user_model',
+				'Slop_model',
+				'Device_model' 
+		) );
 		if ($device_id == '0') {
 			$d = $this->Device_model->get_one ();
 		} else {
 			$d = $this->Device_model->get_one ( array (
-					'device_id' => $device_id
+					'device_id' => $device_id 
 			) );
 		}
 		if (! isset ( $d ) || ! $d)
 			$this->show_error ( "Can not find the device" );
 		
-			$device_id = $d ['device_id']; // incase we ramdonly choose one device
-			$s = $this->Slop_model->get_one ( array (
-					'slop_id' => $d ['slop_id']
-			) );
-			if (! isset ( $s ) || ! $s) {
-				$idel = true;
-				$note = "This device does not belong to any slop.";
-			} else {
-				$idel = false;
-				$note = "";
-			}
+		$device_id = $d ['device_id']; // incase we ramdonly choose one device
+		$s = $this->Slop_model->get_one ( array (
+				'slop_id' => $d ['slop_id'] 
+		) );
+		if (! isset ( $s ) || ! $s) {
+			$idel = true;
+			$note = "This device does not belong to any slop.";
+		} else {
+			$idel = false;
+			$note = "";
+		}
 		
-			if (! $idel) {
-				$p = $this->Project_user_model->get_one ( array (
-						'project_id' => $s ['project_id'],
-						'user_id' => $this->user_id
-				) );
-				if (! isset ( $p ) || ! $p)
-					$this->show_error ( "You are not authorized to access this device!" );
-						
-					$ls = $this->Device_model->select ( array (
-							'slop_id' => $s ['slop_id']
-					) );
-			} else {
-				$ls = $d;
-			}
+		if (! $idel) {
+			$p = $this->Project_user_model->get_one ( array (
+					'project_id' => $s ['project_id'],
+					'user_id' => $this->user_id 
+			) );
+			if (! isset ( $p ) || ! $p)
+				$this->show_error ( "You are not authorized to access this device!" );
 			
+			$ls = $this->Device_model->select ( array (
+					'slop_id' => $s ['slop_id'] 
+			) );
+		} else {
+			$ls = $d;
+		}
+		
 		$this->view ( 'data_display', array (
 				'require_js' => true,
-				'show_sidemenu' => true 
+				'show_sidemenu' => true,
+				'idel' => $idel,
+				'note' => $note,
+				'slop' => $s,
+				'device_list' => $ls ,
+				'device_id' => $device_id,
 		) );
 	}
 	function list_project($id = '1') {
@@ -493,8 +518,8 @@ class Project extends MY_Admin_Controller {
 			$config ['encrypt_name'] = 'FALSE';
 			
 			$name_list = array (
-					'project_pic',
-					'construction_pic' 
+					'pic',
+					'const_pic' 
 			);
 			$r = $this->do_upload_ex ( $userfile_data, true, $config, $name_list );
 			// var_dump($r);

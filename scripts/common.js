@@ -18,7 +18,7 @@ require.config({
 		"headroom":"lib/headroom.min",
         "cookie":"lib/jquery.cookie",
         "highcharts":"highchart/js/highcharts",
-        "j360":"j360/j360",
+        "pano":"pano/pano2vr_player",
     },
     shim: {
         "jquery-ui": {
@@ -56,8 +56,7 @@ require.config({
             exports: "$",
             deps: ['jquery']
         },
-        "highcharts":['jquery'],
-        "j360":['jquery'],
+        "highcharts":['jquery']
     }
 
 });
