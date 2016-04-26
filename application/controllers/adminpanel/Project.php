@@ -2,9 +2,27 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 class Project extends MY_Admin_Controller {
+	protected $data_column;
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function __construct() {
 		parent::__construct ();
+		$this->data_column = 10;
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function index() {
 		$this->check_priv ();
 		
@@ -42,6 +60,14 @@ class Project extends MY_Admin_Controller {
 				'mapdata' => $map_json 
 		) );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function general_info($id = '0') {
 		$this->check_priv ();
 		$this->load->model ( array (
@@ -83,7 +109,7 @@ class Project extends MY_Admin_Controller {
 			}
 			
 			$s = $this->Project_model->get_one ( array (
-					"project_id" => $id, 
+					"project_id" => $id 
 			), array (
 					"picture_path" 
 			) );
@@ -128,6 +154,14 @@ class Project extends MY_Admin_Controller {
 				'pic_path' => $pic 
 		) );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function slop_info($id = '0') {
 		$this->check_priv ();
 		$this->load->model ( array (
@@ -192,6 +226,14 @@ class Project extends MY_Admin_Controller {
 				'slop' => $s 
 		) );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function construct_info($id = '0') {
 		$this->check_priv ();
 		$this->load->model ( array (
@@ -211,15 +253,15 @@ class Project extends MY_Admin_Controller {
 					'project_id' => $id 
 			) );
 		}
-		$pic="";
+		$pic = "";
 		if (isset ( $p ) && $p) {
 			$project_id = $p ['project_id'];
 			$s = $this->Project_model->get_one ( array (
 					"project_id" => $project_id 
 			) );
-			if (isset ( $s ) && $s){
+			if (isset ( $s ) && $s) {
 				$information = $s ['construction_char'];
-				$pic=$s['construction_picture_path'];
+				$pic = $s ['construction_picture_path'];
 			}
 		} else {
 			$information = "Can not find the project, or you are not authorized to access!";
@@ -242,10 +284,18 @@ class Project extends MY_Admin_Controller {
 				'show_sidemenu' => true,
 				'table_data' => $table_data,
 				'information' => $information,
-				'project_id' => $project_id ,
-				'pic_path' => $pic
+				'project_id' => $project_id,
+				'pic_path' => $pic 
 		) );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function device_info($device_id = '0') {
 		$this->check_priv ();
 		$this->load->model ( array (
@@ -300,17 +350,39 @@ class Project extends MY_Admin_Controller {
 				'device_list' => $ls,
 				'd_pic' => $d_pic,
 				'i_pic' => $i_pic,
-				'device_id' => $device_id
+				'device_id' => $device_id 
 		) );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function alarm() {
+		$this->check_priv ();
+		$this->view ( 'alarm', array (
+				'require_js' => true,
+				'show_sidemenu' => true 
+		) );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function data_display($device_id = '0') {
 		$this->check_priv ();
 		$this->load->model ( array (
 				'Project_user_model',
 				'Slop_model',
-				'Device_model' 
+				'Device_model',
+				'Device_data_model' 
 		) );
 		if ($device_id == '0') {
 			$d = $this->Device_model->get_one ();
@@ -334,7 +406,7 @@ class Project extends MY_Admin_Controller {
 			$note = "";
 		}
 		
-		if (! $idel) {
+		if (! $idel) { // check permission
 			$p = $this->Project_user_model->get_one ( array (
 					'project_id' => $s ['project_id'],
 					'user_id' => $this->user_id 
@@ -349,16 +421,117 @@ class Project extends MY_Admin_Controller {
 			$ls = $d;
 		}
 		
+		// get the file information
+		$dd = $this->Device_data_model->get_one ( array (
+				'device_id' => $device_id 
+		) );
+		if (! isset ( $dd ) || ! $dd)
+			$this->show_error ( "Can not find any data file on this device." );
+			
+			// read the csv file
+		$file = fopen ( base_url () . $dd ['path'], 'r' );
+		if (! isset ( $file ) || ! $file)
+			$this->show_error ( "Can not open the data file." );
+		
+		$i = 0;
+		$table_data = array ();
+		$plot_data = array();
+		while ( $data = fgetcsv ( $file ) ) {
+			
+			$j = count ( $data );
+			if ($i == 0) {
+				$title = $data;
+			} else if ($i == 1) {
+				for($x = 0; $x < $j; $x ++) {
+					$mark = $data;
+					$table_data [$x] [$i - 1] = $data [$x];
+					$plot_data [$x] [$i - 1] = $data [$x];
+				}
+			} else if ($i < $this->data_column) {
+				for($x = 0; $x < $j; $x ++) {
+					$table_data [$x] [$i - 1] = $data [$x];
+					$plot_data [$x] [$i - 1] = $data [$x];
+				}
+			}
+			else if ($i == $this->data_column ){
+				for($x = 0; $x < $j; $x ++) {
+					$table_data [$x] [$i - 1] = '...';
+					$plot_data [$x] [$i - 1] = $data [$x];
+				}
+			}
+			else{
+				for($x = 0; $x < $j; $x ++) {
+					$plot_data [$x] [$i - 1] = $data [$x];
+				}
+			}
+			$i ++;
+		}
+		
+		// build table
+		$this->load->library ( 'table' );
+		$template = array (
+				'table_open' => '<table class="table table-hover">' 
+		);
+		$this->table->set_template ( $template );
+		
+		$xtitle = array (
+				"Data" 
+		);
+		for($i = 1; $i < $this->data_column; $i ++) {
+			$xtitle [] = $i;
+		}
+		
+		$this->table->set_heading ( $xtitle );
+		$table = $this->table->generate ( $table_data );
+		
+		// generate data
+		$x_axis = "";
+		foreach ( $plot_data [0] as $k => $v ) {
+			if ($k == '0')
+				continue;
+			$x_axis = $x_axis . "' " . $v . " ' ,";
+		}
+		
+		$row1 = "";
+		foreach ( $plot_data [1] as $k => $v ) {
+			if ($k == '0')
+				continue;
+				$row1 = $row1 . " " . $v . "  ,";
+		}
+		
+		$row2 = "";
+		foreach ( $plot_data [2] as $k => $v ) {
+			if ($k == '0')
+				continue;
+				$row2 = $row2 . " " . $v . "  ,";
+		}
+		$title = implode(',', $title);
+		
 		$this->view ( 'data_display', array (
 				'require_js' => true,
 				'show_sidemenu' => true,
 				'idel' => $idel,
 				'note' => $note,
 				'slop' => $s,
-				'device_list' => $ls ,
+				'device_list' => $ls,
 				'device_id' => $device_id,
+				'table_data' => $table,
+				'x_axis' => $x_axis,
+				'row1' => $row1,
+				'row2' => $row2,
+				'title' => $title,
+				'mark' => $mark
+
 		) );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function list_project($id = '1') {
 		$this->check_priv ();
 		$this->load->model ( array (
@@ -466,12 +639,28 @@ class Project extends MY_Admin_Controller {
 				'project_id' => $id 
 		) );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function add_project() {
 		$this->view ( 'add_project', array (
 				'require_js' => true,
 				'show_sidemenu' => true 
 		) );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function add_project_r() {
 		$this->load->helper ( 'file' );
 		
@@ -559,6 +748,14 @@ class Project extends MY_Admin_Controller {
 		else
 			Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function modify_project($id = '1') {
 		$this->load->model ( array (
 				'Project_model',
@@ -588,6 +785,14 @@ class Project extends MY_Admin_Controller {
 			) );
 		}
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function modify_project_r($project_id) {
 		$this->load->helper ( 'file' );
 		
@@ -682,6 +887,14 @@ class Project extends MY_Admin_Controller {
 		
 		Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	function delete_project($project_id) {
 		$this->check_priv ();
 		$this->load->model ( array (
@@ -720,6 +933,14 @@ class Project extends MY_Admin_Controller {
 		
 		Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	private function show_error($info) {
 		$this->view ( 'show_error', array (
 				'require_js' => true,
@@ -728,6 +949,14 @@ class Project extends MY_Admin_Controller {
 		) );
 		exit ();
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	private function page_config($lines = 0) {
 		// create pageination
 		$this->load->library ( 'pagination' );
@@ -756,6 +985,14 @@ class Project extends MY_Admin_Controller {
 		
 		$this->pagination->initialize ( $pconfig );
 	}
+	/**
+	 * What it do
+	 *
+	 * @param        	
+	 *
+	 * @return
+	 *
+	 */
 	private function do_upload_ex($uploaddata, $Multi_file = false, $config, $name_list = "") {
 		$this->load->library ( "upload" );
 		

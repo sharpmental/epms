@@ -61,7 +61,7 @@
 		<div class="pull-left">
 			<div class='btn-group' role="group">
 				<?php aci_ui_a($folder_name,'slop','add_slop/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 新建边坡')?>
-				<?php aci_ui_a($folder_name,'project','general_info','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+				<?php aci_ui_a($folder_name,'project','general_info/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
             	</div>
 		</div>
 	</div>

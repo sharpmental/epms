@@ -37,7 +37,7 @@
 				<span class="glyphicon glyphicon-info-sign"></span>&nbsp仪器ID：<?php echo $device_id?></h5>
 		</div>
 		<div class="row">
-			<div class="col-sm-4 col-md-4 btn text-center">
+			<div class="col-sm-3 col-md-3 btn text-center">
 				<h4>设备列表</h4>
 				<div class="list-group text-left">
 					<a href="" class="list-group-item active"> <?php if (!$idel) echo '边坡ID:'.$slop['slop_id']; else echo $note ?> </a> 
@@ -53,37 +53,16 @@
 					?>
 				</div>
 			</div>
-			<div class="col-sm-7 col-md-7 text-center">
+			<div class="col-sm-8 col-md-8 text-center">
 				<h4>数据表格</h4>
-				<div class="row">
-					<table class="table table-condensed">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Username</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-							</tr>
-						</tbody>
-					</table>
+				<div class="text-left panel panel-default">
+					<?php echo $table_data?>
 				</div>
 				<div class="row">
 					<h4>数据曲线图</h4>
-					<div id="datachart"></div>
+					<div id="datachart1"></div>
+					<div id="datachart2"></div>
+					<div id="datachart3"></div>
 				</div>
 			</div>
 		</div>
@@ -92,12 +71,20 @@
 	<div class="panel-footer">
 		<div class="pull-left">
 			<div class="btn-group">
-				<?php aci_ui_a($folder_name,'project','slop_info','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+				<?php aci_ui_a($folder_name,'project','device_info/'.$device_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
 			</div>
 		</div>
 	</div>
 </div>
 
-<script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
+<script language="javascript" type="text/javascript"> 
+	var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
+    var x_axis = [<?php echo $x_axis?>];
+    var row1 = [<?php echo $row1?>];
+    var row2 = [<?php echo $row2?>];
+    var title1 = "<?php echo $title?>";
+    var title2 = "<?php echo $title?>";
+    var mark1 = "<?php echo $mark[1]?>";
+    var mark2 = "<?php echo $mark[2]?>"; 
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/data_display.js']); </script>

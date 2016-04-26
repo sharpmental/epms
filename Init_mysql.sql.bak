@@ -429,23 +429,6 @@ insert into `tb_device_info` values (
 	'1+1',
 	2, '2011-01-01'
 );
--- --------------------------------------------------------
-
---
--- 表的结构 `tb_device_data`
--- 仪器数据表
-
-drop table if exists `tb_device_data`;
-
-create table`tb_device_data`(
-	`data_id` int(11) not null,
-	`device_id` int(16) not null,
-	`start_time` datetime default null,
-	`original_data` varchar(32) default null,
-	`calculation_result` varchar(32) default null,
-	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
-	primary key (`data_id`)
-)engine=myisam default charset=utf8;
 
 -- --------------------------------------------------------
 
@@ -533,4 +516,4 @@ create table`tb_device_data`(
 	 primary key (`id`)
 )engine=myisam default charset=utf8;
 
-insert into `tb_device_data` values(1, 1, 0, '/upload/device_data/1-2016-01-24.csv');
+insert into `tb_device_data` values(1, 1, 0, '/upload/device_data/1-2016-01-24.csv', '2016-01-01');

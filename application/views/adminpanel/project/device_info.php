@@ -79,8 +79,11 @@
 
 	<div class="panel-footer">
 		<div class="pull-left">
+		<div class="btn-group">
+				<?php aci_ui_a($folder_name,'project','data_display/'.$device_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-zoom-in"></span> 查看数据')?>
+			</div>
 			<div class="btn-group">
-				<?php aci_ui_a($folder_name,'project','slop_info','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+				<?php aci_ui_a($folder_name,'project','slop_info/'.isset($slop['slop_id'])?$slop['slop_id']:'0' ,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
 			</div>
 		</div>
 	</div>

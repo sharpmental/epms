@@ -14,11 +14,17 @@ class Alarm extends MY_Admin_Controller{
 	}
 	
 	function add(){
-		
+		$this->check_priv ();
+		$this->view ( 'add', array (
+				'require_js' => true,
+				'show_sidemenu' => true));
 	}
 	
 	function modify(){
-		
+		$this->check_priv ();
+		$this->view ( 'modify', array (
+				'require_js' => true,
+				'show_sidemenu' => true));
 	}
 	
 	function delete(){

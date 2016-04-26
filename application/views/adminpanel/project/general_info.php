@@ -61,6 +61,9 @@
 			</div>
 			<div class='btn-group' role="group">
 			<?php aci_ui_a($folder_name,'project','construct_info/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-road"></span> 建造情况')?>
+            <?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-map-marker"></span> 地图查询')?>
+            </div>
+            <div class='btn-group' role="group">
             <?php aci_ui_a($folder_name,'project','general_info','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
             </div>
 		</div>

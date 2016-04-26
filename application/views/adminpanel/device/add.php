@@ -2,7 +2,7 @@
 
 <div class="panel panel-default grid">
 	<div class='panel-heading row'>
-		<h4 class="col-sm-2 col-md-2">项目信息</h4>
+		<h4 class="col-sm-2 col-md-2">设备信息</h4>
 		<div class="col-sm-8 col-md-8 ">
 			<div class="btn-group btn-group-justified" role="group"
 				aria-label="...">
@@ -49,7 +49,7 @@
 	<div class="panel-footer">
 		<div class="pull-left">
 			<div class="btn-group">
-			<?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+			<?php aci_ui_a($folder_name,'device','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
 			</div>
 		</div>
 	</div>
@@ -57,4 +57,4 @@
 
 <script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
-    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/index.js']); </script>
+    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/add.js']); </script>

@@ -6,15 +6,34 @@ if (! defined ( 'BASEPATH' ))
 			parent::__construct();			
 		}
 		
-		function add_device(){
+		function index(){
+			$this->check_priv ();
 			
+			$this->view ( 'index', array (
+					'require_js' => true,
+					'show_sidemenu' => true
+			) );
 		}
 		
-		function modify_device(){
+		function add(){
+			$this->check_priv ();
 			
+			$this->view ( 'add', array (
+					'require_js' => true,
+					'show_sidemenu' => true
+			) );
 		}
 		
-		function delete_device(){
+		function modify(){
+			$this->check_priv ();
+			
+			$this->view ( 'modify', array (
+					'require_js' => true,
+					'show_sidemenu' => true
+			) );
+		}
+		
+		function delete(){
 			
 		}
 	}

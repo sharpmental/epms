@@ -144,9 +144,9 @@ VALUES
 	(33,'边坡增加',3,1,'slop','add_slop','0','bars','0'),
 	(34,'边坡修改',3,0,'slop','modify_slop','0','bars','0'),
 	(35,'边坡删除',3,0,'slop','delete_slop','0','bars','0'),
-	(36,'设备增加',3,1,'device','add_device','0','cog','0'),
-	(37,'设备修改',3,0,'device','modify_device','0','cog','0'),
-	(38,'设备删除',3,0,'device','delete_device','0','cog','0'),
+	(36,'设备增加',3,1,'device','add','0','cog','0'),
+	(37,'设备修改',3,0,'device','modify','0','cog','0'),
+	(38,'设备删除',3,0,'device','delete','0','cog','0'),
 
 	(40,'用户列表',5,1,'user','index','0','user','0'),
 	(401,'添加用户',40,1,'user','add','0','user','0'),
@@ -516,4 +516,4 @@ create table`tb_device_data`(
 	 primary key (`id`)
 )engine=myisam default charset=utf8;
 
-insert into `tb_device_data` values(1, 1, 0, '/upload/device_data/1-2016-01-24.csv');
+insert into `tb_device_data` values(1, 1, 0, '/upload/device_data/1-2016-01-24.csv', '2016-01-01');
