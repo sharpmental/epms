@@ -32,24 +32,67 @@
 	</div>
 
 	<div class="panel-body">
-		<div class="row">
-		<div class="col-sm-6 col-md-6 btn text-center">Project general information
-			<div style="width:100%">
-			<img src="" alt="A" style="height:120px;width:100%">
+		<<form class="form-horizontal" id="addform" role="form" method="post"
+			enctype="multipart/form-data"
+			action="<?php echo current_url()."_r"?>">
+			<div class="form-group">
+				<label for="device_name" class="col-sm-2 control-label">设备名称</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="device_name" name="device_name"
+						placeholder="设备名称">
+				</div>
 			</div>
-		</div>
-		<div class="col-sm-6 col-md-6 btn text-center">Project picture
-			<div style="width:100%">
-			<img src="" alt="A" style="height:120px;width:100%">
+			<div class="form-group">
+				<label for="device_des" class="col-sm-2 control-label">设备描述</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="device_des" name="device_des"
+						placeholder="设备描述">
+				</div>
 			</div>
-		</div>
-		</div>
+			<div class="form-group">
+				<label for="device_type" class="col-sm-2 control-label">设备类型</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="device_type"
+						name="device_type" placeholder="设备类型">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="devicepic" class="col-sm-2 control-label">设备图片</label>
+				<div class="col-sm-7">
+					<input type="file" class="form-control" id="device-pic"
+						name="userfile[]" accept="image/*" placeholder="上传项目图片">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="install-pic" class="col-sm-2 control-label">安装图片</label>
+				<div class="col-sm-7">
+					<input type="file" class="form-control" id="install-pic"
+						name="userfile[]" accept="image/*" placeholder="上传项目图片">
+				</div>
+			</div>
+			
+
+			<div class="form-group">
+				<label for="device" class="col-sm-2 control-label"></label>
+				<div class="col-sm-7">
+					<div class='btn-group' role="group">
+						<button type="submit" class="btn btn-default" id="dosubmit">
+							<span class="glyphicon glyphicon-ok"></span>&nbsp确定
+						</button>
+					</div>
+					<div class='btn-group' role="group">
+					<?php aci_ui_a($folder_name,'device','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+            		</div>
+				</div>
+			</div>
+		</form>
 	</div>
 
 	<div class="panel-footer">
 		<div class="pull-left">
 			<div class="btn-group">
-			<?php aci_ui_a($folder_name,'device','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+			
 			</div>
 		</div>
 	</div>
@@ -57,4 +100,4 @@
 
 <script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
-    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/add.js']); </script>
+    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/modify.js']); </script>

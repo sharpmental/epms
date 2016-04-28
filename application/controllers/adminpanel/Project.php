@@ -435,7 +435,7 @@ class Project extends MY_Admin_Controller {
 		
 		$i = 0;
 		$table_data = array ();
-		$plot_data = array();
+		$plot_data = array ();
 		while ( $data = fgetcsv ( $file ) ) {
 			
 			$j = count ( $data );
@@ -452,14 +452,12 @@ class Project extends MY_Admin_Controller {
 					$table_data [$x] [$i - 1] = $data [$x];
 					$plot_data [$x] [$i - 1] = $data [$x];
 				}
-			}
-			else if ($i == $this->data_column ){
+			} else if ($i == $this->data_column) {
 				for($x = 0; $x < $j; $x ++) {
 					$table_data [$x] [$i - 1] = '...';
 					$plot_data [$x] [$i - 1] = $data [$x];
 				}
-			}
-			else{
+			} else {
 				for($x = 0; $x < $j; $x ++) {
 					$plot_data [$x] [$i - 1] = $data [$x];
 				}
@@ -496,16 +494,16 @@ class Project extends MY_Admin_Controller {
 		foreach ( $plot_data [1] as $k => $v ) {
 			if ($k == '0')
 				continue;
-				$row1 = $row1 . " " . $v . "  ,";
+			$row1 = $row1 . " " . $v . "  ,";
 		}
 		
 		$row2 = "";
 		foreach ( $plot_data [2] as $k => $v ) {
 			if ($k == '0')
 				continue;
-				$row2 = $row2 . " " . $v . "  ,";
+			$row2 = $row2 . " " . $v . "  ,";
 		}
-		$title = implode(',', $title);
+		$title = implode ( ',', $title );
 		
 		$this->view ( 'data_display', array (
 				'require_js' => true,
@@ -520,8 +518,7 @@ class Project extends MY_Admin_Controller {
 				'row1' => $row1,
 				'row2' => $row2,
 				'title' => $title,
-				'mark' => $mark
-
+				'mark' => $mark 
 		) );
 	}
 	/**
@@ -573,6 +570,15 @@ class Project extends MY_Admin_Controller {
 				) 
 		);
 		
+		// set the information table
+		$this->load->library ( 'table' );
+		$template = array (
+				'table_open' => '<table class="table table-hover dataTable">' 
+		);
+		$this->table->set_template ( $template );
+		$this->table->set_heading ( '名称', '描述' );
+		$info_table_data = $this->table->generate ( $information );
+		
 		foreach ( $project_data as $k => $v ) {
 			$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) . "/" . $v ['project_id'] . '" class="list-group-item active">' . "项目名称:&nbsp" . $v ['project_name'] . '</a>';
 			
@@ -585,9 +591,8 @@ class Project extends MY_Admin_Controller {
 				}
 			}
 			
-			// set the information table
 			if ($v ['project_id'] == $id) {
-				unset ( $information );
+				
 				$information = array (
 						array (
 								"项目名称",
@@ -618,13 +623,6 @@ class Project extends MY_Admin_Controller {
 								$v ['update_timestamp'] 
 						) 
 				);
-				
-				$this->load->library ( 'table' );
-				$template = array (
-						'table_open' => '<table class="table table-hover dataTable">' 
-				);
-				$this->table->set_template ( $template );
-				$this->table->set_heading ( '名称', '描述' );
 				
 				$info_table_data = $this->table->generate ( $information );
 			}
@@ -706,6 +704,8 @@ class Project extends MY_Admin_Controller {
 			$config ['max_heigth'] = '768';
 			$config ['encrypt_name'] = 'FALSE';
 			
+			// $this->show_error ( var_dump($_FILES) );
+			
 			$name_list = array (
 					'pic',
 					'const_pic' 
@@ -719,8 +719,8 @@ class Project extends MY_Admin_Controller {
 			
 			// update the picture path information
 			$r = $this->Project_model->update ( array (
-					"picture_path" => $pic_path . '/' . $r [0] ['file_name'],
-					"construction_picture_path" => $thumb_path . '/' . $r [1] ['file_name'] 
+					"picture_path" => isset ( $r [0] ['file_name'] ) ? $pic_path . '/' . $r [0] ['file_name'] : "",
+					"construction_picture_path" => isset ( $r [1] ['file_name'] ) ? $pic_path . '/' . $r [1] ['file_name'] : "" 
 			), array (
 					"project_id" => $project_id 
 			) );
@@ -785,14 +785,6 @@ class Project extends MY_Admin_Controller {
 			) );
 		}
 	}
-	/**
-	 * What it do
-	 *
-	 * @param        	
-	 *
-	 * @return
-	 *
-	 */
 	function modify_project_r($project_id) {
 		$this->load->helper ( 'file' );
 		
@@ -860,8 +852,8 @@ class Project extends MY_Admin_Controller {
 				
 				// update the picture path information
 			$r = $this->Project_model->update ( array (
-					"picture_path" => $pic_path . '/' . $r [0] ['file_name'],
-					"construction_picture_path" => $thumb_path . '/' . $r [1] ['file_name'] 
+					"picture_path" => isset ( $r [0] ['file_name'] ) ? $pic_path . '/' . $r [0] ['file_name'] : "",
+					"construction_picture_path" => isset ( $r [1] ['file_name'] ) ? $pic_path . '/' . $r [1] ['file_name'] : "" 
 			), array (
 					"project_id" => $project_id 
 			) );
@@ -1005,6 +997,9 @@ class Project extends MY_Admin_Controller {
 		
 		if ($Multi_file) {
 			for($i = 0; $i < $size; $i ++) {
+				if (! isset ( $uploaddata ['name'] [$i] ) || ! $uploaddata ['name'] [$i] || $uploaddata ['name'] [$i] == "")
+					break;
+				
 				foreach ( $uploaddata as $k => $v ) {
 					$tempdata ['file'] [$k] = $v [$i];
 				}

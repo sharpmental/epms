@@ -35,64 +35,64 @@
 			<div class="form-group">
 				<label for="slop_name" class="col-sm-2 control-label">边坡名称</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="slop_name" name="slop_name" 
+					<input type="" class="form-control" id="slop_name" name="slop_name" value="<?php echo $slop['slop_name']?>"
 						placeholder="边坡名称">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="slop_des" class="col-sm-2 control-label">边坡描述</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="slop_des" name="slop_des"
+					<input type="" class="form-control" id="slop_des" name="slop_des" value="<?php echo $slop['slop_description']?>"
 						placeholder="边坡描述">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="start_time" class="col-sm-2 control-label">开始时间</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="start_time" name="start_time"
+					<input type="" class="form-control" id="start_time" name="start_time" value="<?php echo $slop['start_time']?>"
 						placeholder="开始时间">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="address" class="col-sm-2 control-label">地理位置</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="address" name="address" placeholder="地理位置">
+					<input type="" class="form-control" id="address" name="address" placeholder="地理位置" value="<?php echo $slop['position_char']?>" >
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="address" class="col-sm-2 control-label">地图X坐标值</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="cord-x" name="cord-x" placeholder="地图X坐标值">
+					<input type="" class="form-control" id="cord-x" name="cord-x" placeholder="地图X坐标值" value="<?php echo $slop['position_x']?>" >
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="address" class="col-sm-2 control-label">地图Y坐标值</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="cord-y" name="cord-y" placeholder="地图Y坐标值">
+					<input type="" class="form-control" id="cord-y" name="cord-y" placeholder="地图Y坐标值" value="<?php echo $slop['position_y']?>" >
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="address" class="col-sm-2 control-label">报警模型</label>
+				<label for="alarm_model" class="col-sm-2 control-label">报警模型</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="alarm-model" name="alarm-model" placeholder="报警模型">
+					<input type="" class="form-control" id="alarm-model" name="alarm-model" placeholder="报警模型" value="<?php echo $slop['alarm_model']?>" >
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="address" class="col-sm-2 control-label">属性1</label>
-				<div class="col-sm-7">
-					<input type="" class="form-control" id="property-1" name="property-1" placeholder="属性1">
+				<div class="col-sm-7"> 
+					<input type="" class="form-control" id="property-1" name="property-1" placeholder="属性1" value="<?php echo $slop['property_1']?>"> 
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="address" class="col-sm-2 control-label">属性2</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="property-2" name="property-2" placeholder="属性2">
+					<input type="" class="form-control" id="property-2" name="property-2" placeholder="属性2" value="<?php echo $slop['property_2']?>">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="address" class="col-sm-2 control-label">属性3</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="property-3" name="property-3" placeholder="属性3">
+					<input type="" class="form-control" id="property-3" name="property-3" placeholder="属性3" value="<?php echo $slop['property_3']?>">
 				</div>
 			</div>
 			<div class="form-group">
@@ -155,7 +155,7 @@
 				<label for="construction" class="col-sm-2 control-label">所属项目</label>
 				<div class="col-sm-7">
 					<input type="" class="form-control" id="project_id" name="project_id"
-						value="0">
+						value="<?php echo $slop['project_id']?>">
 				</div>
 			</div>
 			
@@ -181,4 +181,4 @@
 	var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
      
-    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/add_slop.js']); </script>
+    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/modify_slop.js']); </script>

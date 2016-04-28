@@ -72,7 +72,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="address" class="col-sm-2 control-label">报警模型</label>
+				<label for="alarm_model" class="col-sm-2 control-label">报警模型</label>
 				<div class="col-sm-7">
 					<input type="" class="form-control" id="alarm-model" name="alarm-model" placeholder="报警模型">
 				</div>
@@ -95,6 +95,7 @@
 					<input type="" class="form-control" id="property-3" name="property-3" placeholder="属性3">
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label for="pic" class="col-sm-2 control-label">设计图片</label>
 				<div class="col-sm-7">

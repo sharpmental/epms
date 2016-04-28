@@ -122,7 +122,7 @@ INSERT INTO `tb_module_menu`
 VALUES
 	(1,'首页',0,1,'manage','index','0','home','10'),
 	(2,'项目-边坡管理',0,1,'project','index','0','globe','10'),
-    (3,'项目管理',0,1,'project','list_project','0','photo','0'),
+	(3,'项目管理',0,1,'manage','go_3','0','photo','0'),
 	(4,'报警管理',0,1,'manage','go_4','0','warning','0'),
 	(5,'用户管理',0,1,'manage','go_5','0','user','0'),
 	(6,'服务器管理',0,1,'manage','go_6','0','server','0'),
@@ -137,16 +137,21 @@ VALUES
 	(106,'边坡总介绍',2,0,'project','slop_general','0','user','0'),
 
 	(1001,'检测数据和图表',104,1,'project','data_display','0','gears','0'),
+	
+	(30,'项目列表',3,1,'project','list_project','0','photo','0'),
+	(130,'项目增加',30,1,'project','add_project','0','user','0'),
+	(131,'项目修改',30,0,'project','modify_project','0','user','0'),
+	(132,'项目删除',30,0,'project','delete_project','0','user','0'),
+	
+	(33,'边坡列表',3,1,'slop','index','0','bars','0'),
+	(133,'边坡增加',33,1,'slop','add_slop','0','bars','0'),
+	(134,'边坡修改',33,0,'slop','modify_slop','0','bars','0'),
+	(135,'边坡删除',33,0,'slop','delete_slop','0','bars','0'),
 
-	(30,'项目增加',3,1,'project','add_project','0','user','0'),
-	(31,'项目修改',3,0,'project','modify_project','0','user','0'),
-	(32,'项目删除',3,0,'project','delete_project','0','user','0'),
-	(33,'边坡增加',3,1,'slop','add_slop','0','bars','0'),
-	(34,'边坡修改',3,0,'slop','modify_slop','0','bars','0'),
-	(35,'边坡删除',3,0,'slop','delete_slop','0','bars','0'),
-	(36,'设备增加',3,1,'device','add','0','cog','0'),
-	(37,'设备修改',3,0,'device','modify','0','cog','0'),
-	(38,'设备删除',3,0,'device','delete','0','cog','0'),
+	(36,'设备列表',3,1,'device','index','0','cog','0'),
+	(136,'设备增加',36,1,'device','add','0','cog','0'),
+	(137,'设备修改',36,0,'device','modify','0','cog','0'),
+	(138,'设备删除',36,0,'device','delete','0','cog','0'),
 
 	(40,'用户列表',5,1,'user','index','0','user','0'),
 	(401,'添加用户',40,1,'user','add','0','user','0'),
@@ -268,16 +273,16 @@ insert into `tb_server_info` values(2, 1, 'server B', '192.168.0.2', 0, '2000-01
 drop table if exists `tb_project_info`;
 
 create table`tb_project_info`(
-	`project_id` int(11) not null AUTO_INCREMENT,
-	`project_name` varchar(64) not null,
-	`project_description` varchar(128) not null,
-	`start_time` datetime default null,
-	`position_char` varchar(128) default null,
-	`picture_path` varchar(128) default null,
-	`construction_char` varchar(128) default null,
-	`construction_picture_path` varchar(256) default null,
-	`general_slop` varchar(128) default null,
-	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
+	`project_id` int(11) not null AUTO_INCREMENT, /* 项目编号*/
+	`project_name` varchar(64) not null, /* 项目名称*/
+	`project_description` varchar(128) not null, /* 项目描述 */
+	`start_time` datetime default null, /* 起始时间*/
+	`position_char` varchar(128) default null, /* 位置信息*/
+	`picture_path` varchar(128) default null, /* 项目图片*/
+	`construction_char` varchar(128) default null, /* 建设信息*/
+	`construction_picture_path` varchar(256) default null, /* 建设图片 */
+	`general_slop` varchar(128) default null, /* 边坡概况*/
+	`update_timestamp` datetime not null default current_timestamp on update current_timestamp, /*更新时间*/
 	primary key (`project_id`)
 )engine=myisam default charset=utf8;
 
@@ -385,15 +390,15 @@ drop table if exists `tb_device_info`;
 
 create table`tb_device_info`(
 	`device_id` int(11) not null AUTO_INCREMENT,
-	`device_name` varchar(64) not null,
-	`device_description` varchar(128) not null,
-	`device_type` int(16) default 0,
+	`device_name` varchar(64) not null, /* 设备名称 */
+	`device_description` varchar(128) not null,  /* 设备描述*/
+	`device_type` int(16) default 0, /* 设备类型 */
 
-	`device_picture_path` varchar(128) default null,
-	`install_picture_path` varchar(128) default null,
+	`device_picture_path` varchar(128) default null, /* 设备图*/
+	`install_picture_path` varchar(128) default null, /* 安装图 */
 
-	`formular` varchar(128) default null,
-	`slop_id` int(16) default 0, /* 属于哪个边坡*/
+	`formular` varchar(128) default null, /* 计算公式 */
+	`slop_id` int(16) default 0, /* 边坡ID */
 	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
 	primary key (`device_id`)
 )engine=myisam default charset=utf8;

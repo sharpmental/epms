@@ -42,10 +42,10 @@ function ($, aci) {
                     notEmpty: {
                         message: '请输入'
                     },
-//                    date: {
-//                        format: 'YYYY/MM/DD',
-//                        message: 'The value is not a valid date'
-//                    }
+                    date: {
+                        format: 'YYYY-MM-DD',
+                        message: 'The value is not a valid date'
+                    }
                 }
             },
             address: {
