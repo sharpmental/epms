@@ -49,9 +49,16 @@ class Slop extends MY_Admin_Controller {
 					"user_id" => $this->user_id 
 			) );
 			
-			if (isset ( $p ) && $p)
+			if (isset ( $p ) && $p){
+				//add action button
+				$link1 = base_url ( $this->page_data ['folder_name'] . '/slop/modify_slop/' . $v ['slop_id'] );
+				$v[] = '<a class="btn btn-default" href="'.$link1.'">修改</a>';
 				$t [] = $v;
+			}
 		}
+		
+		
+		
 		
 		// build table
 		$this->load->library ( 'table' );
@@ -59,7 +66,7 @@ class Slop extends MY_Admin_Controller {
 				'table_open' => '<table class="table table-hover">' 
 		);
 		$this->table->set_template ( $template );
-		$this->table->set_heading ( '边坡编号', '边坡名称', '边坡描述', '启动时间', '位置描述', '地图X坐标值', '地图X坐标值', '报警模型', '所属项目', '更新时间' );
+		$this->table->set_heading ( '边坡编号', '边坡名称', '边坡描述', '启动时间', '位置描述', '地图X坐标值', '地图X坐标值', '报警模型', '所属项目', '更新时间', '操作' );
 		
 		$table_data = $this->table->generate ( $t );
 		

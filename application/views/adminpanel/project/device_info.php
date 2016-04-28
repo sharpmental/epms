@@ -81,6 +81,8 @@
 		<div class="pull-left">
 		<div class="btn-group">
 				<?php aci_ui_a($folder_name,'project','data_display/'.$device_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-zoom-in"></span> 查看数据')?>
+				<?php aci_ui_a($folder_name,'device','modify/'.$device_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-pencil"></span> 修改设备')?>
+				<?php aci_ui_a($folder_name,'device','delete/'.$device_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-remove"></span> 删除设备')?>
 			</div>
 			<div class="btn-group">
 				<?php aci_ui_a($folder_name,'project',isset($slop['slop_id'])?'slop_info/'.$slop['slop_id']:'slop_info/0' ,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>

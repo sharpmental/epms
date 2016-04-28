@@ -2,8 +2,8 @@
 
 <div class="panel panel-default grid">
 	<div class='panel-heading row'>
-		<h4 class="col-sm-2 col-md-2">项目信息</h4>
-		<div class="col-sm-8 col-md-8 ">
+		<h4 class="col-sm-2 col-md-2">设备列表</h4>
+		<div class="col-sm-7 col-md-7 ">
 			<div class="btn-group btn-group-justified" role="group"
 				aria-label="...">
 				<div class="btn-group" role="group">
@@ -28,33 +28,19 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 	<div class="panel-body">
-		<div class="row">
-		<div class="col-sm-6 col-md-6 btn text-center">Project general information
-			<div style="width:100%">
-			<img src="" alt="A" style="height:120px;width:100%">
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-6 btn text-center">Project picture
-			<div style="width:100%">
-			<img src="" alt="A" style="height:120px;width:100%">
-			</div>
-		</div>
-		</div>
+		<?php  echo $table_data;?>
 	</div>
 
 	<div class="panel-footer">
-		<div class="pull-left">
-			<div class="btn-group">
-			<?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
-			</div>
-		</div>
+		<?php aci_ui_a($folder_name,'project','list_project','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
 	</div>
 </div>
 
-<script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
+<script language="javascript" type="text/javascript"> 
+	var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
+     
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/index.js']); </script>
