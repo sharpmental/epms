@@ -29,7 +29,7 @@ drop table if exists `tb_operator_info`;
 
 create table `tb_operator_info` (
   `operator_id` int(11) not null auto_increment, 
-  `operator_name` varchar(64) not null, 
+  `operator_name` varchar(64) not null,  /* 用户名称 */
   `operator_pwd` varchar(64) not null, 
   `operator_role` int(10) not null, 
   `operator_displayname` varchar(64) not null,

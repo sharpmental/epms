@@ -2,8 +2,8 @@
 
 <div class="panel panel-default grid">
 	<div class='panel-heading row'>
-		<h4 class="col-sm-2 col-md-2">建设情况</h4>
-		<div class="col-sm-7 col-md-7 ">
+		<h4 class="col-sm-2 col-md-2">项目关联</h4>
+		<div class="col-sm-8 col-md-8 ">
 			<div class="btn-group btn-group-justified" role="group"
 				aria-label="...">
 				<div class="btn-group" role="group">
@@ -28,47 +28,25 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="panel-body text-center">
-		<div class="text-left">
-			<h5>
-				<span class="glyphicon glyphicon-info-sign"></span>&nbsp项目ID：<?php echo $project_id?></h5>
-		</div>
-		<div class="col-sm-4 col-md-4 btn text-center">
-			<div class="">
-				<h4>建造情况</h4>
-				<h4 class="well text-left"><?php echo $information?></h4>
-			</div>
-			<div>
-				<div class="list-group text-left">
-					<li href="#" class="list-group-item active">边坡列表</li>
-					<?php echo $table_data?>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-6 btn text-center">
-			<h4>建造状况图片</h4>
-			<div class="thumbnail">
-				<img src="<?php echo $pic_path?>"
-					alt="Picture Lost? Check directory: <?php echo $pic_path?>"
-					style="height: 320px; width: 100%">
-			</div>
-		</div>
 	</div>
-
+	
+	<div class="panel-body">
+		<?php echo $content?>
+	</div>
+	
+	
 	<div class="panel-footer">
 		<div class="pull-left">
-			<div class='btn-group' role="group">
-				<?php aci_ui_a($folder_name,'slop','add_slop/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 新建边坡')?>
-				<?php aci_ui_a($folder_name,'project','general_info/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
-            	</div>
+			<div class="btn-group">
+			<?php aci_ui_a($folder_name,'project_user','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+			</div>
 		</div>
 	</div>
 </div>
 
-<script language="javascript" type="text/javascript"> 	
+<script language="javascript" type="text/javascript"> 
 	var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
-    
-    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/construct_info.js']); </script>
+    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/index.js']);  
+    </script>

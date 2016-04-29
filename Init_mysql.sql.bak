@@ -273,16 +273,16 @@ insert into `tb_server_info` values(2, 1, 'server B', '192.168.0.2', 0, '2000-01
 drop table if exists `tb_project_info`;
 
 create table`tb_project_info`(
-	`project_id` int(11) not null AUTO_INCREMENT,
-	`project_name` varchar(64) not null,
-	`project_description` varchar(128) not null,
-	`start_time` datetime default null,
-	`position_char` varchar(128) default null,
-	`picture_path` varchar(128) default null,
-	`construction_char` varchar(128) default null,
-	`construction_picture_path` varchar(256) default null,
-	`general_slop` varchar(128) default null,
-	`update_timestamp` datetime not null default current_timestamp on update current_timestamp,
+	`project_id` int(11) not null AUTO_INCREMENT, /* 项目编号*/
+	`project_name` varchar(64) not null, /* 项目名称*/
+	`project_description` varchar(128) not null, /* 项目描述 */
+	`start_time` datetime default null, /* 起始时间*/
+	`position_char` varchar(128) default null, /* 位置信息*/
+	`picture_path` varchar(128) default null, /* 项目图片*/
+	`construction_char` varchar(128) default null, /* 建设信息*/
+	`construction_picture_path` varchar(256) default null, /* 建设图片 */
+	`general_slop` varchar(128) default null, /* 边坡概况*/
+	`update_timestamp` datetime not null default current_timestamp on update current_timestamp, /*更新时间*/
 	primary key (`project_id`)
 )engine=myisam default charset=utf8;
 
