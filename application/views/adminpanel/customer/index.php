@@ -52,8 +52,6 @@
 	</div>
 </div>
 
-<script language="javascript" type="text/javascript"> 
-	var folder_name = "<?php echo $folder_name?>";
+<script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
-    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/index.js']);  
-    </script>
+    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/index.js']); </script>

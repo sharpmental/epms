@@ -72,7 +72,21 @@
 				</div>
 			</div>
 			
-
+			<div class="form-group">
+				<label for="formular" class="col-sm-2 control-label">计算公式</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="formular"
+						name="formular" placeholder="计算公式">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="slop_id" class="col-sm-2 control-label">边坡号码</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="slop_id"
+						name="slop_id" placeholder="边坡号码">
+				</div>
+			</div>
+			
 			<div class="form-group">
 				<label for="device" class="col-sm-2 control-label"></label>
 				<div class="col-sm-7">

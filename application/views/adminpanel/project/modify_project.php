@@ -31,7 +31,7 @@
 	</div>
 	
 	<div class="panel-body">
-		<form class="form-horizontal" id="addform" role="form" method="post" enctype="multipart/form-data" action="<?php echo current_url()."_r/".$data['project_id']?>">
+		<form class="form-horizontal" id="addform" role="form" method="post" enctype="multipart/form-data" action="<?php echo base_url($folder_name.'/project/modify_project_r/'.$data['project_id'])?>">
 			<div class="form-group">
 				<label for="project_name" class="col-sm-2 control-label">项目名称</label>
 				<div class="col-sm-7">

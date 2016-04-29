@@ -31,7 +31,7 @@
 	</div>
 
 	<div class="panel-body">
-		<form class="form-horizontal" id="addform" role="form" method="post" enctype="multipart/form-data" action="<?php echo current_url()."_r"?>">
+		<form class="form-horizontal" id="addform" role="form" method="post" enctype="multipart/form-data" action="<?php echo base_url($folder_name.'/slop/modify_slop_r/'.$slop['slop_id'])?>">
 			<div class="form-group">
 				<label for="slop_name" class="col-sm-2 control-label">边坡名称</label>
 				<div class="col-sm-7">
@@ -72,7 +72,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="alarm_model" class="col-sm-2 control-label">报警模型</label>
+				<label for="alarm-model" class="col-sm-2 control-label">报警模型</label>
 				<div class="col-sm-7">
 					<input type="" class="form-control" id="alarm-model" name="alarm-model" placeholder="报警模型" value="<?php echo $slop['alarm_model']?>" >
 				</div>

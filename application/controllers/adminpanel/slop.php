@@ -197,7 +197,7 @@ class Slop extends MY_Admin_Controller {
 			}
 			
 			// update the picture path information
-			$r = $this->Project_model->update ( array (
+			$r = $this->Slop_model->update ( array (
 					"design_picture_path" => isset ( $r [0] ['file_name'] ) ? $pic_path . '/' . $r [0] ['file_name'] : "",
 					"solidate_picture_path" => isset ( $r [1] ['file_name'] ) ? $pic_path . '/' . $r [1] ['file_name'] : "",
 					"conservation_picture_path" => isset ( $r [2] ['file_name'] ) ? $pic_path . '/' . $r [2] ['file_name'] : "",
@@ -214,6 +214,8 @@ class Slop extends MY_Admin_Controller {
 				$this->show_error ( "Update project picture path failed. You may modify the project information again." );
 			}
 		}
+		
+		Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/slop/index' ) );
 	}
 	/**
 	 * What it do
@@ -290,7 +292,7 @@ class Slop extends MY_Admin_Controller {
 				'position_char' => $this->input->post ( 'address' ),
 				'position_x' => $this->input->post ( 'cord-x' ),
 				'position_y' => $this->input->post ( 'cord-y' ),
-				'alarm_model' => $this->input->post ( 'alarm_model' ),
+				'alarm_model' => $this->input->post ( 'alarm-model' ),
 				'property_1' => $this->input->post ( 'property-1' ),
 				'property_2' => $this->input->post ( 'property-1' ),
 				'property_3' => $this->input->post ( 'property-1' ),
@@ -342,7 +344,7 @@ class Slop extends MY_Admin_Controller {
 			}
 			
 			// update the picture path information
-			$r = $this->Project_model->update ( array (
+			$r = $this->Slop_model->update ( array (
 					"design_picture_path" => isset ( $r [0] ['file_name'] ) ? $pic_path . '/' . $r [0] ['file_name'] : "",
 					"solidate_picture_path" => isset ( $r [1] ['file_name'] ) ? $pic_path . '/' . $r [1] ['file_name'] : "",
 					"conservation_picture_path" => isset ( $r [2] ['file_name'] ) ? $pic_path . '/' . $r [2] ['file_name'] : "",
@@ -359,6 +361,8 @@ class Slop extends MY_Admin_Controller {
 				$this->show_error ( "Update project picture path failed. You may modify the project information again." );
 			}
 		}
+		
+		Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/slop/index' ) );
 	}
 	/**
 	 * What it do
@@ -381,7 +385,7 @@ class Slop extends MY_Admin_Controller {
 		if (! isset ( $s ) || ! $s)
 			$this->show_error ( "Failed to delete this project!" );
 		
-		Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) );
+		Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/slop/index' ) );
 	}
 	/**
 	 * What it do
