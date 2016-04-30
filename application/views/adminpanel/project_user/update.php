@@ -2,7 +2,7 @@
 
 <div class="panel panel-default grid">
 	<div class='panel-heading row'>
-		<h4 class="col-sm-2 col-md-2">预警信息</h4>
+		<h4 class="col-sm-2 col-md-2">项目关联</h4>
 		<div class="col-sm-8 col-md-8 ">
 			<div class="btn-group btn-group-justified" role="group"
 				aria-label="...">
@@ -30,29 +30,37 @@
 		</div>
 
 	</div>
-
-	<div class="panel-body">
-		<div class=" ">
-			<h1>页面正在建设中......</h1>
-			<p>请访问项目页面</p>
-			<p>
-				<a class="btn btn-primary btn-lg"
-					href="<?php echo base_url($folder_name.'/project/index')?>"
-					role="button">项目页面</a>
-			</p>
+	<form class="form-horizontal" id="addform" role="form" method="post"
+		enctype="multipart/form-data"
+		action="<?php echo base_url($folder_name . '/project_user/update_r/' . $user_id)?>">
+		<div class="panel-body">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+		用户姓名:<?php echo $user_name?>
 		</div>
-	</div>
+				<div class="panel-body"><?php echo $content?></div>
+			</div>
 
-	<div class="panel-footer">
-		<div class="pull-left">
-			<div class='btn-group' role="group">
-			<?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
-        </div>
 		</div>
-	</div>
+
+
+		<div class="panel-footer">
+			<div class="pull-left">
+				<div class="btn-group">
+					<button type="submit" class="btn btn-default" id="dosubmit">
+						<span class="glyphicon glyphicon-ok"></span>&nbsp确定
+					</button>
+			<?php aci_ui_a($folder_name,'project_user','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+			</div>
+			</div>
+		</div>
+	</form>
 </div>
 
+<?php echo var_dump($content)?>
+
 <script language="javascript" type="text/javascript"> 
-    var folder_name = "<?php echo $folder_name?>";
+	var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
-    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/alarm.js']); </script>
+    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/index.js']);  
+    </script>

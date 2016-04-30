@@ -101,7 +101,9 @@ class Project extends MY_Admin_Controller {
 						"project_name",
 						"project_description",
 						"start_time",
-						"position_char" 
+						"position_char",
+						"type",
+						"customer_id"
 				) );
 				if (isset ( $s ) && $s) {
 					$project_data [] = $s;
@@ -136,7 +138,7 @@ class Project extends MY_Admin_Controller {
 				'table_open' => '<table class="table table-hover">' 
 		);
 		$this->table->set_template ( $template );
-		$this->table->set_heading ( '项目编号', '项目名称', '项目描述', '启动时间', '项目地址' );
+		$this->table->set_heading ( '项目编号', '项目名称', '项目描述', '启动时间', '项目地址', '项目类型', "客户编号" );
 		// $this->table->set_heading ( '项目编号', '项目名称', '项目描述', '启动时间', '项目地址', '操作', '操作' );
 		
 		$table_data = $this->table->generate ( $project_data );
@@ -559,6 +561,8 @@ class Project extends MY_Admin_Controller {
 						"position_char",
 						"construction_char",
 						"general_slop",
+						"type",
+						"customer_id",
 						"update_timestamp" 
 				) );
 				if (isset ( $s ) && $s)
@@ -622,6 +626,14 @@ class Project extends MY_Admin_Controller {
 						array (
 								"边坡概况",
 								$v ['general_slop'] 
+						),
+						array (
+								"项目类型",
+								$v ['type']
+						),
+						array (
+								"客户编号",
+								$v ['customer_id']
 						),
 						array (
 								"更新时间",

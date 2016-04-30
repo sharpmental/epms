@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex,nofollow" />
  
 <title><?php echo SITE_NAME?></title>
-<link href="<?php echo base_url('css/bootstrap.min.css')?>" rel="stylesheet">
+<link href="<?php echo base_url('css/bootstrap.css')?>" rel="stylesheet">
 <link type="text/css" href="<?php echo base_url('css/font-awesome.min.css')?>" rel="stylesheet" />
 <link type="text/css" href="<?php echo base_url('css/jquery.dataTables.min.css')?>" rel="stylesheet" />
 

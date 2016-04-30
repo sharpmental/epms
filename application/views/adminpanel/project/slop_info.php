@@ -48,27 +48,15 @@
 				<div style="width: 100%">
 					<img src="<?php echo $slop['design_picture_path']?>"
 						alt="Picture Lost? Check directory: <?php echo $slop['design_picture_path']?>"
-						style="height: 120px; width: 100%">
-				</div>
-				<p></p>
-				<div style="width: 100%">
-					<img src="<?php echo $slop['solidate_picture_path']?>"
-						alt="Picture Lost? Check directory: <?php echo $slop['solidate_picture_path']?>"
-						style="height: 120px; width: 100%">
+						style="height: 220px; width: 100%">
 				</div>
 			</div>
 			<div class="col-sm-4 col-md-4 btn text-center">
 				<h4>边坡图片</h4>
 				<div style="width: 100%">
-					<img src="<?php echo $slop['conservation_picture_path']?>"
-						alt="Picture Lost? Check directory: <?php echo $slop['conservation_picture_path']?>"
-						style="height: 120px; width: 100%">
-				</div>
-				<p></p>
-				<div style="width: 100%">
-					<img src="<?php echo $slop['panorama_picture_path']?>"
-						alt="Picture Lost? Check directory: <?php echo $slop['panorama_picture_path']?>"
-						style="height: 120px; width: 100%">
+					<img src="<?php echo $slop['3d_picture_path']?>"
+						alt="Picture Lost? Check directory: <?php echo $slop['3d_picture_path']?>"
+						style="height: 220px; width: 100%">
 				</div>
 			</div>
 		</div>

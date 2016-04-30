@@ -29,7 +29,7 @@ drop table if exists `tb_operator_info`;
 
 create table `tb_operator_info` (
   `operator_id` int(11) not null auto_increment, 
-  `operator_name` varchar(64) not null, 
+  `operator_name` varchar(64) not null,  /* 用户名称 */
   `operator_pwd` varchar(64) not null, 
   `operator_role` int(10) not null, 
   `operator_displayname` varchar(64) not null,
@@ -275,19 +275,43 @@ drop table if exists `tb_project_info`;
 create table`tb_project_info`(
 	`project_id` int(11) not null AUTO_INCREMENT, /* 项目编号*/
 	`project_name` varchar(64) not null, /* 项目名称*/
-	`project_description` varchar(128) not null, /* 项目描述 */
+	`project_description` varchar(128) not null, /* 项目描述 =projinfo */
 	`start_time` datetime default null, /* 起始时间*/
-	`position_char` varchar(128) default null, /* 位置信息*/
-	`picture_path` varchar(128) default null, /* 项目图片*/
+	`position_char` varchar(128) default null, /* 位置信息 = roadname*/
+	`picture_path` varchar(128) default null, /* 项目图片= projpic */
 	`construction_char` varchar(128) default null, /* 建设信息*/
-	`construction_picture_path` varchar(256) default null, /* 建设图片 */
+	`construction_picture_path` varchar(256) default null, /* 建设图片 = const pic*/
 	`general_slop` varchar(128) default null, /* 边坡概况*/
+	`type` int  not null default 100, /* 项目类型 */
+	`customer_id` int not null default 0, /* 客户编号 */ 
 	`update_timestamp` datetime not null default current_timestamp on update current_timestamp, /*更新时间*/
 	primary key (`project_id`)
 )engine=myisam default charset=utf8;
 
-insert into `tb_project_info` values (1, 'project A', 'AAA', '2011-01-01', 'Road A, street A, room A', '/upload/project_info/1/pic.jpg', 'building...', '/upload/project_info/1/const_pic.jpg', 'Slop General information', '2011-01-01');
-insert into `tb_project_info` values (2, 'project B', 'BBB', '2011-01-02', 'Road B, street B, room B', '/upload/project_info/2/pic.jpg', 'building...', '/upload/project_info/2/const_pic.jpg', 'Slop General information', '2011-01-02');
+insert into `tb_project_info` values (1, 'project A', 'AAA', '2011-01-01', 'Road A, street A, room A', '/upload/project_info/1/pic.jpg', 'building...', '/upload/project_info/1/const_pic.jpg', 'Slop General information', 10, 0, '2011-01-01');
+insert into `tb_project_info` values (2, 'project B', 'BBB', '2011-01-02', 'Road B, street B, room B', '/upload/project_info/2/pic.jpg', 'building...', '/upload/project_info/2/const_pic.jpg', 'Slop General information1', 10, 0, '2011-01-02');
+insert into `tb_project_info` values (3, 'project C', 'BBB', '2011-01-02', 'Road C, street B, room B', '/upload/project_info/3/pic.jpg', 'building...', '/upload/project_info/3/const_pic.jpg', 'Slop General information', 10, 0, '2011-01-02');
+insert into `tb_project_info` values (4, 'project D', 'BBB', '2011-01-02', 'Road D, street B, room B', '/upload/project_info/4/pic.jpg', 'building...', '/upload/project_info/4/const_pic.jpg', 'Slop General information', 10, 0, '2011-01-02');
+insert into `tb_project_info` values (5, 'project E', 'BBB', '2011-01-02', 'Road E, street B, room B', '/upload/project_info/5/pic.jpg', 'building...', '/upload/project_info/5/const_pic.jpg', 'Slop General information', 10, 0, '2011-01-02');
+insert into `tb_project_info` values (6, 'project F', 'BBB', '2011-01-02', 'Road F, street B, room B', '/upload/project_info/6/pic.jpg', 'building...', '/upload/project_info/6/const_pic.jpg', 'Slop General information', 10, 0, '2011-01-02');
+
+drop table if exists `tb_project_type`;
+
+create table `tb_project_type` (
+	`type_id` int not null AUTO_INCREMENT,
+	`type_name` varchar(64) not null default 'type',
+	`flag` int not null default 0,
+	`update_timestamp` datetime not null default current_timestamp on update current_timestamp, /*更新时间*/
+	primary key (`type_id`)
+)engine=myisam default charset=utf8;
+
+
+insert into `tb_project_type` values (1,  ‘Class A’, 0, '2011-01-01');
+insert into `tb_project_type` values (2,  ‘Class B’, 0, '2011-01-01');
+insert into `tb_project_type` values (3,  ‘Class C’, 0, '2011-01-01');
+insert into `tb_project_type` values (4,  ‘Class D’, 0, '2011-01-01');
+insert into `tb_project_type` values (5,  ‘客户项目’, 0, '2011-01-01');
+insert into `tb_project_type` values (6,  ‘演示项目’, 0, '2011-01-01');
 
 -- --------------------------------------------------------
 
@@ -305,18 +329,26 @@ create table`tb_slop_info`(
 	`position_char` varchar(128) default null, /* 位置描述 */
 	`position_x` varchar(16) default 0, /* 地图X坐标值 */
 	`position_y` varchar(16) default 0, /* 地图Y坐标值 */
-	`alarm_model` int(16) default 0, /* 报警模型 */
-	
-	`property_1` int(16) default 0, /* 属性1 */
-	`property_2` int(16) default 0,
-	`property_3` int(16) default 0,
 
-	`design_picture_path` varchar(128) default null, /* 设计图片 */
-	`solidate_picture_path` varchar(128) default null, /* 加固图片 */
-	`conservation_picture_path` varchar(128) default null, /* 保护图片 */
-	`panorama_picture_path` varchar(128) default null, /* 全景图 */
-	`install_picture_path` varchar(128) default null, /* 安装图片 */
-	`decompose_picture_path` varchar(128) default null, /* 拆解图 */
+	`alarm_model` int(16) default 0, /* 报警模型 */
+	`slop_type` int(16) default 0, /*  边坡类型 */
+	`env_id` int(16) default 0, /* 环境属性 */
+	`disease_id` int(16) default 0, /* 疾病属性 */
+	`sub_road_name` int(16) default 0, /* 所属路段 */
+	`stake_bg` int default 0, /* 起始桩号*/
+	`stake_end` int default 0, /* 终止桩号*/
+
+	`longtitude` varchar(64),  /* 纬度*/
+	`latitude` varchar(64), /* 经度*/
+	`altitude` varchar(64), /*海拔高度*/
+	`strength_info` varchar(64), /* 加固描述 */
+
+	 `design_picture_path` varchar(128) default null, /* 设计图片 */
+	-- `solidate_picture_path` varchar(128) default null, /* 加固图片 */
+	-- `conservation_picture_path` varchar(128) default null, /* 保护图片 */
+	-- `panorama_picture_path` varchar(128) default null, /* 全景图 */
+	-- `install_picture_path` varchar(128) default null, /* 安装图片 */
+	-- `decompose_picture_path` varchar(128) default null, /* 拆解图 */
 	`3d_picture_path` varchar(128) default null, /* 3D展示图 */
 	`video_path` varchar(128) default null, /* 上传视频 */
 
@@ -326,56 +358,60 @@ create table`tb_slop_info`(
 )engine=myisam default charset=utf8;
 
 insert into `tb_slop_info` values (
-	1, 'slop A', 'Slop AAA', '2011-01-01', '火车东站','120.218107', '30.29573', 0,
-	0,0,0,
+	1, 'slop A', 'Slop AAA', '2011-01-01', '火车东站','120.218107', '30.29573', 
+	0,0,0,0,0,0,0,
+	'0', '0', '0', '0', 
 	'/upload/slop_info/1/d.jpg',
-	'/upload/slop_info/1/s.jpg',
-	'/upload/slop_info/1/c.jpg',
-	'/upload/slop_info/1/p.jpg',
-	'/upload/slop_info/1/i.jpg',
-	'/upload/slop_info/1/decomp.jpg',
+	-- '/upload/slop_info/1/s.jpg',
+	-- '/upload/slop_info/1/c.jpg',
+	-- '/upload/slop_info/1/p.jpg',
+	-- '/upload/slop_info/1/i.jpg',
+	-- '/upload/slop_info/1/decomp.jpg',
 	'/upload/slop_info/1/3d.jpg',
 	'/upload/slop_info/1/video.avi',
 	1,'2011-01-01'
 );
 
 insert into `tb_slop_info` values (
-	2, 'slop B', 'Slop BBB', '2011-01-02', '东方丽都','120.206734', '30.298255', 0,
-	0,0,0,
+	2, 'slop B', 'Slop BBB', '2011-01-02', '东方丽都','120.206734', '30.298255', 
+	0,0,0,0,0,0,0,
+	'0', '0', '0', '0', 
 	'/upload/slop_info/2/d.jpg',
-	'/upload/slop_info/2/s.jpg',
-	'/upload/slop_info/2/c.jpg',
-	'/upload/slop_info/2/p.jpg',
-	'/upload/slop_info/2/i.jpg',
-	'/upload/slop_info/2/decomp.jpg',
+	-- '/upload/slop_info/2/s.jpg',
+	-- '/upload/slop_info/2/c.jpg',
+	-- '/upload/slop_info/2/p.jpg',
+	-- '/upload/slop_info/2/i.jpg',
+	-- '/upload/slop_info/2/decomp.jpg',
 	'/upload/slop_info/2/3d.jpg',
 	'/upload/slop_info/2/video.avi',
 	1,'2011-01-01'
 );
 
 insert into `tb_slop_info` values (
-	3, 'slop C', 'Slop CCC', '2011-01-03', '闸弄口','120.199152', '30.290553', 0,
-	0,0,0,
+	3, 'slop C', 'Slop CCC', '2011-01-03', '闸弄口','120.199152', '30.290553', 
+	0,0,0,0,0,0,0,
+	'0', '0', '0', '0', 
 	'/upload/slop_info/3/d.jpg',
-	'/upload/slop_info/3/s.jpg',
-	'/upload/slop_info/3/c.jpg',
-	'/upload/slop_info/3/p.jpg',
-	'/upload/slop_info/3/i.jpg',
-	'/upload/slop_info/3/decomp.jpg',
+	-- '/upload/slop_info/3/s.jpg',
+	-- '/upload/slop_info/3/c.jpg',
+	-- '/upload/slop_info/3/p.jpg',
+	-- '/upload/slop_info/3/i.jpg',
+	-- '/upload/slop_info/3/decomp.jpg',
 	'/upload/slop_info/3/3d.jpg',
 	'/upload/slop_info/3/video.avi',
 	1,'2011-01-01'
 );
 
 insert into `tb_slop_info` values (
-	4, 'slop D', 'Slop DDD', '2011-01-04', '水岸雅苑','120.196457', '30.304523', 0,
-	0,0,0,
+	4, 'slop D', 'Slop DDD', '2011-01-04', '水岸雅苑','120.196457', '30.304523', 
+	0,0,0,0,0,0,0,
+	'0', '0', '0', '0', 
 	'/upload/slop_info/4/d.jpg',
-	'/upload/slop_info/4/s.jpg',
-	'/upload/slop_info/4/c.jpg',
-	'/upload/slop_info/4/p.jpg',
-	'/upload/slop_info/4/i.jpg',
-	'/upload/slop_info/4/decomp.jpg',
+	-- '/upload/slop_info/4/s.jpg',
+	-- '/upload/slop_info/4/c.jpg',
+	-- '/upload/slop_info/4/p.jpg',
+	-- '/upload/slop_info/4/i.jpg',
+	-- '/upload/slop_info/4/decomp.jpg',
 	'/upload/slop_info/4/3d.jpg',
 	'/upload/slop_info/4/video.avi',
 	2,'2011-01-01'
