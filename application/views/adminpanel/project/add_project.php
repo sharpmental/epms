@@ -87,6 +87,18 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label for="type" class="col-sm-2 control-label">项目类型</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id=""type"" name=""type"" placeholder="项目类型">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="customer_id" class="col-sm-2 control-label">客户编号</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="customer_id" name="customer_id" placeholder="客户编号">
+				</div>
+			</div>
+			<div class="form-group">
 				<label for="slop" class="col-sm-2 control-label"></label>
 				<div class="col-sm-7">
 					<div class='btn-group' role="group">

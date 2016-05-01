@@ -78,23 +78,77 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="address" class="col-sm-2 control-label">属性1</label>
-				<div class="col-sm-7"> 
-					<input type="" class="form-control" id="property-1" name="property-1" placeholder="属性1" value="<?php echo $slop['property_1']?>"> 
+				<label for="slop_type" class="col-sm-2 control-label">边坡类型</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="slop_type" name="slop_type" 
+					value="<?php echo $slop['slop_type']?>" >
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="address" class="col-sm-2 control-label">属性2</label>
+				<label for="env_id" class="col-sm-2 control-label">环境属性</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="property-2" name="property-2" placeholder="属性2" value="<?php echo $slop['property_2']?>">
+					<input type="" class="form-control" id="env_id" name="env_id" value="<?php echo $slop['env_id']?>">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="address" class="col-sm-2 control-label">属性3</label>
+				<label for="disease_id" class="col-sm-2 control-label">疾病属性</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="property-3" name="property-3" placeholder="属性3" value="<?php echo $slop['property_3']?>">
+					<input type="" class="form-control" id="disease_id" value="<?php echo $slop['disease_id']?>"
+						name="disease_id" >
 				</div>
 			</div>
+			<div class="form-group">
+				<label for="sub_road_name" class="col-sm-2 control-label">所属路段</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="sub_road_name" value="<?php echo $slop['sub_road_name']?>"
+						name="sub_road_name" placeholder="所属路段">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="stake_bg" class="col-sm-2 control-label">起始桩号</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="stake_bg" name="stake_bg" value="<?php echo $slop['stake_bg']?>"
+						placeholder="起始桩号">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="stake_end" class="col-sm-2 control-label">终止桩号</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="stake_end" name="stake_end" value="<?php echo $slop['stake_end']?>"
+						placeholder="终止桩号">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="longtitude" class="col-sm-2 control-label">纬度</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="longtitude" value="<?php echo $slop['longtitude']?>"
+						name="longtitude" placeholder="纬度">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="latitude" class="col-sm-2 control-label">经度</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="latitude" name="latitude" value="<?php echo $slop['latitude']?>"
+						placeholder="经度">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="altitude" class="col-sm-2 control-label">海拔高度</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="altitude" name="altitude" value="<?php echo $slop['altitude']?>"
+						placeholder="海拔高度"> 
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="strength_info" class="col-sm-2 control-label">加固描述</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="strength_info" value="<?php echo $slop['strength_info']?>"
+						name="strength_info" placeholder="加固描述 ">
+				</div>
+			</div>
+			
+			
 			<div class="form-group">
 				<label for="pic" class="col-sm-2 control-label">设计图片</label>
 				<div class="col-sm-7">
@@ -102,7 +156,7 @@
 						placeholder="上传项目图片">
 				</div>
 			</div>
-			<div class="form-group">
+			<!--  div class="form-group">
 				<label for="pic" class="col-sm-2 control-label">加固图片</label>
 				<div class="col-sm-7">
 					<input type="file" class="form-control" id="solidate-pic" name="userfile[]" accept="image/*"
@@ -136,7 +190,7 @@
 					<input type="file" class="form-control" id="decompose-pic" name="userfile[]" accept="image/*"
 						placeholder="上传项目图片">
 				</div>
-			</div>
+			</div -->
 			<div class="form-group">
 				<label for="pic" class="col-sm-2 control-label">3D展示图</label>
 				<div class="col-sm-7">
@@ -154,8 +208,9 @@
 			<div class="form-group">
 				<label for="construction" class="col-sm-2 control-label">所属项目</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="project_id" name="project_id"
-						value="<?php echo $slop['project_id']?>">
+					<select class="form-control validate[required]" name="project_id">
+							  <?php echo $project_list?>
+							</select>
 				</div>
 			</div>
 			

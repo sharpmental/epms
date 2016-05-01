@@ -84,6 +84,20 @@ function ($, aci) {
                     },
                 }
             },
+            type: {
+                validators: {
+                	integer: {
+                        message: 'The value is not an integer'
+                    }
+                }
+            },
+            customer_id: {
+                validators: {
+                	integer: {
+                        message: 'The value is not an integer'
+                    }
+                }
+            }
         }
     };
 

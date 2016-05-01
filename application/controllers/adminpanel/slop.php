@@ -49,16 +49,13 @@ class Slop extends MY_Admin_Controller {
 					"user_id" => $this->user_id 
 			) );
 			
-			if (isset ( $p ) && $p){
-				//add action button
+			if (isset ( $p ) && $p) {
+				// add action button
 				$link1 = base_url ( $this->page_data ['folder_name'] . '/slop/modify_slop/' . $v ['slop_id'] );
-				$v[] = '<a class="btn btn-default" href="'.$link1.'">修改</a>';
+				$v [] = '<a class="btn btn-default" href="' . $link1 . '">修改</a>';
 				$t [] = $v;
 			}
 		}
-		
-		
-		
 		
 		// build table
 		$this->load->library ( 'table' );
@@ -90,10 +87,10 @@ class Slop extends MY_Admin_Controller {
 	function add_slop($project_id = '0') {
 		$this->check_priv ();
 		
-		// $this->load->model ( array (
-		// 'Project_model',
-		// 'Project_user_model'
-		// ) );
+		$this->load->model ( array (
+				// 'Project_model',
+				'Project_user_model' 
+		) );
 		
 		// $r = $this->Project_user_model->get_one ( array (
 		// 'project_id' => $project_id,
@@ -104,10 +101,19 @@ class Slop extends MY_Admin_Controller {
 		// $this->show_error ( "You are no authorized to change this project!" );
 		// }
 		
+		$p = $this->Project_user_model->select ( array (
+				'user_id' => $this->user_id 
+		) );
+		$project_list = '<option value ="NA">请选择项目</option>';
+		
+		foreach ( $p as $k => $v ) {
+			$project_list = $project_list . '<option value ="' . $v ['project_id'] . '">' . $v ['project_id'] . '</option>';
+		}
+		
 		$this->view ( 'add_slop', array (
 				'require_js' => true,
 				'show_sidemenu' => true,
-				'project_id' => $project_id 
+				'project_list' => $project_list 
 		) );
 	}
 	/**
@@ -251,10 +257,23 @@ class Slop extends MY_Admin_Controller {
 			exit ();
 		}
 		
+		$p = $this->Project_user_model->select ( array (
+				'user_id' => $this->user_id 
+		) );
+		$project_list = '<option value ="NA">请选择项目</option>';
+		
+		foreach ( $p as $k => $v ) {
+			if ($v ['project_id'] == $s ['project_id'])
+				$project_list = $project_list . '<option selected="selected" value ="' . $v ['project_id'] . '">' . $v ['project_id'] . '</option>';
+			else
+				$project_list = $project_list . '<option value ="' . $v ['project_id'] . '">' . $v ['project_id'] . '</option>';
+		}
+		
 		$this->view ( 'modify_slop', array (
 				'require_js' => true,
 				'show_sidemenu' => true,
-				'slop' => $s 
+				'slop' => $s,
+				'project_list' => $project_list
 		) );
 	}
 	/**

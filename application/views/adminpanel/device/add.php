@@ -38,15 +38,15 @@
 			<div class="form-group">
 				<label for="device_name" class="col-sm-2 control-label">设备名称</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="device_name" name="device_name"
-						placeholder="设备名称">
+					<input type="" class="form-control" id="device_name"
+						name="device_name" placeholder="设备名称">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="device_des" class="col-sm-2 control-label">设备描述</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="device_des" name="device_des"
-						placeholder="设备描述">
+					<input type="" class="form-control" id="device_des"
+						name="device_des" placeholder="设备描述">
 				</div>
 			</div>
 			<div class="form-group">
@@ -56,7 +56,7 @@
 						name="device_type" placeholder="设备类型">
 				</div>
 			</div>
-			
+
 			<div class="form-group">
 				<label for="devicepic" class="col-sm-2 control-label">设备图片</label>
 				<div class="col-sm-7">
@@ -71,22 +71,23 @@
 						name="userfile[]" accept="image/*" placeholder="上传项目图片">
 				</div>
 			</div>
-			
+
 			<div class="form-group">
 				<label for="formular" class="col-sm-2 control-label">计算公式</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="formular"
-						name="formular" placeholder="计算公式">
+					<input type="" class="form-control" id="formular" name="formular"
+						placeholder="计算公式">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="slop_id" class="col-sm-2 control-label">边坡号码</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="slop_id"
-						name="slop_id" placeholder="边坡号码">
+					<select class="form-control validate[required]" name="slop_id">
+							  <?php echo $slop_list?>
+							</select>
 				</div>
 			</div>
-			
+
 			<div class="form-group">
 				<label for="device" class="col-sm-2 control-label"></label>
 				<div class="col-sm-7">
@@ -105,9 +106,7 @@
 
 	<div class="panel-footer">
 		<div class="pull-left">
-			<div class="btn-group">
-			
-			</div>
+			<div class="btn-group"></div>
 		</div>
 	</div>
 </div>

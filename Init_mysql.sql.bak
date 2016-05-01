@@ -306,12 +306,12 @@ create table `tb_project_type` (
 )engine=myisam default charset=utf8;
 
 
-insert into `tb_project_type` values (1,  ‘Class A’, 0, '2011-01-01');
-insert into `tb_project_type` values (2,  ‘Class B’, 0, '2011-01-01');
-insert into `tb_project_type` values (3,  ‘Class C’, 0, '2011-01-01');
-insert into `tb_project_type` values (4,  ‘Class D’, 0, '2011-01-01');
-insert into `tb_project_type` values (5,  ‘客户项目’, 0, '2011-01-01');
-insert into `tb_project_type` values (6,  ‘演示项目’, 0, '2011-01-01');
+insert into `tb_project_type` values (1,  'Class A', 0, '2011-01-01');
+insert into `tb_project_type` values (2,  'Class B', 0, '2011-01-01');
+insert into `tb_project_type` values (3,  'Class C', 0, '2011-01-01');
+insert into `tb_project_type` values (4,  'Class D', 0, '2011-01-01');
+insert into `tb_project_type` values (5,  '客户项目', 0, '2011-01-01');
+insert into `tb_project_type` values (6,  '演示项目', 0, '2011-01-01');
 
 -- --------------------------------------------------------
 

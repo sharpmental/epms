@@ -84,9 +84,30 @@ class Device extends MY_Admin_Controller {
 	function add() {
 		$this->check_priv ();
 		
+		$this->load->model ( array (
+				"Slop_model",
+				"Project_user_model" 
+		) );
+		$pu = $this->Project_user_model->select ( array (
+				'user_id' => $this->user_id 
+		) );
+		
+		$slop_list = '<option value ="NA">请选择边坡</option>';
+		;
+		foreach ( $pu as $k => $v ) {
+			$s = $this->Slop_model->select ( array (
+					'project_id' => $v ['project_id'] 
+			) );
+			
+			foreach ( $s as $kk => $vv ) {
+				$slop_list = $slop_list . '<option value ="' . $vv ['slop_id'] . '">' . $vv ['slop_id'] . '</option>';
+			}
+		}
+		
 		$this->view ( 'add', array (
 				'require_js' => true,
-				'show_sidemenu' => true 
+				'show_sidemenu' => true,
+				'slop_list' => $slop_list 
 		) );
 	}
 	/**
@@ -236,10 +257,29 @@ class Device extends MY_Admin_Controller {
 			exit ();
 		}
 		
+		$pu = $this->Project_user_model->select ( array (
+				'user_id' => $this->user_id 
+		) );
+		
+		$slop_list = '<option value ="NA">请选择边坡</option>';
+		;
+		foreach ( $pu as $k => $v ) {
+			$s = $this->Slop_model->select ( array (
+					'project_id' => $v ['project_id'] 
+			) );
+			
+			foreach ( $s as $kk => $vv ) {
+				if ($vv ['slop_id'] == $d ['slop_id'])
+					$slop_list = $slop_list . '<option selected="selected" value ="' . $vv ['slop_id'] . '">' . $vv ['slop_id'] . '</option>';
+				else
+					$slop_list = $slop_list . '<option value ="' . $vv ['slop_id'] . '">' . $vv ['slop_id'] . '</option>';
+			}
+		}
 		$this->view ( 'modify', array (
 				'require_js' => true,
 				'show_sidemenu' => true,
-				'device' => $d 
+				'device' => $d,
+				'slop_list' => $slop_list,
 		) );
 	}
 	/**

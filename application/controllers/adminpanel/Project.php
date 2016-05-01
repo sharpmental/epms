@@ -103,7 +103,7 @@ class Project extends MY_Admin_Controller {
 						"start_time",
 						"position_char",
 						"type",
-						"customer_id"
+						"customer_id" 
 				) );
 				if (isset ( $s ) && $s) {
 					$project_data [] = $s;
@@ -276,12 +276,8 @@ class Project extends MY_Admin_Controller {
 		// build table
 		$table_data = "";
 		foreach ( $slop as $k => $v ) {
-			$del_link = "javascript:if(confirm('确定要删除吗'))window.location.href='".base_url ( $this->page_data ['folder_name'] . '/slop/delete_slop' ) . "/" . $v ['slop_id']."'";
-			$item = '<li class="list-group-item">'.
-					'<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $v ['slop_id'] . '" class="btn btn-default">' . "边坡名称: " . $v ['slop_name'] . '</a>' . 
-					'<a class="btn btn-default pull-right xbtn-delete" href="' . $del_link . '">删除</a>'.
-					'<a class="btn btn-default pull-right" href="' . base_url ( $this->page_data ['folder_name'] . '/slop/modify_slop' ) . "/" . $v ['slop_id'] . '">修改</a>' . 
-					'</li>';
+			$del_link = "javascript:if(confirm('确定要删除吗'))window.location.href='" . base_url ( $this->page_data ['folder_name'] . '/slop/delete_slop' ) . "/" . $v ['slop_id'] . "'";
+			$item = '<li class="list-group-item">' . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $v ['slop_id'] . '" class="btn btn-default">' . "边坡名称: " . $v ['slop_name'] . '</a>' . '<a class="btn btn-default pull-right xbtn-delete" href="' . $del_link . '">删除</a>' . '<a class="btn btn-default pull-right" href="' . base_url ( $this->page_data ['folder_name'] . '/slop/modify_slop' ) . "/" . $v ['slop_id'] . '">修改</a>' . '</li>';
 			$table_data = $table_data . $item;
 		}
 		
@@ -629,11 +625,11 @@ class Project extends MY_Admin_Controller {
 						),
 						array (
 								"项目类型",
-								$v ['type']
+								$v ['type'] 
 						),
 						array (
 								"客户编号",
-								$v ['customer_id']
+								$v ['customer_id'] 
 						),
 						array (
 								"更新时间",
@@ -691,7 +687,9 @@ class Project extends MY_Admin_Controller {
 				'start_time' => $this->input->post ( 'start_time' ),
 				'position_char' => $this->input->post ( 'address' ),
 				'construction_char' => $this->input->post ( 'construction' ),
-				'general_slop' => $this->input->post ( 'slop' ) 
+				'general_slop' => $this->input->post ( 'slop' ),
+				'type' => $this->input->post ( 'type' ),
+				'customer_id' => $this->input->post ( 'customer_id' ) 
 		) );
 		
 		if (! $r) {
@@ -821,14 +819,16 @@ class Project extends MY_Admin_Controller {
 		}
 		
 		$r = $this->Project_model->update ( array (
-				'project_id' => $id 
-		), array (
 				'project_name' => $this->input->post ( 'project_name' ),
 				'project_description' => $this->input->post ( 'project_des' ),
 				'start_time' => $this->input->post ( 'start_time' ),
 				'position_char' => $this->input->post ( 'address' ),
 				'construction_char' => $this->input->post ( 'construction' ),
-				'general_slop' => $this->input->post ( 'slop' ) 
+				'general_slop' => $this->input->post ( 'slop' ),
+				'type' => $this->input->post ( 'type' ),
+				'customer_id' => $this->input->post ( 'customer_id' ) 
+		), array (
+				'project_id' => $id 
 		) );
 		
 		if (! $r) {

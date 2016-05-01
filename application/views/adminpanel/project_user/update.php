@@ -57,8 +57,6 @@
 	</form>
 </div>
 
-<?php echo var_dump($content)?>
-
 <script language="javascript" type="text/javascript"> 
 	var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";

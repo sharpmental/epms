@@ -157,8 +157,8 @@ VALUES
 	(401,'添加用户',40,1,'user','add','0','user','0'),
 	(402,'修改用户',40,0,'user','edit','0','user','0'),
 	(403,'删除用户',40,0,'user','delete','0','user','0'),
-    (404,'项目关联',40,1,'project_user','index','0','heart','0'),
-    (405,'修改关联',40,1,'project_user','update','0','wrench','0'),
+	(404,'项目关联',40,1,'project_user','index','0','heart','0'),
+	(405,'修改关联',40,0,'project_user','update','0','wrench','0'),
     
 	(50,'报警模型列表',4,1,'alarm','index','0','user','0'),
 	(501,'添加模型',50,1,'alarm','add','0','user','0'),
