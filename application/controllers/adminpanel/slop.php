@@ -152,10 +152,18 @@ class Slop extends MY_Admin_Controller {
 				'position_x' => $this->input->post ( 'cord-x' ),
 				'position_y' => $this->input->post ( 'cord-y' ),
 				'alarm_model' => $this->input->post ( 'alarm_model' ),
-				'property_1' => $this->input->post ( 'property-1' ),
-				'property_2' => $this->input->post ( 'property-1' ),
-				'property_3' => $this->input->post ( 'property-1' ),
-				'project_id' => $this->input->post ( 'project_id' ) 
+				'slop_type' => $this->input->post ( 'slop_type' ),
+				'env_id' => $this->input->post ( 'env_id' ),
+				'disease_id' => $this->input->post ( 'disease_id' ),
+				'sub_road_name' => $this->input->post ( 'sub_road_name' ),
+				'stake_bg' => $this->input->post ( 'stake_bg' ),
+				'stake_end' => $this->input->post ( 'stake_end' ),
+				'longtitude' => $this->input->post ( 'longtitude' ),
+				'latitude' => $this->input->post ( 'latitude' ),
+				'altitude' => $this->input->post ( 'altitude' ),
+				'altitude' => $this->input->post ( 'altitude' ),
+				'strength_info' => $this->input->post ( 'strength_info' ),
+				'project_id' => $this->input->post ( 'project_id' ),
 		) );
 		
 		if (! $s) {
@@ -187,11 +195,11 @@ class Slop extends MY_Admin_Controller {
 			
 			$name_list = array (
 					'd',
-					's',
-					'c',
-					'p',
-					'i',
-					'decomp',
+// 					's',
+// 					'c',
+// 					'p',
+// 					'i',
+// 					'decomp',
 					'3d',
 					'video' 
 			);
@@ -205,13 +213,13 @@ class Slop extends MY_Admin_Controller {
 			// update the picture path information
 			$r = $this->Slop_model->update ( array (
 					"design_picture_path" => isset ( $r [0] ['file_name'] ) ? $pic_path . '/' . $r [0] ['file_name'] : "",
-					"solidate_picture_path" => isset ( $r [1] ['file_name'] ) ? $pic_path . '/' . $r [1] ['file_name'] : "",
-					"conservation_picture_path" => isset ( $r [2] ['file_name'] ) ? $pic_path . '/' . $r [2] ['file_name'] : "",
-					"panorama_picture_path" => isset ( $r [3] ['file_name'] ) ? $pic_path . '/' . $r [3] ['file_name'] : "",
-					"install_picture_path" => isset ( $r [4] ['file_name'] ) ? $pic_path . '/' . $r [4] ['file_name'] : "",
-					"decompose_picture_path" => isset ( $r [5] ['file_name'] ) ? $pic_path . '/' . $r [5] ['file_name'] : "",
-					"3d_picture_path" => isset ( $r [6] ['file_name'] ) ? $pic_path . '/' . $r [6] ['file_name'] : "",
-					"video_path" => isset ( $r [7] ['file_name'] ) ? $pic_path . '/' . $r [7] ['file_name'] : "" 
+// 					"solidate_picture_path" => isset ( $r [1] ['file_name'] ) ? $pic_path . '/' . $r [1] ['file_name'] : "",
+// 					"conservation_picture_path" => isset ( $r [2] ['file_name'] ) ? $pic_path . '/' . $r [2] ['file_name'] : "",
+// 					"panorama_picture_path" => isset ( $r [3] ['file_name'] ) ? $pic_path . '/' . $r [3] ['file_name'] : "",
+// 					"install_picture_path" => isset ( $r [4] ['file_name'] ) ? $pic_path . '/' . $r [4] ['file_name'] : "",
+// 					"decompose_picture_path" => isset ( $r [5] ['file_name'] ) ? $pic_path . '/' . $r [5] ['file_name'] : "",
+					"3d_picture_path" => isset ( $r [1] ['file_name'] ) ? $pic_path . '/' . $r [1] ['file_name'] : "",
+					"video_path" => isset ( $r [2] ['file_name'] ) ? $pic_path . '/' . $r [2] ['file_name'] : "" 
 			), array (
 					"slop_id" => $slop_id 
 			) );
@@ -312,10 +320,18 @@ class Slop extends MY_Admin_Controller {
 				'position_x' => $this->input->post ( 'cord-x' ),
 				'position_y' => $this->input->post ( 'cord-y' ),
 				'alarm_model' => $this->input->post ( 'alarm-model' ),
-				'property_1' => $this->input->post ( 'property-1' ),
-				'property_2' => $this->input->post ( 'property-1' ),
-				'property_3' => $this->input->post ( 'property-1' ),
-				'project_id' => $this->input->post ( 'project_id' ) 
+				'slop_type' => $this->input->post ( 'slop_type' ),
+				'env_id' => $this->input->post ( 'env_id' ),
+				'disease_id' => $this->input->post ( 'disease_id' ),
+				'sub_road_name' => $this->input->post ( 'sub_road_name' ),
+				'stake_bg' => $this->input->post ( 'stake_bg' ),
+				'stake_end' => $this->input->post ( 'stake_end' ),
+				'longtitude' => $this->input->post ( 'longtitude' ),
+				'latitude' => $this->input->post ( 'latitude' ),
+				'altitude' => $this->input->post ( 'altitude' ),
+				'altitude' => $this->input->post ( 'altitude' ),
+				'strength_info' => $this->input->post ( 'strength_info' ),
+				'project_id' => $this->input->post ( 'project_id' ),
 		), array (
 				'slop_id' => $slop_id 
 		) );
@@ -347,11 +363,11 @@ class Slop extends MY_Admin_Controller {
 			
 			$name_list = array (
 					'd',
-					's',
-					'c',
-					'p',
-					'i',
-					'decomp',
+// 					's',
+// 					'c',
+// 					'p',
+// 					'i',
+// 					'decomp',
 					'3d',
 					'video' 
 			);
@@ -365,13 +381,13 @@ class Slop extends MY_Admin_Controller {
 			// update the picture path information
 			$r = $this->Slop_model->update ( array (
 					"design_picture_path" => isset ( $r [0] ['file_name'] ) ? $pic_path . '/' . $r [0] ['file_name'] : "",
-					"solidate_picture_path" => isset ( $r [1] ['file_name'] ) ? $pic_path . '/' . $r [1] ['file_name'] : "",
-					"conservation_picture_path" => isset ( $r [2] ['file_name'] ) ? $pic_path . '/' . $r [2] ['file_name'] : "",
-					"panorama_picture_path" => isset ( $r [3] ['file_name'] ) ? $pic_path . '/' . $r [3] ['file_name'] : "",
-					"install_picture_path" => isset ( $r [4] ['file_name'] ) ? $pic_path . '/' . $r [4] ['file_name'] : "",
-					"decompose_picture_path" => isset ( $r [5] ['file_name'] ) ? $pic_path . '/' . $r [5] ['file_name'] : "",
-					"3d_picture_path" => isset ( $r [6] ['file_name'] ) ? $pic_path . '/' . $r [6] ['file_name'] : "",
-					"video_path" => isset ( $r [7] ['file_name'] ) ? $pic_path . '/' . $r [7] ['file_name'] : "" 
+// 					"solidate_picture_path" => isset ( $r [1] ['file_name'] ) ? $pic_path . '/' . $r [1] ['file_name'] : "",
+// 					"conservation_picture_path" => isset ( $r [2] ['file_name'] ) ? $pic_path . '/' . $r [2] ['file_name'] : "",
+// 					"panorama_picture_path" => isset ( $r [3] ['file_name'] ) ? $pic_path . '/' . $r [3] ['file_name'] : "",
+// 					"install_picture_path" => isset ( $r [4] ['file_name'] ) ? $pic_path . '/' . $r [4] ['file_name'] : "",
+// 					"decompose_picture_path" => isset ( $r [5] ['file_name'] ) ? $pic_path . '/' . $r [5] ['file_name'] : "",
+					"3d_picture_path" => isset ( $r [1] ['file_name'] ) ? $pic_path . '/' . $r [1] ['file_name'] : "",
+					"video_path" => isset ( $r [2] ['file_name'] ) ? $pic_path . '/' . $r [2] ['file_name'] : "" 
 			), array (
 					"slop_id" => $slop_id 
 			) );

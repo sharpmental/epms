@@ -89,7 +89,7 @@
 			<div class="form-group">
 				<label for="type" class="col-sm-2 control-label">项目类型</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id=""type"" name=""type"" placeholder="项目类型">
+					<input type="" class="form-control" id="type" name="type" placeholder="项目类型">
 				</div>
 			</div>
 			<div class="form-group">

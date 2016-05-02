@@ -86,6 +86,10 @@ function ($, aci) {
             },
             type: {
                 validators: {
+                	{
+                        notEmpty: {
+                            message: '请输入'
+                        },
                 	integer: {
                         message: 'The value is not an integer'
                     }

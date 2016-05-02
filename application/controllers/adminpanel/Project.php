@@ -121,6 +121,7 @@ class Project extends MY_Admin_Controller {
 		}
 		
 		// add operation button
+		$xi = false;
 		foreach ( $project_data as $k => $v ) {
 			$num = $project_data [$k] ['project_id'];
 			
@@ -129,7 +130,12 @@ class Project extends MY_Admin_Controller {
 			
 			// $project_data [$k] ['change'] = $btnchange;
 			// $project_data [$k] ['del'] = $btndel;
-			$project_data [$k] ['project_id'] = '<a class="btn btn-default btn-small" href="' . base_url ( $this->page_data ['folder_name'] . '/project/general_info/' . $num ) . '">' . $num . '</a>';
+			if ($xi == false)
+			$project_data [$k] ['project_id'] = '<a class="btn btn-warning btn-small" href="' . base_url ( $this->page_data ['folder_name'] . '/project/general_info/' . $num ) . '">' . $num . '</a>';
+			else	
+				$project_data [$k] ['project_id'] = '<a class="btn btn-default btn-small" href="' . base_url ( $this->page_data ['folder_name'] . '/project/general_info/' . $num ) . '">' . $num . '</a>';
+			
+				$xi = true;
 		}
 		
 		// build table
@@ -805,7 +811,8 @@ class Project extends MY_Admin_Controller {
 		
 		$this->load->model ( array (
 				'Project_model',
-				'Project_user_model' 
+				'Project_user_model',
+				'Member_model'
 		) );
 		
 		$r = $this->Project_user_model->get_one ( array (
@@ -828,7 +835,7 @@ class Project extends MY_Admin_Controller {
 				'type' => $this->input->post ( 'type' ),
 				'customer_id' => $this->input->post ( 'customer_id' ) 
 		), array (
-				'project_id' => $id 
+				'project_id' => $project_id 
 		) );
 		
 		if (! $r) {

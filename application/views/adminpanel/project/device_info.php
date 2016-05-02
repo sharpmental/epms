@@ -46,10 +46,13 @@
 					
 					if (! $idel) {
 						foreach ( $device_list as $k => $v ) {
-							echo '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $v ['device_id'] ) . '" class="list-group-item"> 设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp' . $v ['device_name'] . '</a> ';
+							if ($v ['device_id'] == $device_id)
+								echo '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $v ['device_id'] ) . '" class="list-group-item list-group-item-info"> 设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp' . $v ['device_name'] . '</a> ';
+							else
+								echo '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $v ['device_id'] ) . '" class="list-group-item"> 设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp' . $v ['device_name'] . '</a> ';
 						}
 					} else {
-						echo '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $device_list ['device_id'] ) . '" class="list-group-item"> 设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp' . $device_list ['device_name'] . '</a>';
+						echo '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $device_list ['device_id'] ) . '" class="list-group-item list-group-item-info"> 设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp' . $device_list ['device_name'] . '</a>';
 					}
 					?>
 				</div>
@@ -71,7 +74,9 @@
 			<div class="col-sm-4 col-md-4 text-center">
 				<h4>全景图</h4>
 				<div class="thumbnail">
-				<div id="container" style="width:100%;height:180px;">This content requires HTML5/CSS3, WebGL, or Adobe Flash Player Version 9 or higher.</div>
+					<div id="container" style="width: 100%; height: 180px;">This
+						content requires HTML5/CSS3, WebGL, or Adobe Flash Player Version
+						9 or higher.</div>
 				</div>
 			</div>
 		</div>
@@ -79,7 +84,7 @@
 
 	<div class="panel-footer">
 		<div class="pull-left">
-		<div class="btn-group">
+			<div class="btn-group">
 				<?php aci_ui_a($folder_name,'project','data_display/'.$device_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-zoom-in"></span> 查看数据')?>
 				<?php aci_ui_a($folder_name,'device','modify/'.$device_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-pencil"></span> 修改设备')?>
 				<?php aci_ui_a($folder_name,'device','delete/'.$device_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-remove"></span> 删除设备')?>
