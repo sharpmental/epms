@@ -331,7 +331,7 @@ class Device extends MY_Admin_Controller {
 		) );
 		
 		if (! $d) {
-			$this->show_error ( "添加记录失败。" );
+			$this->show_error ( "Failed to insert into slop_info table" );
 		}
 		
 		// upload picture
@@ -375,7 +375,7 @@ class Device extends MY_Admin_Controller {
 			) );
 			
 			if (! isset ( $r ) || ! $r) {
-				$this->show_error ( "添加文件成功。修改文件路径时发生一些错误。" );
+				$this->show_error ( "Update project picture path failed. You may modify the project information again." );
 			}
 		}
 		
@@ -403,7 +403,7 @@ class Device extends MY_Admin_Controller {
 		) );
 		
 		if (! isset ( $d ) || ! $d) {
-			$this->show_error ( "找不到你指定的设备。" );
+			$this->show_error ( "Can not find the Device!" );
 			exit ();
 		}
 		
@@ -426,7 +426,7 @@ class Device extends MY_Admin_Controller {
 			$p = true;
 		
 		if (! isset ( $p ) || ! $p) {
-			$this->show_error ( "你无权访问此项目。" );
+			$this->show_error ( "You are no authorized to change this project!" );
 			exit ();
 		}
 		
@@ -434,7 +434,7 @@ class Device extends MY_Admin_Controller {
 				'device_id' => $device_id 
 		) );
 		if (! isset ( $d ) || ! $d)
-			$this->show_error ( "删除设备失败。" );
+			$this->show_error ( "Some error happens when delete this device." );
 		
 		Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/device/index' ) );
 	}
@@ -444,7 +444,7 @@ class Device extends MY_Admin_Controller {
 		$imgname = array ();
 		
 		if (! isset ( $uploaddata ['name'] ) || ! $uploaddata ['name'])
-			exit ( '上传文件失败。' );
+			exit ( 'The upload data is wrong. Sever can not find the file information. Go back and try again.' );
 		
 		$size = count ( $uploaddata ['name'] );
 		

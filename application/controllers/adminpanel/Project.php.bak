@@ -1015,7 +1015,7 @@ class Project extends MY_Admin_Controller {
 		$imgname = array ();
 		
 		if (! isset ( $uploaddata ['name'] ) || ! $uploaddata ['name'])
-			exit ( '上传文件出错。' );
+			exit ( 'The upload data is wrong. Sever can not find the file information. Go back and try again.' );
 		
 		$size = count ( $uploaddata ['name'] );
 		
