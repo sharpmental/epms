@@ -31,7 +31,9 @@
 	</div>
 
 	<div class="panel-body">
+		<div class="text-left">
 		<?php  echo $table_data;?>
+		</div>
 	</div>
 
 	<div class="panel-footer">

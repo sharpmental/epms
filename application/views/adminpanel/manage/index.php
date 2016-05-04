@@ -14,11 +14,12 @@
 	<div class="panel-body">
 		<div>
 			<div class="jumbotron">
-				<h2>公司介绍</h2>
 				<div class="pull-right">
 					<img src="/images/company_logo.jpg" class="thumbnail"
-						style="width: 250px; height: 250px;"></img>
+						style="width: 200px; height: 200px;"></img>
 				</div>
+				<h2>公司介绍</h2>
+				
 				<p>中国公路工程咨询集团有限公司简介</p>
 				<strong>中国公路工程咨询集团有限公司（简称中咨集团）成立于1992
 					年，为国资委管理的大型中央企业中国交通建设股份有限公司全资子集团，注册资本金人民币6.5

@@ -395,7 +395,7 @@ class Slop extends MY_Admin_Controller {
 			) );
 			
 			if (! isset ( $r ) || ! $r) {
-				$this->show_error ( "上传文件成。修改文件路径时发生错误。" );
+				$this->show_error ( "上传文件失败。" );
 			}
 		}
 		
@@ -420,7 +420,7 @@ class Slop extends MY_Admin_Controller {
 		) );
 		
 		if (! isset ( $s ) || ! $s)
-			$this->show_error ( "删除此项目失败。" );
+			$this->show_error ( "Failed to delete this project!" );
 		
 		Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/slop/index' ) );
 	}
@@ -455,7 +455,7 @@ class Slop extends MY_Admin_Controller {
 		$imgname = array ();
 		
 		if (! isset ( $uploaddata ['name'] ) || ! $uploaddata ['name'])
-			exit ( '上传文件失败。信息有误。' );
+			exit ( 'The upload data is wrong. Sever can not find the file information. Go back and try again.' );
 		
 		$size = count ( $uploaddata ['name'] );
 		

@@ -131,11 +131,11 @@ class Project extends MY_Admin_Controller {
 			// $project_data [$k] ['change'] = $btnchange;
 			// $project_data [$k] ['del'] = $btndel;
 			if ($xi == false)
-			$project_data [$k] ['project_id'] = '<a class="btn btn-warning btn-small" href="' . base_url ( $this->page_data ['folder_name'] . '/project/general_info/' . $num ) . '">' . $num . '</a>';
-			else	
+				$project_data [$k] ['project_id'] = '<a class="btn btn-warning btn-small" href="' . base_url ( $this->page_data ['folder_name'] . '/project/general_info/' . $num ) . '">' . $num . '</a>';
+			else
 				$project_data [$k] ['project_id'] = '<a class="btn btn-default btn-small" href="' . base_url ( $this->page_data ['folder_name'] . '/project/general_info/' . $num ) . '">' . $num . '</a>';
 			
-				$xi = true;
+			$xi = true;
 		}
 		
 		// build table
@@ -283,7 +283,9 @@ class Project extends MY_Admin_Controller {
 		$table_data = "";
 		foreach ( $slop as $k => $v ) {
 			$del_link = "javascript:if(confirm('确定要删除吗'))window.location.href='" . base_url ( $this->page_data ['folder_name'] . '/slop/delete_slop' ) . "/" . $v ['slop_id'] . "'";
-			$item = '<li class="list-group-item">' . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $v ['slop_id'] . '" class="btn btn-default">' . "边坡名称: " . $v ['slop_name'] . '</a>' . '<a class="btn btn-default pull-right xbtn-delete" href="' . $del_link . '">删除</a>' . '<a class="btn btn-default pull-right" href="' . base_url ( $this->page_data ['folder_name'] . '/slop/modify_slop' ) . "/" . $v ['slop_id'] . '">修改</a>' . '</li>';
+			$item = '<li class="list-group-item">' . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $v ['slop_id'] . '" class="btn btn-default">' . "边坡名称: " . $v ['slop_name'] . '</a>' . 
+			// '<a class="btn btn-default pull-right xbtn-delete" href="' . $del_link . '">删除</a>' .
+			'<a class="btn btn-default pull-right" href="' . base_url ( $this->page_data ['folder_name'] . '/slop/modify_slop' ) . "/" . $v ['slop_id'] . '">修改</a>' . '</li>';
 			$table_data = $table_data . $item;
 		}
 		
@@ -538,7 +540,7 @@ class Project extends MY_Admin_Controller {
 	 * @return
 	 *
 	 */
-	function list_project($id = '1') {
+	function list_project($id = '0') {
 		$this->check_priv ();
 		$this->load->model ( array (
 				'Project_model',
@@ -552,6 +554,9 @@ class Project extends MY_Admin_Controller {
 		$project_data = array ();
 		
 		if (isset ( $p ) && $p) {
+			if ($id == '0')
+				$id = reset ( $p ) ['project_id'];
+			
 			foreach ( $p as $k => $v ) {
 				$s = $this->Project_model->select ( array (
 						"project_id" => $v ['project_id'] 
@@ -588,7 +593,8 @@ class Project extends MY_Admin_Controller {
 		);
 		$this->table->set_template ( $template );
 		$this->table->set_heading ( '名称', '描述' );
-		$info_table_data = $this->table->generate ( $information );
+		$info_table_data = '';
+		// $this->table->generate ( $information );
 		
 		foreach ( $project_data as $k => $v ) {
 			$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) . "/" . $v ['project_id'] . '" class="list-group-item active">' . "项目名称:&nbsp" . $v ['project_name'] . '</a>';
@@ -789,7 +795,7 @@ class Project extends MY_Admin_Controller {
 		) );
 		
 		if (! $r)
-			$this->show_error ("无法找到此项目，或者你无权访问此设备所在项目。");
+			$this->show_error ( "无法找到此项目，或者你无权访问此设备所在项目。" );
 		
 		$p = $this->Project_model->get_one ( array (
 				'project_id' => $id 
@@ -812,7 +818,7 @@ class Project extends MY_Admin_Controller {
 		$this->load->model ( array (
 				'Project_model',
 				'Project_user_model',
-				'Member_model'
+				'Member_model' 
 		) );
 		
 		$r = $this->Project_user_model->get_one ( array (

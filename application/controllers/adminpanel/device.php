@@ -48,8 +48,10 @@ class Device extends MY_Admin_Controller {
 			
 			if (isset ( $p ) && $p) {
 				// add action button
-				$link1 = base_url ( $this->page_data ['folder_name'] . '/device/modify/' . $v ['device_id'] );
-				$v [] = '<a class="btn btn-default" href="' . $link1 . '">修改</a>';
+				$modify_link = base_url ( $this->page_data ['folder_name'] . '/device/modify/' . $v ['device_id'] );
+				$del_link = "javascript:if(confirm('确定要删除吗'))window.location.href='" . base_url ( $this->page_data ['folder_name'] . '/device/delete' ) . "/" . $v ['device_id'] . "'";
+				$v [] = '<a class="btn btn-default" href="' . $modify_link . '">修改</a>';
+				$v [] = '<a class="btn btn-default" href="' . $del_link . '">删除</a>';
 				$t [] = $v;
 			}
 		}
@@ -60,7 +62,7 @@ class Device extends MY_Admin_Controller {
 				'table_open' => '<table class="table table-hover">' 
 		);
 		$this->table->set_template ( $template );
-		$this->table->set_heading ( '设备编号', '设备名称', '设备描述', '设备类型', '计算公式', '边坡ID', '更新时间', '操作' );
+		$this->table->set_heading ( '设备编号', '设备名称', '设备描述', '设备类型', '计算公式', '边坡ID', '更新时间', '操作', '操作' );
 		
 		$table_data = $this->table->generate ( $t );
 		
