@@ -89,6 +89,7 @@ class Project extends MY_Admin_Controller {
 		
 		$project_data = array ();
 		$pic = "";
+		$information = "";
 		
 		if (isset ( $p ) && $p) {
 			$id = reset ( $p ) ['project_id'];
@@ -107,6 +108,8 @@ class Project extends MY_Admin_Controller {
 				) );
 				if (isset ( $s ) && $s) {
 					$project_data [] = $s;
+					if($s['project_id'] == $id)
+						$information = $s['project_description'];
 				}
 			}
 			
@@ -155,9 +158,10 @@ class Project extends MY_Admin_Controller {
 		// display page
 		$this->view ( 'general_info', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'table_data' => $table_data,
 				'pageslink' => $pageslink,
+				'information' => $information,
 				'project_id' => $id,
 				'pic_path' => $pic 
 		) );
@@ -229,7 +233,7 @@ class Project extends MY_Admin_Controller {
 		
 		$this->view ( 'slop_info', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'table_data' => $table_data,
 				'slop' => $s 
 		) );
@@ -292,7 +296,7 @@ class Project extends MY_Admin_Controller {
 		// display page
 		$this->view ( 'construct_info', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'table_data' => $table_data,
 				'information' => $information,
 				'project_id' => $project_id,
@@ -354,7 +358,7 @@ class Project extends MY_Admin_Controller {
 		$i_pic = $d ['install_picture_path'];
 		$this->view ( 'device_info', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'idel' => $idel,
 				'note' => $note,
 				'slop' => $s,
@@ -376,7 +380,7 @@ class Project extends MY_Admin_Controller {
 		$this->check_priv ();
 		$this->view ( 'alarm', array (
 				'require_js' => true,
-				'show_sidemenu' => true 
+				'show_sidemenu' => false, 
 		) );
 	}
 	/**
@@ -518,7 +522,7 @@ class Project extends MY_Admin_Controller {
 		
 		$this->view ( 'data_display', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'idel' => $idel,
 				'note' => $note,
 				'slop' => $s,
@@ -656,7 +660,7 @@ class Project extends MY_Admin_Controller {
 		// display page
 		$this->view ( 'list_project', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'table_data' => $table_data,
 				'info_table' => $info_table_data,
 				'project_id' => $id 
@@ -673,7 +677,7 @@ class Project extends MY_Admin_Controller {
 	function add_project() {
 		$this->view ( 'add_project', array (
 				'require_js' => true,
-				'show_sidemenu' => true 
+				'show_sidemenu' => false, 
 		) );
 	}
 	/**
@@ -807,7 +811,7 @@ class Project extends MY_Admin_Controller {
 			$p = $this->Project_model->check_data ( $p );
 			$this->view ( 'modify_project', array (
 					'require_js' => true,
-					'show_sidemenu' => true,
+					'show_sidemenu' => false,
 					'data' => $p 
 			) );
 		}

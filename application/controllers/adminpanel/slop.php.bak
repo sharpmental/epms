@@ -74,7 +74,7 @@ class Slop extends MY_Admin_Controller {
 		
 		$this->view ( 'index', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'table_data' => $table_data 
 		) );
 	}
@@ -114,7 +114,7 @@ class Slop extends MY_Admin_Controller {
 		
 		$this->view ( 'add_slop', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'project_list' => $project_list 
 		) );
 	}
@@ -281,7 +281,7 @@ class Slop extends MY_Admin_Controller {
 		
 		$this->view ( 'modify_slop', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'slop' => $s,
 				'project_list' => $project_list
 		) );

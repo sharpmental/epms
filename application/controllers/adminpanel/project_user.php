@@ -50,7 +50,7 @@ class Project_user extends MY_Admin_Controller {
 		
 		$this->view ( 'index', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'content' => $content 
 		) );
 	}
@@ -100,7 +100,7 @@ class Project_user extends MY_Admin_Controller {
 		
 		$this->view ( 'update', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'content' => $content,
 				'user_name' => $u ['operator_name'],
 				'user_id' => $user_id

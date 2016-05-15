@@ -9,7 +9,7 @@
 				aria-label="...">
 				<div class="btn-group" role="group">
 					<a type="button" class="btn btn-primary"
-						href="<?php echo base_url($this->page_data['folder_name'].'/project/index')?>">项目概况</a>
+						href="<?php echo base_url($this->page_data['folder_name'].'/project/general_info')?>">项目概况</a>
 				</div>
 				<div class="btn-group" role="group">
 					<a type="button" class="btn btn-success"

@@ -42,7 +42,7 @@ class User extends MY_Admin_Controller {
 				'pages' => $this->Member_model->pages,
 				'keyword' => $keyword,
 				'require_js' => true,
-				'show_sidemenu' => true 
+				'show_sidemenu' => false, 
 		) );
 	}
 	function check_username($username = '') {

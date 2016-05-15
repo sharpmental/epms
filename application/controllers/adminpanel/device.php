@@ -71,7 +71,7 @@ class Device extends MY_Admin_Controller {
 		
 		$this->view ( 'index', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'table_data' => $table_data 
 		) );
 	}
@@ -108,7 +108,7 @@ class Device extends MY_Admin_Controller {
 		
 		$this->view ( 'add', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'slop_list' => $slop_list 
 		) );
 	}
@@ -279,7 +279,7 @@ class Device extends MY_Admin_Controller {
 		}
 		$this->view ( 'modify', array (
 				'require_js' => true,
-				'show_sidemenu' => true,
+				'show_sidemenu' => false,
 				'device' => $d,
 				'slop_list' => $slop_list,
 		) );

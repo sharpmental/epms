@@ -30,33 +30,27 @@
 		</div>
 
 	</div>
-	<div class="panel-body text-center">
-		<div class="text-left">
-			<h5>
-				<span class="glyphicon glyphicon-info-sign"></span>&nbsp项目ID：<?php echo $project_id?></h5>
-		</div>
-		<div class="col-sm-8 col-md-8 btn text-center">
-			<div class="">
-				<h4>概况介绍</h4>
-				<h4 class="well text-left"><?php echo $information?></h4>
-			</div>
-			<div>
-				<div class="list-group text-left">
-					<li href="#" class="list-group-item active">边坡列表</li>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-7 col-md-7 text-center">
+				<h5>概况介绍</h5>
+				<div style="width: 100%" class="text-left">
 					<?php echo $table_data?>
+					<?php echo $pageslink?>
+				</div>
+			</div>
+			<div class="col-sm-5 col-md-5 text-center">
+				<h5>工程概况图片</h5>
+				<div class="thumbnail">
+					<img
+						src="<?php echo $pic_path?>"
+						alt="Picture Lost? Check directory: <?php echo $pic_path?>"
+						style="height: 220px; width: 100%">
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-4 col-md-4 btn text-center">
-			<h4>建造状况图片</h4>
-			<div class="thumbnail">
-				<img src="<?php echo $pic_path?>"
-					alt="Picture Lost? Check directory: <?php echo $pic_path?>"
-					style="height: 320px; width: 100%">
-			</div>
-		</div>
 	</div>
-	
+
 	<div class="panel-footer">
 		<div class="pull-left">
 			<div class="btn-group">

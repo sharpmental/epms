@@ -9,7 +9,7 @@ class Alarm extends MY_Admin_Controller{
 		
 		$this->view ( 'index', array (
 				'require_js' => true,
-				'show_sidemenu' => true
+				'show_sidemenu' => false,
 		) );
 	}
 	
@@ -17,14 +17,14 @@ class Alarm extends MY_Admin_Controller{
 		$this->check_priv ();
 		$this->view ( 'add', array (
 				'require_js' => true,
-				'show_sidemenu' => true));
+				'show_sidemenu' => false,));
 	}
 	
 	function modify(){
 		$this->check_priv ();
 		$this->view ( 'modify', array (
 				'require_js' => true,
-				'show_sidemenu' => true));
+				'show_sidemenu' => false,));
 	}
 	
 	function delete(){
