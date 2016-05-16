@@ -494,13 +494,23 @@ class MY_Admin_Controller extends MY_Member_Controller {
 		
 		$this->load->view ( $this->page_data ['folder_name'] . '/header', $pageview_data );
 		
-		if (isset ( $sub_page_data ['show_sidemenu'] ) && ! $sub_page_data ['show_sidemenu']) // default view is with side menu
+		if (isset ( $sub_page_data ['baidumap'] ) && $sub_page_data ['baidumap'])
+			$this->load->view ( $this->page_data ['folder_name'] . '/index_baidumap', $pageview_data );
+		elseif (isset ( $sub_page_data ['show_sidemenu'] ) && ! $sub_page_data ['show_sidemenu']) 
 			$this->load->view ( $this->page_data ['folder_name'] . '/index_nosidemenu', $pageview_data );
 		else
 			$this->load->view ( $this->page_data ['folder_name'] . '/index', $pageview_data );
 		
 		$this->load->view ( $this->page_data ['folder_name'] . '/footer', $pageview_data );
 	}
+	/**
+	 * What it do
+	 	*
+	 	* @param
+	 	*
+	 	* @return
+	 	*
+	 	*/
 	final public function reload_all_cache() {
 		$menus = array ();
 		$datas = $this->Module_menu_model->select ( '', '*', 10000, ' menu_id asc' );

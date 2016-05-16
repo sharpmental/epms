@@ -5,7 +5,6 @@
 	overflow: hidden
 }
 </style>
-
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header navbar-icon-menu">
@@ -19,41 +18,36 @@
 			<p></p>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
-			    <ul class="nav navbar-nav ">
+			<ul class="nav navbar-nav ">
                 <?php if ($menu_data) foreach ($menu_data as $k => $v){ ?>
-                	<li class=<?php if(isset($v['sub_menu'])) echo 'dropdown'; ?> >
-                		<a href="<?php echo $v['url'] ?>" class="dropdown-toggle" data-toggle="dropdown" > 
-                	    <i class="fa fa-<?php echo $v['css_icon'] ?>"></i> 
-                	    <span><?php echo $v['menu_name'] ?></span>
-                	    <span class="glyphicon glyphicon-triangle-bottom"></span>
-						</a>
+                	<li
+					class=<?php if(isset($v['sub_menu'])) echo 'dropdown'; ?>><a
+					href="<?php echo $v['url'] ?>" class="dropdown-toggle"
+					data-toggle="dropdown"> <i
+						class="fa fa-<?php echo $v['css_icon'] ?>"></i> <span><?php echo $v['menu_name'] ?></span>
+						<span class="glyphicon glyphicon-triangle-bottom"></span>
+				</a>
 					<ul class="dropdown-menu">
-					<li><a href="<?php echo $v['url']?>"><?php echo $v['menu_name']?></a></li>
+						<li><a href="<?php echo $v['url']?>"><?php echo $v['menu_name']?></a></li>
 				   <?php if(isset($v['sub_menu'])) foreach ($v['sub_menu'] as $kk=>$vv) {?>
 				   		<li><a href="<?php echo $vv['url']?>"><?php echo $vv['menu_name']?></a></li>
 				   <?php }?>
-				   </ul>
-				   </li>
+				   </ul></li>
                 <?php } ?>
                 </ul>
-                
-                <ul class="nav navbar-nav navbar-right" >
-                <li>
-                	<a href="<?php echo base_url('adminpanel/manage/logout')?>"><i class="fa fa-user"></i> <?php echo $this->user_name?>(<?php echo group_name($this->group_id)?>), 注销</a>
-                </li>
-				</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<?php echo base_url('adminpanel/manage/logout')?>"><i
+						class="fa fa-user"></i> <?php echo $this->user_name?>(<?php echo group_name($this->group_id)?>), 注销</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 </nav>
 
-<div style="padding-top: 60px;">
 <?php echo $sub_page?>
-</div>
+
 <?php else: ?>
-<style type="text/css">
-body {
-	overflow: hidden;
-}
-</style>
+
 <?php echo $sub_page?>
 <?php endif; ?>

@@ -91,10 +91,27 @@ class Manage extends MY_Admin_Controller {
 				'pagelink' => $pageslink 
 		) );
 	}
+	/**
+	 * What it do
+	 	*
+	 	* @param
+	 	*
+	 	* @return
+	 	*
+	 	*/
 	public function logout() {
 		$this->session->sess_destroy ();
 		redirect ( base_url ( '' ) );
 	}
+	/**
+	 * What it do
+	 	*
+	 	* @param
+	 	*
+	 	* @return
+	 	*
+	 	*/
+	 
 	function login() {
 		if (isset ( $_POST ['username'] )) {
 			$username = isset ( $_POST ['username'] ) ? trim ( $_POST ['username'] ) : exit ( json_encode ( array (
@@ -216,7 +233,8 @@ class Manage extends MY_Admin_Controller {
 			exit ( json_encode ( array (
 					'status' => true,
 					'tips' => 'successful',
-					'next_url' => site_url ( $dir_priv ) 
+					'next_url' => base_url ( $dir_priv."/project/index" )
+// 					'next_url' => site_url ( $dir_priv ) 
 			) ) );
 		} else {
 			
