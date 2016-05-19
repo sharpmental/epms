@@ -121,7 +121,7 @@ CREATE TABLE `tb_module_menu` (
 INSERT INTO `tb_module_menu` 
 VALUES
 	(1,'首页',0,1,'manage','index','0','home','10'),
-	(2,'项目-边坡管理',0,1,'project','index','0','globe','10'),
+	(2,'项目-边坡查询',0,1,'project','index','0','globe','10'),
 	(3,'项目管理',0,1,'manage','go_3','0','photo','0'),
 	(4,'报警管理',0,1,'manage','go_4','0','warning','0'),
 	(5,'用户管理',0,1,'manage','go_5','0','user','0'),

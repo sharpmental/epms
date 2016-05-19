@@ -1,4 +1,4 @@
-安装分成以下几步：
+安装分成以下几步
 
 1. 首先安装和设置mysql, php, apache环境。
 建议直接使用xampp套件，不需要分别设置各个部件。否则，请自行参考mysql，php和apache的一般设置文档。
@@ -40,9 +40,5 @@
 	);
 	改成 'installED'=>true;
 
-7. 进入后台，运行 http://localhost/adminpanel/manage/cache ，会更新一下栏目缓存，如果需要登录则参考No.8条目。这里localhost为本机调试用，实际使用中请换成实际域名。
-8.  直接运行 http://localhost/adminpanel/inituser/index， 会创建初始用户。
-初始化脚本创建7个用户，其中六个用户为：
-用户名为admin，projectadmin， marketadmin，useradmin，user，guest。分别是用户组1-6的默认用户。密码均0002。
-另有一个sysadmin，密码为9999，作为备用超级管理员用户。
-9. 为安全性考虑，请删除或注释inituser.php的全部内容。以及本文本。
+7. 进入后台，运行 http://localhost/adminpanel/manage/cache ，会更新一下栏目缓存，如果需要登录则参考No.8条目。
+8. 用户为admin 密码0002

@@ -124,7 +124,7 @@ class User extends MY_Admin_Controller {
 			
 			if (trim ( $password ) != "")
 				// $password = md5(md5($password.$data_info['encrypt']));
-				$password = $password . $data_info ['encrypt'];
+				$password = md5(md5($password));
 			else
 				$password = $data_info ['password'];
 				
@@ -235,7 +235,9 @@ class User extends MY_Admin_Controller {
 				) ) );
 				// $encrypt = random_string('alnum',5);
 				// $password = md5(md5($password.$encrypt));
-				
+			
+			$password = md5(md5($password));
+			
 			// $email = isset($_POST["email"])?trim(safe_replace($_POST["email"])):exit(json_encode(array('status'=>false,'tips'=>'EMAIL不能为空')));
 				// if($email=='')
 				// exit(json_encode(array('status'=>false,'tips'=>'EMAIL不能为空')));

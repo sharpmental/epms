@@ -19,6 +19,7 @@ require.config({
         "cookie":"lib/jquery.cookie",
         "highcharts":"highchart/js/highcharts",
         "pano":"pano/pano2vr_player",
+        "bootstrap-tree":"lib/bootstrap-treeview"
     },
     shim: {
         "jquery-ui": {

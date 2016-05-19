@@ -151,9 +151,10 @@ class Manage extends MY_Admin_Controller {
 						'tips' => ' 用户名或密码不正确' 
 				) ) );
 				
-				// $password = md5(md5(trim($_POST['password']).$r['encrypt']));
-			$password = trim ( $_POST ['password'] );
-			
+//          $password = md5(md5(trim($_POST['password']).$r['encrypt']));
+// 			$password = trim ( $_POST ['password'] );
+			$password = md5(md5(trim($_POST['password'])));
+				
 			$ip = $this->input->ip_address ();
 			if (isset ( $r ['operator_pwd'] ) && $r ['operator_pwd'] != $password) {
 				if ($rtime && $rtime ['failure_times'] < $maxloginfailedtimes) {
