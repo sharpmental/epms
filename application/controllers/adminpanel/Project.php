@@ -193,6 +193,7 @@ class Project extends MY_Admin_Controller {
 				) );
 				if (! isset ( $s ) || ! $s)
 					exit ( "Can not find the project, or you are not authorized to access this project!" );
+				$id = $s['slop_id'];
 			} else
 				exit ( "Can not find the project, or you are not authorized to access this project!" );
 		} else {
@@ -213,6 +214,8 @@ class Project extends MY_Admin_Controller {
 				"user_id" => $this->user_id 
 		) );
 		
+		$json_array = array();
+		
 		if (isset ( $p ) && $p) {
 			// build information table
 			$table_data = "";
@@ -221,21 +224,37 @@ class Project extends MY_Admin_Controller {
 			// $table_data = $table_data . '<a href="" class="list-group-item active">' . "边坡名称:&nbsp" . $s ['slop_name'] . '</a>';
 			
 			$d = $this->Device_model->select ( array (
-					'slop_id' => $s ['slop_id'] 
+					'slop_id' => $id 
 			) );
+			
+			//build json array
+			$json_array[$id] ['text'] = $id.'_'.$s['slop_name'];
+			$json_array[$id] ['href'] = '';
+			$json_array[$id] ['tags'] = 0;
+			$json_array[$id] ['nodes'] = array();
+			
 			if (isset ( $d ) && $d) {
 				foreach ( $d as $kk => $vv ) {
 					$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info' ) . "/" . $vv ['device_id'] . '" class="list-group-item">' . "设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp" . $vv ['device_name'] . '</a>';
+					$node = array(
+							'text' => $vv['device_id'],
+							'href' => '',
+							'tags' => 0
+					);
+					
+					$json_array[$id] ['nodes'] [] = $node;
+					$json_array[$id] ['tags'] ++;
 				}
 			}
 		}
 		
-		$project_data = array ();
+		$json_table = json_encode($json_array);
 		
 		$this->view ( 'slop_info', array (
 				'require_js' => true,
 				'show_sidemenu' => false,
 				'table_data' => $table_data,
+				'json_table' => $json_table,
 				'slop' => $s 
 		) );
 	}

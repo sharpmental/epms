@@ -2,8 +2,8 @@
 
 <div class="panel panel-default grid">
 	<div class='panel-heading row'>
-		<h4 class="col-sm-2 col-md-2">项目概况</h4>
-		<div class="col-sm-8 col-md-8 ">
+		<h4 class="col-sm-2 col-md-2">建设情况</h4>
+		<div class="col-sm-7 col-md-7 ">
 			<div class="btn-group btn-group-justified" role="group"
 				aria-label="...">
 				<div class="btn-group" role="group">
@@ -28,17 +28,17 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
+
 	<div class="panel-body text-center">
 		<div class="text-left">
 			<h5>
 				<span class="glyphicon glyphicon-info-sign"></span>&nbsp项目ID：<?php echo $project_id?></h5>
 		</div>
-		<div class="col-sm-7 col-md-7 btn text-center">
+		<div class="col-sm-4 col-md-4 btn text-center">
 			<div class="">
-				<h4>概况介绍</h4>
-				<pre class="text-left"><h4><?php echo $information?></h4></pre>
+				<h4>建造情况</h4>
+				<pre><h5 class="text-left"><?php echo $information?></h5></pre>
 			</div>
 			<div>
 				<div class="list-group text-left">
@@ -47,7 +47,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-4 col-md-4 btn text-center">
+		<div class="col-sm-6 col-md-6 btn text-center">
 			<h4>建造状况图片</h4>
 			<div class="thumbnail">
 				<img src="<?php echo $pic_path?>"
@@ -56,26 +56,19 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="panel-footer">
 		<div class="pull-left">
-			<div class="btn-group">
-				<?php aci_ui_a($folder_name,'project','add_project/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-plus"></span> 新增项目')?>
-            	<?php aci_ui_a($folder_name,'project','modify_project/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-pencil"></span> 修改项目')?>
-            	<!-- <?php aci_ui_a($folder_name,'project','delete_project/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-remove"></span> 删除项目')?> -->
-            	
-			</div>
 			<div class='btn-group' role="group">
-			<?php aci_ui_a($folder_name,'project','construct_info/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-road"></span> 建造情况')?>
-            <?php aci_ui_a($folder_name,'project','index','',' class="btn btn-default"','<span class="glyphicon glyphicon-map-marker"></span> 地图查询')?>
-            </div>
-            <div class='btn-group' role="group">
-            <?php aci_ui_a($folder_name,'project','general_info','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
-            </div>
+				<?php aci_ui_a($folder_name,'slop','add_slop/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 新建边坡')?>
+				<?php aci_ui_a($folder_name,'project','general_info/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+            	</div>
 		</div>
 	</div>
 </div>
 
-<script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
+<script language="javascript" type="text/javascript"> 	
+	var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
-    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/general_info.js']); </script>
+    
+    require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/construct_info.js']); </script>

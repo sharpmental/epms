@@ -38,7 +38,7 @@
 		<div class="col-sm-4 col-md-4 btn text-center">
 			<div class="">
 				<h4>建造情况</h4>
-				<h4 class="well text-left"><?php echo $information?></h4>
+				<pre><h4 class="text-left"><?php echo $information?></h4></pre>
 			</div>
 			<div>
 				<div class="list-group text-left">
