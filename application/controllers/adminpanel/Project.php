@@ -109,8 +109,8 @@ class Project extends MY_Admin_Controller {
 				) );
 				if (isset ( $s ) && $s) {
 					$project_data [] = $s;
-					if($s['project_id'] == $id)
-						$information = $s['project_description'];
+					if ($s ['project_id'] == $id)
+						$information = $s ['project_description'];
 				}
 			}
 			
@@ -193,7 +193,7 @@ class Project extends MY_Admin_Controller {
 				) );
 				if (! isset ( $s ) || ! $s)
 					exit ( "Can not find the project, or you are not authorized to access this project!" );
-				$id = $s['slop_id'];
+				$id = $s ['slop_id'];
 			} else
 				exit ( "Can not find the project, or you are not authorized to access this project!" );
 		} else {
@@ -214,7 +214,7 @@ class Project extends MY_Admin_Controller {
 				"user_id" => $this->user_id 
 		) );
 		
-		$json_array = array();
+		$json_array = array ();
 		
 		if (isset ( $p ) && $p) {
 			// build information table
@@ -227,28 +227,33 @@ class Project extends MY_Admin_Controller {
 					'slop_id' => $id 
 			) );
 			
-			//build json array
-			$json_array[$id] ['text'] = $id.'_'.$s['slop_name'];
-			$json_array[$id] ['href'] = '';
-			$json_array[$id] ['tags'] = 0;
-			$json_array[$id] ['nodes'] = array();
+			// build json array
+			$jsa = array ();
+			$jsa ['text'] = '边坡名称：' . $s ['slop_name'];
+			$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' . $s ['slop_id'] );
+			$jsa ['tags'] = 0;
+			$jsa ['backColor'] = 'lightblue';
+			$jsa ['icon'] = "glyphicon glyphicon-road";
+			$jsa ['nodes'] = array ();
 			
 			if (isset ( $d ) && $d) {
 				foreach ( $d as $kk => $vv ) {
 					$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info' ) . "/" . $vv ['device_id'] . '" class="list-group-item">' . "设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp" . $vv ['device_name'] . '</a>';
-					$node = array(
-							'text' => $vv['device_id'],
-							'href' => '',
-							'tags' => 0
+					$node = array (
+							'text' => '设备名称: ' . $vv ['device_name'],
+							'href' => base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $vv ['device_id'] ),
+							'tags' => 0,
+							'icon' => 'glyphicon glyphicon-cog' 
 					);
 					
-					$json_array[$id] ['nodes'] [] = $node;
-					$json_array[$id] ['tags'] ++;
+					$jsa ['nodes'] [] = $node;
+					$jsa ['tags'] ++;
 				}
 			}
+			$json_array [] = $jsa;
 		}
 		
-		$json_table = json_encode($json_array);
+		$json_table = json_encode ( $json_array );
 		
 		$this->view ( 'slop_info', array (
 				'require_js' => true,
@@ -276,27 +281,47 @@ class Project extends MY_Admin_Controller {
 		$project_id = $id;
 		
 		if ($id == '0') { // if not specify any project, just choose one
-			$p = $this->Project_user_model->get_one ( array (
+			$pu = $this->Project_user_model->get_one ( array (
 					'user_id' => $this->user_id 
 			) );
 		} else {
-			$p = $this->Project_user_model->get_one ( array (
+			$pu = $this->Project_user_model->get_one ( array (
 					'user_id' => $this->user_id,
 					'project_id' => $id 
 			) );
 		}
 		$pic = "";
-		if (isset ( $p ) && $p) {
-			$project_id = $p ['project_id'];
-			$s = $this->Project_model->get_one ( array (
+		
+		// build json array
+		$json_array = array ();
+		$jsa = array ();
+		
+		if (isset ( $pu ) && $pu) {
+			$project_id = $pu ['project_id'];
+			$p = $this->Project_model->get_one ( array (
 					"project_id" => $project_id 
 			) );
-			if (isset ( $s ) && $s) {
-				$information = $s ['construction_char'];
-				$pic = $s ['construction_picture_path'];
+			if (isset ( $p ) && $p) {
+				$information = $p ['construction_char'];
+				$pic = $p ['construction_picture_path'];
 			}
+			
+			$jsa ['text'] = '项目名称：' . $p ['project_name'];
+			$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/general_info/' . $p ['project_id'] );
+			$jsa ['tags'] = 0;
+			$jsa ['backColor'] = 'lightblue';
+			$jsa ['icon'] = "glyphicon glyphicon-tower";
+			$jsa ['nodes'] = array ();
+			
 		} else {
 			$information = "无法找到对应项目，或者是你无权访问此项目。";
+		
+			$jsa ['text'] = '项目名称：' . 'NA';
+			$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/general_info/' );
+			$jsa ['tags'] = 0;
+			$jsa ['backColor'] = 'lightblue';
+			$jsa ['icon'] = "glyphicon glyphicon-tower";
+			$jsa ['nodes'] = array ();
 		}
 		
 		$slop = $this->Slop_model->select ( array (
@@ -306,12 +331,24 @@ class Project extends MY_Admin_Controller {
 		// build table
 		$table_data = "";
 		foreach ( $slop as $k => $v ) {
-			$del_link = "javascript:if(confirm('确定要删除吗'))window.location.href='" . base_url ( $this->page_data ['folder_name'] . '/slop/delete_slop' ) . "/" . $v ['slop_id'] . "'";
-			$item = '<li class="list-group-item">' . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $v ['slop_id'] . '" class="btn btn-default">' . "边坡名称: " . $v ['slop_name'] . '</a>' . 
-			// '<a class="btn btn-default pull-right xbtn-delete" href="' . $del_link . '">删除</a>' .
-			'<a class="btn btn-default pull-right" href="' . base_url ( $this->page_data ['folder_name'] . '/slop/modify_slop' ) . "/" . $v ['slop_id'] . '">修改</a>' . '</li>';
-			$table_data = $table_data . $item;
+// 			$del_link = "javascript:if(confirm('确定要删除吗'))window.location.href='" . base_url ( $this->page_data ['folder_name'] . '/slop/delete_slop' ) . "/" . $v ['slop_id'] . "'";
+// 			$item = '<li class="list-group-item">' . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $v ['slop_id'] . '" class="btn btn-default">' . "边坡名称: " . $v ['slop_name'] . '</a>' . 
+// 			// '<a class="btn btn-default pull-right xbtn-delete" href="' . $del_link . '">删除</a>' .
+// 			'<a class="btn btn-default pull-right" href="' . base_url ( $this->page_data ['folder_name'] . '/slop/modify_slop' ) . "/" . $v ['slop_id'] . '">修改</a>' . '</li>';
+// 			$table_data = $table_data . $item;
+
+			$node = array (
+					'text' => '边坡名称: ' . $v ['slop_name'],
+					'href' => base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' . $v ['slop_id'] ),
+					'tags' => 0,
+					'icon' => 'glyphicon glyphicon-road'
+			);
+				
+			$jsa ['nodes'] [] = $node;
+			$jsa ['tags'] ++;
 		}
+		$json_array [] = $jsa;
+		$json_table = json_encode ( $json_array );
 		
 		// display page
 		$this->view ( 'construct_info', array (
@@ -320,7 +357,8 @@ class Project extends MY_Admin_Controller {
 				'table_data' => $table_data,
 				'information' => $information,
 				'project_id' => $project_id,
-				'pic_path' => $pic 
+				'pic_path' => $pic,
+				'json_table' => $json_table
 		) );
 	}
 	/**
@@ -349,43 +387,87 @@ class Project extends MY_Admin_Controller {
 			$this->show_error ( "无法找到此设备，或你无权访问此设备所在项目。" );
 		
 		$device_id = $d ['device_id']; // incase we ramdonly choose one device
+		
 		$s = $this->Slop_model->get_one ( array (
 				'slop_id' => $d ['slop_id'] 
 		) );
 		if (! isset ( $s ) || ! $s) {
-			$idel = true;
+			$solo = true;
 			$note = "当前设备不属于任何项目。";
 		} else {
-			$idel = false;
+			$solo = false;
 			$note = "";
 		}
+		// build json array
+		$jsa = array ();
 		
-		if (! $idel) {
+		if (! $solo) {
 			$p = $this->Project_user_model->get_one ( array (
 					'project_id' => $s ['project_id'],
 					'user_id' => $this->user_id 
 			) );
 			if (! isset ( $p ) || ! $p)
 				$this->show_error ( "你无权访问此设备所在项目！" );
+				
+			$jsa ['text'] = '边坡名称：' . $s ['slop_name'];
+			$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' . $s ['slop_id'] );
+			$jsa ['tags'] = 0;
+			$jsa ['backColor'] = 'lightblue';
+			$jsa ['icon'] = "glyphicon glyphicon-road";
+			$jsa ['nodes'] = array ();
 			
 			$ls = $this->Device_model->select ( array (
 					'slop_id' => $s ['slop_id'] 
 			) );
+			
+			foreach ( $ls as $k => $v ) {
+				$node = array (
+						'text' => '设备名称: ' . $v ['device_name'],
+						'href' => base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $v ['device_id'] ),
+						'tags' => 0,
+						'icon' => 'glyphicon glyphicon-cog' 
+				);
+				
+				$jsa ['nodes'] [] = $node;
+				$jsa ['tags'] ++;
+			}
 		} else {
+			$jsa ['text'] = '边坡名称：' . 'NA';
+			$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' );
+			$jsa ['tags'] = 0;
+			$jsa ['backColor'] = 'lightblue';
+			$jsa ['icon'] = "glyphicon glyphicon-road";
+			$jsa ['nodes'] = array ();
+			
 			$ls = $d;
+			
+			$node = array (
+					'text' => '设备名称: ' . $d ['device_name'],
+					'href' => base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $d ['device_id'] ),
+					'tags' => 0,
+					'icon' => 'glyphicon glyphicon-cog'
+			);
+			
+			$jsa ['nodes'] [] = $node;
+			$jsa ['tags'] ++;
 		}
+		$json_array [] = $jsa;
+		
 		$d_pic = $d ['device_picture_path'];
 		$i_pic = $d ['install_picture_path'];
+		$json_table = json_encode ( $json_array );
+		
 		$this->view ( 'device_info', array (
 				'require_js' => true,
 				'show_sidemenu' => false,
-				'idel' => $idel,
+				'solo' => $solo,
 				'note' => $note,
 				'slop' => $s,
 				'device_list' => $ls,
 				'd_pic' => $d_pic,
 				'i_pic' => $i_pic,
-				'device_id' => $device_id 
+				'device_id' => $device_id,
+				'json_table' => $json_table
 		) );
 	}
 	/**
@@ -400,7 +482,7 @@ class Project extends MY_Admin_Controller {
 		$this->check_priv ();
 		$this->view ( 'alarm', array (
 				'require_js' => true,
-				'show_sidemenu' => false, 
+				'show_sidemenu' => false 
 		) );
 	}
 	/**
@@ -434,14 +516,17 @@ class Project extends MY_Admin_Controller {
 				'slop_id' => $d ['slop_id'] 
 		) );
 		if (! isset ( $s ) || ! $s) {
-			$idel = true;
+			$solo = true;
 			$note = "This device does not belong to any slop.";
 		} else {
-			$idel = false;
+			$solo = false;
 			$note = "";
 		}
 		
-		if (! $idel) { // check permission
+		// build json array
+		$jsa = array ();
+		
+		if (! $solo) { // check permission
 			$p = $this->Project_user_model->get_one ( array (
 					'project_id' => $s ['project_id'],
 					'user_id' => $this->user_id 
@@ -449,12 +534,52 @@ class Project extends MY_Admin_Controller {
 			if (! isset ( $p ) || ! $p)
 				$this->show_error ( "你无权访问此设备所在项目。" );
 			
+				$jsa ['text'] = '边坡名称：' . $s ['slop_name'];
+				$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' . $s ['slop_id'] );
+				$jsa ['tags'] = 0;
+				$jsa ['backColor'] = 'lightblue';
+				$jsa ['icon'] = "glyphicon glyphicon-road";
+				$jsa ['nodes'] = array ();
+				
 			$ls = $this->Device_model->select ( array (
 					'slop_id' => $s ['slop_id'] 
 			) );
+			
+			
+			
+			foreach ( $ls as $k => $v ) {
+				$node = array (
+						'text' => '设备名称: ' . $v ['device_name'],
+						'href' => base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $v ['device_id'] ),
+						'tags' => 0,
+						'icon' => 'glyphicon glyphicon-cog'
+				);
+			
+				$jsa ['nodes'] [] = $node;
+				$jsa ['tags'] ++;
+			}
+				
 		} else {
+			$jsa ['text'] = '边坡名称：' . 'NA';
+			$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' );
+			$jsa ['tags'] = 0;
+			$jsa ['backColor'] = 'lightblue';
+			$jsa ['icon'] = "glyphicon glyphicon-road";
+			$jsa ['nodes'] = array ();
+			
 			$ls = $d;
+			
+			$node = array (
+					'text' => '设备名称: ' . $d ['device_name'],
+					'href' => base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $d ['device_id'] ),
+					'tags' => 0,
+					'icon' => 'glyphicon glyphicon-cog'
+			);
+				
+			$jsa ['nodes'] [] = $node;
+			$jsa ['tags'] ++;
 		}
+		$json_array [] = $jsa;
 		
 		// get the file information
 		$dd = $this->Device_data_model->get_one ( array (
@@ -540,10 +665,12 @@ class Project extends MY_Admin_Controller {
 		}
 		$title = implode ( ',', $title );
 		
+		$json_table = json_encode ( $json_array );
+		
 		$this->view ( 'data_display', array (
 				'require_js' => true,
 				'show_sidemenu' => false,
-				'idel' => $idel,
+				'solo' => $solo,
 				'note' => $note,
 				'slop' => $s,
 				'device_list' => $ls,
@@ -553,7 +680,8 @@ class Project extends MY_Admin_Controller {
 				'row1' => $row1,
 				'row2' => $row2,
 				'title' => $title,
-				'mark' => $mark 
+				'mark' => $mark,
+				'json_table' => $json_table,
 		) );
 	}
 	/**
@@ -620,17 +748,37 @@ class Project extends MY_Admin_Controller {
 		$info_table_data = '';
 		// $this->table->generate ( $information );
 		
+		$json_array = array ();
+		
 		foreach ( $project_data as $k => $v ) {
-			$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) . "/" . $v ['project_id'] . '" class="list-group-item active">' . "项目名称:&nbsp" . $v ['project_name'] . '</a>';
+// 			$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) . "/" . $v ['project_id'] . '" class="list-group-item active">' . "项目名称:&nbsp" . $v ['project_name'] . '</a>';
+			
+			$jsa ['text'] = '项目名称：' . $v ['project_name'];
+			$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/list_project/' . $v ['project_id'] );
+			$jsa ['tags'] = 0;
+			$jsa ['backColor'] = 'lightblue';
+			$jsa ['icon'] = "glyphicon glyphicon-tower";
+			$jsa ['nodes'] = array ();
 			
 			$s = $this->Slop_model->select ( array (
 					'project_id' => $v ['project_id'] 
 			) );
 			if (isset ( $s ) && $s) {
 				foreach ( $s as $kk => $vv ) {
-					$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $vv ['slop_id'] . '" class="list-group-item">' . "边坡名称:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" . $vv ['slop_name'] . '</a>';
+// 					$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $vv ['slop_id'] . '" class="list-group-item">' . "边坡名称:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" . $vv ['slop_name'] . '</a>';
+				
+					$node = array (
+							'text' => '边坡名称: ' . $vv ['slop_name'],
+							'href' => base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' . $vv ['slop_id'] ),
+							'tags' => 0,
+							'icon' => 'glyphicon glyphicon-road'
+					);
+					
+					$jsa ['nodes'] [] = $node;
+					$jsa ['tags'] ++;
 				}
 			}
+			$json_array [] = $jsa;
 			
 			if ($v ['project_id'] == $id) {
 				
@@ -677,13 +825,15 @@ class Project extends MY_Admin_Controller {
 			}
 		}
 		
+		$json_table = json_encode ( $json_array );
 		// display page
 		$this->view ( 'list_project', array (
 				'require_js' => true,
 				'show_sidemenu' => false,
 				'table_data' => $table_data,
 				'info_table' => $info_table_data,
-				'project_id' => $id 
+				'project_id' => $id,
+				'json_table' => $json_table
 		) );
 	}
 	/**
@@ -697,7 +847,7 @@ class Project extends MY_Admin_Controller {
 	function add_project() {
 		$this->view ( 'add_project', array (
 				'require_js' => true,
-				'show_sidemenu' => false, 
+				'show_sidemenu' => false 
 		) );
 	}
 	/**

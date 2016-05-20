@@ -39,11 +39,11 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-3 btn text-center">
 				<h4>设备列表</h4>
-				<div class="list-group text-left">
-					<a href="" class="list-group-item active"> <?php if (!$idel) echo '边坡ID:'.$slop['slop_id']; else echo $note ?> </a> 
+				<!-- div class="list-group text-left">
+					<a href="" class="list-group-item active"> <?php if (!$solo) echo '边坡ID:'.$slop['slop_id']; else echo $note ?> </a> 
 					<?php
 					
-					if (! $idel) {
+					if (! $solo) {
 						foreach ( $device_list as $k => $v ) {
 							echo '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $v ['device_id'] ) . '" class="list-group-item"> 设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp' . $v ['device_name'] . '</a> ';
 						}
@@ -51,7 +51,8 @@
 						echo '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $device_list ['device_id'] ) . '" class="list-group-item"> 设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp' . $device_list ['device_name'] . '</a>';
 					}
 					?>
-				</div>
+				</div -->
+				<div id="treeview1" class="text-left"></div>
 			</div>
 			<div class="col-sm-8 col-md-8 text-center">
 				<h4>数据表格</h4>
@@ -87,4 +88,5 @@
     var title2 = "<?php echo $title?>";
     var mark1 = "<?php echo $mark[1]?>";
     var mark2 = "<?php echo $mark[2]?>"; 
+    var defaultData = '<?php echo $json_table ?>';
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/data_display.js']); </script>

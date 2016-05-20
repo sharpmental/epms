@@ -57,7 +57,8 @@ require.config({
             exports: "$",
             deps: ['jquery']
         },
-        "highcharts":['jquery']
+        "highcharts":['jquery'],
+        "bootstrap-tree":['jquery']
     }
 
 });

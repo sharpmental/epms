@@ -40,11 +40,11 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-3 text-center">
 				<h4>仪器列表</h4>
-				<div class="list-group text-left">
-					<a href="" class="list-group-item active"> <?php if (!$idel) echo '边坡ID:'.$slop['slop_id']; else echo $note ?> </a> 
+				<!-- div class="list-group text-left">
+					<a href="" class="list-group-item active"> <?php if (!$solo) echo '边坡ID:'.$slop['slop_id']; else echo $note ?> </a> 
 					<?php
 					
-					if (! $idel) {
+					if (! $solo) {
 						foreach ( $device_list as $k => $v ) {
 							if ($v ['device_id'] == $device_id)
 								echo '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $v ['device_id'] ) . '" class="list-group-item list-group-item-info"> 设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp' . $v ['device_name'] . '</a> ';
@@ -55,7 +55,8 @@
 						echo '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $device_list ['device_id'] ) . '" class="list-group-item list-group-item-info"> 设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp' . $device_list ['device_name'] . '</a>';
 					}
 					?>
-				</div>
+				</div -->
+				<div id="treeview1" class="text-left"></div>
 			</div>
 			<div class="col-sm-4 col-md-4 text-center">
 				<h4>仪器图片</h4>
@@ -86,7 +87,7 @@
 		<div class="pull-left">
 			<div class="btn-group">
 				<?php aci_ui_a($folder_name,'project','data_display/'.$device_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-zoom-in"></span> 查看数据')?>
-				<?php aci_ui_a($folder_name,'device','modify/'.$device_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-pencil"></span> 修改设备')?>
+				<!-- <?php aci_ui_a($folder_name,'device','modify/'.$device_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-pencil"></span> 修改设备')?> -->
 				<!-- <?php aci_ui_a($folder_name,'device','delete/'.$device_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-remove"></span> 删除设备')?> -->
 			</div>
 			<div class="btn-group">
@@ -102,6 +103,7 @@
     var id = "<?php echo $device_id?>";
     pano = new pano2vrPlayer("container");
     pano.readConfigUrl("/upload/device_info/"+id+"/thumb_out.xml");
-    
+
+    var defaultData = '<?php echo $json_table ?>';
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/device_info.js']);  
 </script>

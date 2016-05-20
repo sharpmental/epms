@@ -8,23 +8,15 @@
 				aria-label="...">
 				<div class="btn-group" role="group">
 					<a type="button" class="btn btn-primary"
-						href="<?php echo base_url($this->page_data['folder_name'].'/project/general_info')?>">项目概况</a>
+						href="<?php echo base_url($this->page_data['folder_name'].'/project/list_project')?>">项目列表</a>
 				</div>
 				<div class="btn-group" role="group">
 					<a type="button" class="btn btn-success"
-						href="<?php echo base_url($this->page_data['folder_name'].'/project/construct_info')?>">建设情况</a>
+						href="<?php echo base_url($this->page_data['folder_name'].'/slop/index')?>">边坡列表</a>
 				</div>
 				<div class="btn-group" role="group">
 					<a type="button" class="btn btn-info"
-						href="<?php echo base_url($this->page_data['folder_name'].'/project/slop_info')?>">边坡概况</a>
-				</div>
-				<div class="btn-group" role="group">
-					<a type="button" class="btn btn-warning"
-						href="<?php echo base_url($this->page_data['folder_name'].'/project/device_info')?>">仪器数据</a>
-				</div>
-				<div class="btn-group" role="group">
-					<a type="button" class="btn btn-danger"
-						href="<?php echo base_url($this->page_data['folder_name'].'/project/alarm')?>">预警信息</a>
+						href="<?php echo base_url($this->page_data['folder_name'].'/device/index')?>">设备列表</a>
 				</div>
 			</div>
 		</div>
@@ -35,9 +27,10 @@
 	<div class="row">
 		<div class="col-sm-3 col-md-3 text-center ">
 			<h5>项目列表</h5>
-			<div class="list-group text-left">
+			<!-- div class="list-group text-left">
 					<?php echo $table_data?>
-				</div>
+				</div -->
+			<div id="treeview1" class="text-left"></div>
 		</div>
 		<div class="col-sm-4 col-md-4 text-center panel panel-default">
 			<h5>项目信息</h5>
@@ -73,4 +66,5 @@
     var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
     var project_id = "<?php echo $project_id?>";
+    var defaultData = '<?php echo $json_table ?>';
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/list_project.js']); </script>

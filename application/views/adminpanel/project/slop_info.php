@@ -38,11 +38,13 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-3 btn text-center">
 				<h4>边坡概况</h4>
-				<div class="list-group text-left">
+				<!--   div class="list-group text-left">
 					<a href="" class="list-group-item active"><?php echo "边坡名称:&nbsp" . $slop ['slop_name']?></a>
 			<?php echo $table_data?>
+			</div -->
+				<div id="treeview1" class="text-left"></div>
 			</div>
-			</div>
+
 			<div class="col-sm-4 col-md-4 btn text-center">
 				<h4>边坡图片</h4>
 				<div style="width: 100%">
@@ -65,15 +67,17 @@
 	<div class="panel-footer">
 		<div class="pull-left">
 			<div class='btn-group' role="group">
-				<?php aci_ui_a($folder_name,'slop','modify_slop/'.$slop['slop_id'],'',' class="btn btn-default"','<span class="glyphicon glyphicon-pencil"></span> 修改边坡')?>
-            	<!-- <?php aci_ui_a($folder_name,'slop','delete_slop/'.$slop['slop_id'],'',' class="btn btn-default"','<span class="glyphicon glyphicon-remove"></span> 删除边坡')?> -->
-            	</div>
+				<!-- <?php aci_ui_a($folder_name,'slop','modify_slop/'.$slop['slop_id'],'',' class="btn btn-default"','<span class="glyphicon glyphicon-pencil"></span> 修改边坡')?> -->
+				<!-- <?php aci_ui_a($folder_name,'slop','delete_slop/'.$slop['slop_id'],'',' class="btn btn-default"','<span class="glyphicon glyphicon-remove"></span> 删除边坡')?> -->
+			</div>
 			<div class='btn-group' role="group"><?php aci_ui_a($folder_name,'project','construct_info/'.$slop['project_id'],'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
             	</div>
 		</div>
 	</div>
 </div>
 
-<script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
+<script language="javascript" type="text/javascript"> 
+	var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
+    var defaultData = '<?php echo $json_table ?>';
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/slop_info.js']); </script>

@@ -40,12 +40,12 @@
 				<h4>建造情况</h4>
 				<pre><h4 class="text-left"><?php echo $information?></h4></pre>
 			</div>
-			<div>
-				<div class="list-group text-left">
+			
+				<!-- div class="list-group text-left">
 					<li href="#" class="list-group-item active">边坡列表</li>
 					<?php echo $table_data?>
-				</div>
-			</div>
+				</div -->
+			<div id="treeview1" class="text-left"></div>
 		</div>
 		<div class="col-sm-6 col-md-6 btn text-center">
 			<h4>建造状况图片</h4>
@@ -60,7 +60,7 @@
 	<div class="panel-footer">
 		<div class="pull-left">
 			<div class='btn-group' role="group">
-				<?php aci_ui_a($folder_name,'slop','add_slop/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 新建边坡')?>
+				<!-- <?php aci_ui_a($folder_name,'slop','add_slop/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 新建边坡')?> -->
 				<?php aci_ui_a($folder_name,'project','general_info/'.$project_id,'',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
             	</div>
 		</div>
@@ -70,5 +70,5 @@
 <script language="javascript" type="text/javascript"> 	
 	var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
-    
+    var defaultData = '<?php echo $json_table ?>';
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/construct_info.js']); </script>
