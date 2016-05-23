@@ -6,7 +6,7 @@
 }
 </style>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header navbar-icon-menu">
 			<button type="button" class="navbar-toggle collapsed "
@@ -46,7 +46,7 @@
 	</div>
 </nav>
 
-<div style="padding-top: 60px;">
+<div class="container-fluid">
 <?php echo $sub_page?>
 </div>
 <?php else: ?>
