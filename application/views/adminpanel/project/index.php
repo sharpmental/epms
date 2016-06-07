@@ -1,6 +1,5 @@
 <?php defined('IN_ADMIN') or exit('No permission resources.'); ?>
-<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1"
-	style="height: 100%;">
+<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1" style="height: 100%;" >
 
 	<div style="position: absolute; top: 70px; left: 20px; z-index: 100">
 		<div class="form-inline bg-info" style="padding: 8px">

@@ -258,6 +258,46 @@ INSERT INTO `tb_project_user` values (4, 2, 3, 0, '2011-01-01');
 
 /* SLOP****************************************************************************************************************/
 
+/*Table structure for table `tb_slop_info` */
+
+DROP TABLE IF EXISTS `tb_slop_info`;
+CREATE TABLE `tb_slop_info` (
+  `slop_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '边坡ID',
+  `slop_name` varchar(64) NOT NULL COMMENT '边坡名称',
+  `slop_description` varchar(256) DEFAULT NULL COMMENT '边坡描述',
+  `slop_type_id` int(11) COMMENT '边坡形态ID',
+  `start_time` datetime DEFAULT NULL COMMENT '开始时间（边坡建造时间）',
+  `position_char` varchar(128) DEFAULT NULL COMMENT '位置描述',
+  `position_x` varchar(16) DEFAULT '0' COMMENT '坐标',
+  `position_y` varchar(16) DEFAULT '0' COMMENT '坐标',
+  `alarm_model` int(16) DEFAULT '0' COMMENT '报警模式',
+  `slop_type` int(16) DEFAULT '0' COMMENT '边坡类型',
+  `env_id` int(16) DEFAULT '0' COMMENT '环境属性ID',
+  `disease_id` int(16) DEFAULT '0' COMMENT '病害属性ID',
+  `subroadname` varchar(128) DEFAULT '0' COMMENT '所属路段',
+  `stake_bg` varchar(128) COMMENT '起始桩号',
+  `stake_end` varchar(128) COMMENT '终止桩号',  
+  `longtitude` varchar(64) DEFAULT NULL COMMENT '经度（中心位置的经度（°））',
+  `latitude` varchar(64) DEFAULT NULL COMMENT '纬度（中心位置的纬度（°））',
+  `altitude` varchar(64) DEFAULT NULL COMMENT '海拔（中心位置的高度(m)）',
+  `strength_info` varchar(64) DEFAULT NULL COMMENT '强度信息（边坡整体加固描述）',
+  `design_picture_path` varchar(128) DEFAULT NULL COMMENT '设计图路径',
+  `3d_picture_path` varchar(128) DEFAULT NULL COMMENT '3D图路径',
+  `sendset_3d` varchar(128) COMMENT '边坡仪器安装动画（一个链接）',
+  `Maintance_Pic` varchar(128) COMMENT '边坡养护图片',
+  `Build_Pic` varchar(128) COMMENT '边坡施工图片',
+  `video_path` varchar(128) DEFAULT NULL COMMENT '视频路径',
+  `project_id` int(16) DEFAULT '0' COMMENT '项目ID（所属项目ID ）',
+  `rock_num` int(11) COMMENT '岩层数量（层）', 
+  `joint_num` int(11) COMMENT '节理数量（个）',
+  `crack_num` int(11) COMMENT '裂隙数量（个）',
+  `fault_num` int(11) COMMENT '断层数量（个）',
+  `struc_surface_num` int(11) COMMENT '结构面数量（个）',
+  `update_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`slop_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='边坡信息表';
+
+
 /*Table structure for table `tb_customer` */
 
 DROP TABLE IF EXISTS `tb_customer`;
@@ -545,44 +585,6 @@ CREATE TABLE `tb_sensor_base`(
 )ENGINE=MyISAM  DEFAULT CHARSET=utf8  COMMENT='传感器基本信息表';
 
 
-/*Table structure for table `tb_slop_info` */
-
-DROP TABLE IF EXISTS `tb_slop_info`;
-CREATE TABLE `tb_slop_info` (
-  `slop_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '边坡ID',
-  `slop_name` varchar(64) NOT NULL COMMENT '边坡名称',
-  `slop_description` varchar(256) DEFAULT NULL COMMENT '边坡描述',
-  `slop_type_id` int(11) COMMENT '边坡形态ID',
-  `start_time` datetime DEFAULT NULL COMMENT '开始时间（边坡建造时间）',
-  `position_char` varchar(128) DEFAULT NULL COMMENT '位置描述',
-  `position_x` varchar(16) DEFAULT '0' COMMENT '坐标',
-  `position_y` varchar(16) DEFAULT '0' COMMENT '坐标',
-  `alarm_model` int(16) DEFAULT '0' COMMENT '报警模式',
-  `slop_type` int(16) DEFAULT '0' COMMENT '边坡类型',
-  `env_id` int(16) DEFAULT '0' COMMENT '环境属性ID',
-  `disease_id` int(16) DEFAULT '0' COMMENT '病害属性ID',
-  `subroadname` varchar(128) DEFAULT '0' COMMENT '所属路段',
-  `stake_bg` varchar(128) COMMENT '起始桩号',
-  `stake_end` varchar(128) COMMENT '终止桩号',  
-  `longtitude` varchar(64) DEFAULT NULL COMMENT '经度（中心位置的经度（°））',
-  `latitude` varchar(64) DEFAULT NULL COMMENT '纬度（中心位置的纬度（°））',
-  `altitude` varchar(64) DEFAULT NULL COMMENT '海拔（中心位置的高度(m)）',
-  `strength_info` varchar(64) DEFAULT NULL COMMENT '强度信息（边坡整体加固描述）',
-  `design_picture_path` varchar(128) DEFAULT NULL COMMENT '设计图路径',
-  `3d_picture_path` varchar(128) DEFAULT NULL COMMENT '3D图路径',
-  `sendset_3d` varchar(128) COMMENT '边坡仪器安装动画（一个链接）',
-  `Maintance_Pic` varchar(128) COMMENT '边坡养护图片',
-  `Build_Pic` varchar(128) COMMENT '边坡施工图片',
-  `video_path` varchar(128) DEFAULT NULL COMMENT '视频路径',
-  `project_id` int(16) DEFAULT '0' COMMENT '项目ID（所属项目ID ）',
-  `rock_num` int(11) COMMENT '岩层数量（层）', 
-  `joint_num` int(11) COMMENT '节理数量（个）',
-  `crack_num` int(11) COMMENT '裂隙数量（个）',
-  `fault_num` int(11) COMMENT '断层数量（个）',
-  `struc_surface_num` int(11) COMMENT '结构面数量（个）',
-  `update_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`slop_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='边坡信息表';
 
 /*Table structure for table `tb_sns` */
 

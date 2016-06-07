@@ -234,9 +234,11 @@ class Manage extends MY_Admin_Controller {
 			exit ( json_encode ( array (
 					'status' => true,
 					'tips' => 'successful',
-					'next_url' => base_url ( $dir_priv."/project/index" )
+					'next_url' => site_url ( $dir_priv."/project/index" )
 // 					'next_url' => site_url ( $dir_priv ) 
 			) ) );
+
+// 			redirect ( base_url ( $dir_priv."/project/index" ) );
 		} else {
 			
 			$this->admin_loginview ( 'login', array (

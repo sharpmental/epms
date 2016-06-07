@@ -52,7 +52,7 @@ class Project extends MY_Admin_Controller {
 		if ($map_data)
 			$map_json = json_encode ( $map_data, JSON_UNESCAPED_UNICODE );
 		else
-			$map_json = "{}";
+			$map_json = json_encode ( array(), JSON_UNESCAPED_UNICODE );;
 		
 		$this->view ( 'index', array (
 				'require_js' => true,

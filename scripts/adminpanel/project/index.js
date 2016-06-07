@@ -13,10 +13,12 @@ requirejs(
 			$("#search")
 					.click(
 							function(e) {
-								var text = $("#search_text").val()
-										.toLowerCase();
+								var text = $("#search_text").val().toLowerCase();
 								$(".search-item").remove();
-
+								
+								if (map_json.length <= 0)
+									return;
+								
 								if (text != "") {
 									for (i = 0; i < map_json.length; i++) {
 										if (map_json[i].slop_name.toLowerCase()
@@ -78,16 +80,23 @@ var map;
 
 function initialize_baidumap() {
 	marker_array = new Array();
-	xmean = 0.0;
-	ymean = 0.0;
+	xmean = 0;
+	ymean = 0;
 
 	for (i = 0; i < map_json.length; i++) {
 		xmean = xmean + parseFloat(map_json[i].position_x);
 		ymean = ymean + parseFloat(map_json[i].position_y);
 	}
-	xmean = xmean / map_json.length;
-	ymean = ymean / map_json.length
-
+	
+	if (map_json.length != 0){
+		xmean = xmean / map_json.length;
+		ymean = ymean / map_json.length
+	}
+	else{
+		xmean = 120.218;
+		ymean = 30.29;
+	}
+	
 	map = new BMap.Map("pmap"); // 创建地图实例
 	var point = new BMap.Point(xmean, ymean); // 创建点坐标
 	map.centerAndZoom(point, 15); // 初始化地图，设置中心点坐标和地图级别
@@ -97,7 +106,8 @@ function initialize_baidumap() {
 	}));
 	map.addControl(new BMap.ScaleControl());
 	// map.addControl(new BMap.OverviewMapControl());
-
+	map.enableScrollWheelZoom(true);
+	
 	for (i = 0; i < map_json.length; i++) {
 		marker_array[i] = new BMap.Marker(new BMap.Point(
 				map_json[i].position_x, map_json[i].position_y)); // 创建点
@@ -109,8 +119,6 @@ function initialize_baidumap() {
 		map.addOverlay(marker_array[i]); // 将标注添加到地图中
 		addClickHandler(content, marker_array[i]);
 	}
-
-	map.enableScrollWheelZoom(true);
 }
 
 function addClickHandler(content, marker) {
