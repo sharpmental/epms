@@ -35,7 +35,7 @@
 			<h5>
 				<span class="glyphicon glyphicon-info-sign"></span>&nbsp项目ID：<?php echo $project_id?></h5>
 		</div>
-		<div class="col-sm-7 col-md-7 btn text-center">
+		<div class="col-sm-7 col-md-7 text-center">
 			<div class="">
 				<h4>概况介绍</h4>
 				<pre class="text-left"><h4><?php echo $information?></h4></pre>
