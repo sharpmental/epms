@@ -40,7 +40,7 @@
 <div class="panel-footer">
 	<div class="pull-left">
 		<div class='btn-group' role="group">
-			<?php aci_ui_a($folder_name,'project','list_project','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+			<?php aci_ui_a($folder_name,'project','general_info','',' class="btn btn-default"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
         </div>
 	</div>
 </div>

@@ -92,7 +92,7 @@
 			<div class="form-group">
 				<label for="sub_road_name" class="col-sm-2 control-label">所属路段</label>
 				<div class="col-sm-7">
-					<input type="" class="form-control" id="sub_road_name" value="<?php echo $slop['sub_road_name']?>"
+					<input type="" class="form-control" id="sub_road_name" value="<?php echo $slop['subroadname']?>"
 						name="sub_road_name" placeholder="所属路段">
 				</div>
 			</div>
@@ -110,21 +110,6 @@
 						placeholder="终止桩号">
 				</div>
 			</div>
-
-			<div class="form-group">
-				<label for="longtitude" class="col-sm-2 control-label">纬度</label>
-				<div class="col-sm-7">
-					<input type="" class="form-control" id="longtitude" value="<?php echo $slop['longtitude']?>"
-						name="longtitude" placeholder="纬度">
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="latitude" class="col-sm-2 control-label">经度</label>
-				<div class="col-sm-7">
-					<input type="" class="form-control" id="latitude" name="latitude" value="<?php echo $slop['latitude']?>"
-						placeholder="经度">
-				</div>
-			</div>
 			<div class="form-group">
 				<label for="altitude" class="col-sm-2 control-label">海拔高度</label>
 				<div class="col-sm-7">
@@ -133,7 +118,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="strength_info" class="col-sm-2 control-label">加固描述</label>
+				<label for="strength_info" class="col-sm-2 control-label">强度信息</label>
 				<div class="col-sm-7">
 					<input type="" class="form-control" id="strength_info" value="<?php echo $slop['strength_info']?>"
 						name="strength_info" placeholder="加固描述 ">
@@ -195,6 +180,34 @@
 				<div class="col-sm-7">
 					<input type="file" class="form-control" id="video" name="userfile[]" accept="*"
 						placeholder="上传项目图片">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="sendset_3d" class="col-sm-2 control-label">安装视频</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="sendset_3d"
+						name="userfile[]" accept="*" placeholder="视频地址">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="maintance_pic" class="col-sm-2 control-label">养护图</label>
+				<div class="col-sm-7">
+					<input type="file" class="form-control" id="maintance_pic"
+						name="userfile[]" accept="image/*" placeholder="上传项目图片">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="build_pic" class="col-sm-2 control-label">施工图</label>
+				<div class="col-sm-7">
+					<input type="file" class="form-control" id="build_pic"
+						name="userfile[]" accept="image/*" placeholder="上传项目图片">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="video_path" class="col-sm-2 control-label">视频</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="video_path"
+						name="userfile[]" accept="*" placeholder="视频地址">
 				</div>
 			</div>
 			<div class="form-group">

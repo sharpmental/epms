@@ -26,9 +26,23 @@ class Device extends MY_Admin_Controller {
 				"device_id",
 				"device_name",
 				"device_description",
-				"device_type",
+				"type_id",
 				"formular",
 				"slop_id",
+				"sen_id",
+				"group_type",
+				"gptype_id",
+				"unit_id",
+				"unit_num",
+				"sen_locX",
+				"sen_locY",
+				"sen_locZ",
+				"data_id",
+				"acq_id",
+				"horiz_angle",
+				"break_angle",
+				"orient",
+				"wk_ok",
 				"update_timestamp" 
 		) );
 		
@@ -49,7 +63,8 @@ class Device extends MY_Admin_Controller {
 			if (isset ( $p ) && $p) {
 				// add action button
 				$modify_link = base_url ( $this->page_data ['folder_name'] . '/device/modify/' . $v ['device_id'] );
-				$del_link = "javascript:if(confirm('确定要删除吗'))window.location.href='" . base_url ( $this->page_data ['folder_name'] . '/device/delete' ) . "/" . $v ['device_id'] . "'";
+				$del_link = "javascript:if(confirm('确定要删除吗'))window.location.href='" . 
+					base_url ( $this->page_data ['folder_name'] . '/device/delete' ) . "/" . $v ['device_id'] . "'";
 				$v [] = '<a class="btn btn-default" href="' . $modify_link . '">修改</a>';
 				$v [] = '<a class="btn btn-default" href="' . $del_link . '">删除</a>';
 				$t [] = $v;
@@ -62,7 +77,10 @@ class Device extends MY_Admin_Controller {
 				'table_open' => '<table class="table table-hover">' 
 		);
 		$this->table->set_template ( $template );
-		$this->table->set_heading ( '设备编号', '设备名称', '设备描述', '设备类型', '计算公式', '边坡ID', '更新时间', '操作', '操作' );
+		$this->table->set_heading ( '设备编号', '设备名称', '设备类型', '设备描述', '计算公式', '边坡ID', '传感器ID', '分组类型', 
+					'分组ID', '单元编号', '单元通道', '坐标X', '坐标Y', '坐标Z', '原始数据ID', '采集通道ID',
+					'水平面角度', '断面角度', '姿势朝向', '是否正常', '更新时间',
+					'操作', '操作' );
 		
 		$table_data = $this->table->generate ( $t );
 		

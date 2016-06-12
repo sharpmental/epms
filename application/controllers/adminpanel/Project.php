@@ -52,7 +52,8 @@ class Project extends MY_Admin_Controller {
 		if ($map_data)
 			$map_json = json_encode ( $map_data, JSON_UNESCAPED_UNICODE );
 		else
-			$map_json = json_encode ( array(), JSON_UNESCAPED_UNICODE );;
+			$map_json = json_encode ( array (), JSON_UNESCAPED_UNICODE );
+		;
 		
 		$this->view ( 'index', array (
 				'require_js' => true,
@@ -105,7 +106,8 @@ class Project extends MY_Admin_Controller {
 						"start_time",
 						"position_char",
 						"type",
-						"customer_id" 
+						"customer_id",
+						"road_name" 
 				) );
 				if (isset ( $s ) && $s) {
 					$project_data [] = $s;
@@ -148,7 +150,7 @@ class Project extends MY_Admin_Controller {
 				'table_open' => '<table class="table table-hover">' 
 		);
 		$this->table->set_template ( $template );
-		$this->table->set_heading ( '项目编号', '项目名称', '项目描述', '启动时间', '项目地址', '项目类型', "客户编号" );
+		$this->table->set_heading ( '项目编号', '项目名称', '项目描述', '启动时间', '项目地址', '项目类型', "客户编号", "施工高速名称" );
 		// $this->table->set_heading ( '项目编号', '项目名称', '项目描述', '启动时间', '项目地址', '操作', '操作' );
 		
 		$table_data = $this->table->generate ( $project_data );
@@ -238,7 +240,7 @@ class Project extends MY_Admin_Controller {
 			
 			if (isset ( $d ) && $d) {
 				foreach ( $d as $kk => $vv ) {
-					$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info' ) . "/" . $vv ['device_id'] . '" class="list-group-item">' . "设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp" . $vv ['device_name'] . '</a>';
+					// $table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/device_info' ) . "/" . $vv ['device_id'] . '" class="list-group-item">' . "设备名称:&nbsp&nbsp&nbsp&nbsp&nbsp" . $vv ['device_name'] . '</a>';
 					$node = array (
 							'text' => '设备名称: ' . $vv ['device_name'],
 							'href' => base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $vv ['device_id'] ),
@@ -258,7 +260,7 @@ class Project extends MY_Admin_Controller {
 		$this->view ( 'slop_info', array (
 				'require_js' => true,
 				'show_sidemenu' => false,
-				'table_data' => $table_data,
+				// 'table_data' => $table_data,
 				'json_table' => $json_table,
 				'slop' => $s 
 		) );
@@ -312,10 +314,9 @@ class Project extends MY_Admin_Controller {
 			$jsa ['backColor'] = 'lightblue';
 			$jsa ['icon'] = "glyphicon glyphicon-tower";
 			$jsa ['nodes'] = array ();
-			
 		} else {
 			$information = "无法找到对应项目，或者是你无权访问此项目。";
-		
+			
 			$jsa ['text'] = '项目名称：' . 'NA';
 			$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/general_info/' );
 			$jsa ['tags'] = 0;
@@ -331,19 +332,19 @@ class Project extends MY_Admin_Controller {
 		// build table
 		$table_data = "";
 		foreach ( $slop as $k => $v ) {
-// 			$del_link = "javascript:if(confirm('确定要删除吗'))window.location.href='" . base_url ( $this->page_data ['folder_name'] . '/slop/delete_slop' ) . "/" . $v ['slop_id'] . "'";
-// 			$item = '<li class="list-group-item">' . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $v ['slop_id'] . '" class="btn btn-default">' . "边坡名称: " . $v ['slop_name'] . '</a>' . 
-// 			// '<a class="btn btn-default pull-right xbtn-delete" href="' . $del_link . '">删除</a>' .
-// 			'<a class="btn btn-default pull-right" href="' . base_url ( $this->page_data ['folder_name'] . '/slop/modify_slop' ) . "/" . $v ['slop_id'] . '">修改</a>' . '</li>';
-// 			$table_data = $table_data . $item;
-
+			// $del_link = "javascript:if(confirm('确定要删除吗'))window.location.href='" . base_url ( $this->page_data ['folder_name'] . '/slop/delete_slop' ) . "/" . $v ['slop_id'] . "'";
+			// $item = '<li class="list-group-item">' . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $v ['slop_id'] . '" class="btn btn-default">' . "边坡名称: " . $v ['slop_name'] . '</a>' .
+			// // '<a class="btn btn-default pull-right xbtn-delete" href="' . $del_link . '">删除</a>' .
+			// '<a class="btn btn-default pull-right" href="' . base_url ( $this->page_data ['folder_name'] . '/slop/modify_slop' ) . "/" . $v ['slop_id'] . '">修改</a>' . '</li>';
+			// $table_data = $table_data . $item;
+			
 			$node = array (
 					'text' => '边坡名称: ' . $v ['slop_name'],
 					'href' => base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' . $v ['slop_id'] ),
 					'tags' => 0,
-					'icon' => 'glyphicon glyphicon-road'
+					'icon' => 'glyphicon glyphicon-road' 
 			);
-				
+			
 			$jsa ['nodes'] [] = $node;
 			$jsa ['tags'] ++;
 		}
@@ -358,7 +359,7 @@ class Project extends MY_Admin_Controller {
 				'information' => $information,
 				'project_id' => $project_id,
 				'pic_path' => $pic,
-				'json_table' => $json_table
+				'json_table' => $json_table 
 		) );
 	}
 	/**
@@ -383,8 +384,10 @@ class Project extends MY_Admin_Controller {
 					'device_id' => $device_id 
 			) );
 		}
-		if (! isset ( $d ) || ! $d)
+		if (! isset ( $d ) || ! $d){
 			$this->show_error ( "无法找到此设备，或你无权访问此设备所在项目。" );
+			return;		
+		}
 		
 		$device_id = $d ['device_id']; // incase we ramdonly choose one device
 		
@@ -406,9 +409,11 @@ class Project extends MY_Admin_Controller {
 					'project_id' => $s ['project_id'],
 					'user_id' => $this->user_id 
 			) );
-			if (! isset ( $p ) || ! $p)
+			if (! isset ( $p ) || ! $p){
 				$this->show_error ( "你无权访问此设备所在项目！" );
-				
+				return ;
+			}
+			
 			$jsa ['text'] = '边坡名称：' . $s ['slop_name'];
 			$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' . $s ['slop_id'] );
 			$jsa ['tags'] = 0;
@@ -445,7 +450,7 @@ class Project extends MY_Admin_Controller {
 					'text' => '设备名称: ' . $d ['device_name'],
 					'href' => base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $d ['device_id'] ),
 					'tags' => 0,
-					'icon' => 'glyphicon glyphicon-cog'
+					'icon' => 'glyphicon glyphicon-cog' 
 			);
 			
 			$jsa ['nodes'] [] = $node;
@@ -467,7 +472,7 @@ class Project extends MY_Admin_Controller {
 				'd_pic' => $d_pic,
 				'i_pic' => $i_pic,
 				'device_id' => $device_id,
-				'json_table' => $json_table
+				'json_table' => $json_table 
 		) );
 	}
 	/**
@@ -508,8 +513,10 @@ class Project extends MY_Admin_Controller {
 					'device_id' => $device_id 
 			) );
 		}
-		if (! isset ( $d ) || ! $d)
+		if (! isset ( $d ) || ! $d){
 			$this->show_error ( "无法找到此设备，或你无权访问此设备所在项目。" );
+			return;
+		}
 		
 		$device_id = $d ['device_id']; // incase we ramdonly choose one device
 		$s = $this->Slop_model->get_one ( array (
@@ -531,34 +538,33 @@ class Project extends MY_Admin_Controller {
 					'project_id' => $s ['project_id'],
 					'user_id' => $this->user_id 
 			) );
-			if (! isset ( $p ) || ! $p)
+			if (! isset ( $p ) || ! $p){
 				$this->show_error ( "你无权访问此设备所在项目。" );
+				return;
+			}
 			
-				$jsa ['text'] = '边坡名称：' . $s ['slop_name'];
-				$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' . $s ['slop_id'] );
-				$jsa ['tags'] = 0;
-				$jsa ['backColor'] = 'lightblue';
-				$jsa ['icon'] = "glyphicon glyphicon-road";
-				$jsa ['nodes'] = array ();
-				
+			$jsa ['text'] = '边坡名称：' . $s ['slop_name'];
+			$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' . $s ['slop_id'] );
+			$jsa ['tags'] = 0;
+			$jsa ['backColor'] = 'lightblue';
+			$jsa ['icon'] = "glyphicon glyphicon-road";
+			$jsa ['nodes'] = array ();
+			
 			$ls = $this->Device_model->select ( array (
 					'slop_id' => $s ['slop_id'] 
 			) );
-			
-			
 			
 			foreach ( $ls as $k => $v ) {
 				$node = array (
 						'text' => '设备名称: ' . $v ['device_name'],
 						'href' => base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $v ['device_id'] ),
 						'tags' => 0,
-						'icon' => 'glyphicon glyphicon-cog'
+						'icon' => 'glyphicon glyphicon-cog' 
 				);
-			
+				
 				$jsa ['nodes'] [] = $node;
 				$jsa ['tags'] ++;
 			}
-				
 		} else {
 			$jsa ['text'] = '边坡名称：' . 'NA';
 			$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' );
@@ -573,9 +579,9 @@ class Project extends MY_Admin_Controller {
 					'text' => '设备名称: ' . $d ['device_name'],
 					'href' => base_url ( $this->page_data ['folder_name'] . '/project/device_info/' . $d ['device_id'] ),
 					'tags' => 0,
-					'icon' => 'glyphicon glyphicon-cog'
+					'icon' => 'glyphicon glyphicon-cog' 
 			);
-				
+			
 			$jsa ['nodes'] [] = $node;
 			$jsa ['tags'] ++;
 		}
@@ -585,40 +591,45 @@ class Project extends MY_Admin_Controller {
 		$dd = $this->Device_data_model->get_one ( array (
 				'device_id' => $device_id 
 		) );
-		if (! isset ( $dd ) || ! $dd)
+		
+		if (! isset ( $dd ) || ! $dd || !file_exists(base_url () . $dd ['path'])){
 			$this->show_error ( "此设备没有已经上传的数据文件。" );
-			
-			// read the csv file
+			return ;
+		}
+		
+		// read the csv file
 		$file = fopen ( base_url () . $dd ['path'], 'r' );
-		if (! isset ( $file ) || ! $file)
+		if (! isset ( $file ) || ! $file){
 			$this->show_error ( "打开数据文件出错。" );
+			return;
+		}
 		
 		$i = 0;
 		$table_data = array ();
 		$plot_data = array ();
 		while ( $data = fgetcsv ( $file ) ) {
 			
-			$j = count ( $data );
+			$data_count = count ( $data );
 			if ($i == 0) {
 				$title = $data;
 			} else if ($i == 1) {
-				for($x = 0; $x < $j; $x ++) {
+				for($x = 0; $x < $data_count; $x ++) {
 					$mark = $data;
 					$table_data [$x] [$i - 1] = $data [$x];
 					$plot_data [$x] [$i - 1] = $data [$x];
 				}
 			} else if ($i < $this->data_column) {
-				for($x = 0; $x < $j; $x ++) {
+				for($x = 0; $x < $data_count; $x ++) {
 					$table_data [$x] [$i - 1] = $data [$x];
 					$plot_data [$x] [$i - 1] = $data [$x];
 				}
 			} else if ($i == $this->data_column) {
-				for($x = 0; $x < $j; $x ++) {
+				for($x = 0; $x < $data_count; $x ++) {
 					$table_data [$x] [$i - 1] = '...';
 					$plot_data [$x] [$i - 1] = $data [$x];
 				}
 			} else {
-				for($x = 0; $x < $j; $x ++) {
+				for($x = 0; $x < $data_count; $x ++) {
 					$plot_data [$x] [$i - 1] = $data [$x];
 				}
 			}
@@ -643,26 +654,34 @@ class Project extends MY_Admin_Controller {
 		$table = $this->table->generate ( $table_data );
 		
 		// generate data
+		
 		$x_axis = "";
-		foreach ( $plot_data [0] as $k => $v ) {
-			if ($k == '0')
-				continue;
-			$x_axis = $x_axis . "' " . $v . " ' ,";
+		if ($data_count > 0) {
+			foreach ( $plot_data [0] as $k => $v ) {
+				if ($k == '0')
+					continue;
+				$x_axis = $x_axis . "' " . $v . " ' ,";
+			}
 		}
 		
 		$row1 = "";
-		foreach ( $plot_data [1] as $k => $v ) {
-			if ($k == '0')
-				continue;
-			$row1 = $row1 . " " . $v . "  ,";
+		if ($data_count > 1) {
+			foreach ( $plot_data [1] as $k => $v ) {
+				if ($k == '0')
+					continue;
+				$row1 = $row1 . " " . $v . "  ,";
+			}
 		}
 		
 		$row2 = "";
-		foreach ( $plot_data [2] as $k => $v ) {
-			if ($k == '0')
-				continue;
-			$row2 = $row2 . " " . $v . "  ,";
+		if ($data_count > 2) {
+			foreach ( $plot_data [2] as $k => $v ) {
+				if ($k == '0')
+					continue;
+				$row2 = $row2 . " " . $v . "  ,";
+			}
 		}
+		
 		$title = implode ( ',', $title );
 		
 		$json_table = json_encode ( $json_array );
@@ -681,7 +700,7 @@ class Project extends MY_Admin_Controller {
 				'row2' => $row2,
 				'title' => $title,
 				'mark' => $mark,
-				'json_table' => $json_table,
+				'json_table' => $json_table 
 		) );
 	}
 	/**
@@ -722,6 +741,7 @@ class Project extends MY_Admin_Controller {
 						"general_slop",
 						"type",
 						"customer_id",
+						"road_name",
 						"update_timestamp" 
 				) );
 				if (isset ( $s ) && $s)
@@ -751,7 +771,7 @@ class Project extends MY_Admin_Controller {
 		$json_array = array ();
 		
 		foreach ( $project_data as $k => $v ) {
-// 			$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) . "/" . $v ['project_id'] . '" class="list-group-item active">' . "项目名称:&nbsp" . $v ['project_name'] . '</a>';
+			// $table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) . "/" . $v ['project_id'] . '" class="list-group-item active">' . "项目名称:&nbsp" . $v ['project_name'] . '</a>';
 			
 			$jsa ['text'] = '项目名称：' . $v ['project_name'];
 			$jsa ['href'] = base_url ( $this->page_data ['folder_name'] . '/project/list_project/' . $v ['project_id'] );
@@ -765,13 +785,13 @@ class Project extends MY_Admin_Controller {
 			) );
 			if (isset ( $s ) && $s) {
 				foreach ( $s as $kk => $vv ) {
-// 					$table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $vv ['slop_id'] . '" class="list-group-item">' . "边坡名称:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" . $vv ['slop_name'] . '</a>';
-				
+					// $table_data = $table_data . '<a href="' . base_url ( $this->page_data ['folder_name'] . '/project/slop_info' ) . "/" . $vv ['slop_id'] . '" class="list-group-item">' . "边坡名称:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" . $vv ['slop_name'] . '</a>';
+					
 					$node = array (
 							'text' => '边坡名称: ' . $vv ['slop_name'],
 							'href' => base_url ( $this->page_data ['folder_name'] . '/project/slop_info/' . $vv ['slop_id'] ),
 							'tags' => 0,
-							'icon' => 'glyphicon glyphicon-road'
+							'icon' => 'glyphicon glyphicon-road' 
 					);
 					
 					$jsa ['nodes'] [] = $node;
@@ -816,6 +836,10 @@ class Project extends MY_Admin_Controller {
 								$v ['customer_id'] 
 						),
 						array (
+								"施工高速名称",
+								$v ['road_name'] 
+						),
+						array (
 								"更新时间",
 								$v ['update_timestamp'] 
 						) 
@@ -833,7 +857,7 @@ class Project extends MY_Admin_Controller {
 				'table_data' => $table_data,
 				'info_table' => $info_table_data,
 				'project_id' => $id,
-				'json_table' => $json_table
+				'json_table' => $json_table 
 		) );
 	}
 	/**
@@ -875,11 +899,13 @@ class Project extends MY_Admin_Controller {
 				'construction_char' => $this->input->post ( 'construction' ),
 				'general_slop' => $this->input->post ( 'slop' ),
 				'type' => $this->input->post ( 'type' ),
-				'customer_id' => $this->input->post ( 'customer_id' ) 
+				'customer_id' => $this->input->post ( 'customer_id' ),
+				'road_name' => $this->input->post ( 'road_name' ) 
 		) );
 		
 		if (! $r) {
 			$this->show_error ( "Failed to insert into project_info table" );
+			return;
 		}
 		
 		$project_id = $this->Project_model->insert_id ();
@@ -916,6 +942,7 @@ class Project extends MY_Admin_Controller {
 			
 			if (! isset ( $r ['if_error'] ) && $r ['if_error']) {
 				$this->show_error ( $r );
+				return;
 			}
 			
 			// update the picture path information
@@ -928,6 +955,7 @@ class Project extends MY_Admin_Controller {
 			
 			if (! isset ( $r ) || ! $r) {
 				$this->show_error ( "上传项目图片失败。" );
+				return;
 			}
 		}
 		$r = true;
@@ -944,8 +972,9 @@ class Project extends MY_Admin_Controller {
 					"flag" => 0 
 			) );
 		}
-		if (! $r)
+		if (! $r){
 			$this->show_error ( "上传成功，但记录文件路径过程中发生错误。" );
+			return;}
 		else
 			Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) );
 	}
@@ -968,15 +997,19 @@ class Project extends MY_Admin_Controller {
 				'user_id' => $this->user_id 
 		) );
 		
-		if (! $r)
+		if (! $r){
 			$this->show_error ( "无法找到此项目，或者你无权访问此设备所在项目。" );
+			return;
+		}
 		
 		$p = $this->Project_model->get_one ( array (
 				'project_id' => $id 
 		) );
 		
-		if (! isset ( $p ) || ! $p)
+		if (! isset ( $p ) || ! $p){
 			$this->show_error ( '无法找到此项目。' );
+			return;
+		}
 		else {
 			$p = $this->Project_model->check_data ( $p );
 			$this->view ( 'modify_project', array (
@@ -1002,7 +1035,7 @@ class Project extends MY_Admin_Controller {
 		
 		if (! isset ( $r ) || ! $r) {
 			$this->show_error ( "你无权修改此项目" );
-			exit ();
+			return;
 		}
 		
 		$r = $this->Project_model->update ( array (
@@ -1013,13 +1046,15 @@ class Project extends MY_Admin_Controller {
 				'construction_char' => $this->input->post ( 'construction' ),
 				'general_slop' => $this->input->post ( 'slop' ),
 				'type' => $this->input->post ( 'type' ),
-				'customer_id' => $this->input->post ( 'customer_id' ) 
+				'customer_id' => $this->input->post ( 'customer_id' ),
+				'road_name' => $this->input->post ( 'road_name' ) 
 		), array (
 				'project_id' => $project_id 
 		) );
 		
 		if (! $r) {
 			$this->show_error ( "Failed to insert into project_info table" );
+			return;
 		}
 		
 		// upload picture
@@ -1051,10 +1086,12 @@ class Project extends MY_Admin_Controller {
 			$r = $this->do_upload_ex ( $userfile_data, true, $config, $name_list );
 			// var_dump($r);
 			
-			if (! isset ( $r ['if_error'] ) && $r ['if_error'])
+			if (! isset ( $r ['if_error'] ) && $r ['if_error']){
 				$this->show_error ( $r );
+				return;
+			}
 				
-				// update the picture path information
+			// update the picture path information
 			$r = $this->Project_model->update ( array (
 					"picture_path" => isset ( $r [0] ['file_name'] ) ? $pic_path . '/' . $r [0] ['file_name'] : "",
 					"construction_picture_path" => isset ( $r [1] ['file_name'] ) ? $pic_path . '/' . $r [1] ['file_name'] : "" 
@@ -1062,8 +1099,10 @@ class Project extends MY_Admin_Controller {
 					"project_id" => $project_id 
 			) );
 			
-			if (! isset ( $r ) || ! $r)
+			if (! isset ( $r ) || ! $r){
 				$this->show_error ( "更新图片信息失败。" );
+				return;
+			}
 		}
 		
 		$r = true;
@@ -1102,30 +1141,37 @@ class Project extends MY_Admin_Controller {
 				'project_id' => $project_id,
 				'user_id' => $this->user_id 
 		) );
-		if (! isset ( $r ) || ! $r)
+		if (! isset ( $r ) || ! $r){
 			$this->show_error ( "你无权访问此项目" );
+			return;}
 		
 		$p = $this->Project_model->get_one ( array (
 				'project_id' => $project_id 
 		) );
 		
-		if (! isset ( $p ) || ! $p)
+		if (! isset ( $p ) || ! $p){
 			$this->show_error ( "无法找到此项目。" );
+			return;
+		}
 			
 			// delete from project_info
 		$s = $this->Project_model->delete ( array (
 				'project_id' => $project_id 
 		) );
-		if (! isset ( $s ) || ! $s)
+		if (! isset ( $s ) || ! $s){
 			$this->show_error ( "删除项目失败。" );
+			return;
+		}
 			
 			// delete all relations and related slop
 		$dr = $this->Project_user_model->delete ( array (
 				'project_id' => $project_id 
 		) );
 		// $ds= $this->Slop_model->delete(array('project_id' => $project_id));
-		if (! isset ( $dr ) || ! $dr)
+		if (! isset ( $dr ) || ! $dr){
 			$this->show_error ( "项目已删除。但有一些项目关联关系尚未被删除。" );
+			return;
+		}
 		
 		Header ( 'Location:' . base_url ( $this->page_data ['folder_name'] . '/project/list_project' ) );
 	}
@@ -1143,7 +1189,6 @@ class Project extends MY_Admin_Controller {
 				'show_sidemenu' => false,
 				'info' => $info 
 		) );
-		exit ();
 	}
 	/**
 	 * What it do

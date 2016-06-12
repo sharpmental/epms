@@ -91,6 +91,12 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label for="croad_name" class="col-sm-2 control-label">施工高速名称</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="customer_id" name="road_name" placeholder="施工高速名称">
+				</div>
+			</div>
+			<div class="form-group">
 				<label for="slop" class="col-sm-2 control-label"></label>
 				<div class="col-sm-7">
 					<div class='btn-group' role="group">

@@ -86,7 +86,7 @@
     var row2 = [<?php echo $row2?>];
     var title1 = "<?php echo $title?>";
     var title2 = "<?php echo $title?>";
-    var mark1 = "<?php echo $mark[1]?>";
-    var mark2 = "<?php echo $mark[2]?>"; 
+    var mark1 = "<?php echo isset($mark[1])?$mark[1]:''?>";
+    var mark2 = "<?php echo isset($mark[2])?$mark[2]:''?>"; 
     var defaultData = '<?php echo $json_table ?>';
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/data_display.js']); </script>

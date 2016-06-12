@@ -38,10 +38,7 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-3 btn text-center">
 				<h4>边坡概况</h4>
-				<!--   div class="list-group text-left">
-					<a href="" class="list-group-item active"><?php echo "边坡名称:&nbsp" . $slop ['slop_name']?></a>
-			<?php echo $table_data?>
-			</div -->
+				<!--   div class="list-group text-left"><a href="" class="list-group-item active"><?php echo "边坡名称:&nbsp" . $slop ['slop_name']?></a>	<?php echo $table_data?></div -->
 				<div id="treeview1" class="text-left"></div>
 			</div>
 

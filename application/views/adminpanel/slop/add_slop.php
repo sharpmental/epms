@@ -55,14 +55,14 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="address" class="col-sm-2 control-label">地图X坐标值</label>
+				<label for="address" class="col-sm-2 control-label">经度坐标值</label>
 				<div class="col-sm-7">
 					<input type="" class="form-control" id="cord-x" name="cord-x"
 						placeholder="地图X坐标值">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="address" class="col-sm-2 control-label">地图Y坐标值</label>
+				<label for="address" class="col-sm-2 control-label">纬度坐标值</label>
 				<div class="col-sm-7">
 					<input type="" class="form-control" id="cord-y" name="cord-y"
 						placeholder="地图Y坐标值">
@@ -117,21 +117,6 @@
 						placeholder="终止桩号">
 				</div>
 			</div>
-
-			<div class="form-group">
-				<label for="longtitude" class="col-sm-2 control-label">纬度</label>
-				<div class="col-sm-7">
-					<input type="" class="form-control" id="longtitude"
-						name="longtitude" placeholder="纬度">
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="latitude" class="col-sm-2 control-label">经度</label>
-				<div class="col-sm-7">
-					<input type="" class="form-control" id="latitude" name="latitude"
-						placeholder="经度">
-				</div>
-			</div>
 			<div class="form-group">
 				<label for="altitude" class="col-sm-2 control-label">海拔高度</label>
 				<div class="col-sm-7">
@@ -140,7 +125,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="strength_info" class="col-sm-2 control-label">加固描述</label>
+				<label for="strength_info" class="col-sm-2 control-label">强度信息</label>
 				<div class="col-sm-7">
 					<input type="" class="form-control" id="strength_info"
 						name="strength_info" placeholder="加固描述 ">
@@ -191,19 +176,41 @@
 				</div>
 			</div -->
 			<div class="form-group">
-				<label for="pic" class="col-sm-2 control-label">3D展示图</label>
+				<label for="3d-pic" class="col-sm-2 control-label">3D展示图</label>
 				<div class="col-sm-7">
 					<input type="file" class="form-control" id="3d-pic"
 						name="userfile[]" accept="image/*" placeholder="上传项目图片">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="pic" class="col-sm-2 control-label">上传视频</label>
+				<label for="sendset_3d" class="col-sm-2 control-label">安装视频</label>
 				<div class="col-sm-7">
-					<input type="file" class="form-control" id="video"
-						name="userfile[]" accept="*" placeholder="上传项目图片">
+					<input type="" class="form-control" id="sendset_3d"
+						name="userfile[]" accept="*" placeholder="视频地址">
 				</div>
 			</div>
+			<div class="form-group">
+				<label for="maintance_pic" class="col-sm-2 control-label">养护图</label>
+				<div class="col-sm-7">
+					<input type="file" class="form-control" id="maintance_pic"
+						name="userfile[]" accept="image/*" placeholder="上传项目图片">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="build_pic" class="col-sm-2 control-label">施工图</label>
+				<div class="col-sm-7">
+					<input type="file" class="form-control" id="build_pic"
+						name="userfile[]" accept="image/*" placeholder="上传项目图片">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="video_path" class="col-sm-2 control-label">视频</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="video_path"
+						name="userfile[]" accept="*" placeholder="视频地址">
+				</div>
+			</div>
+			
 			<div class="form-group">
 				<label for="construction" class="col-sm-2 control-label">所属项目</label>
 				<div class="col-sm-7">

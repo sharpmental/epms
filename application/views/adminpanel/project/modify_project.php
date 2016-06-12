@@ -81,6 +81,24 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label for="type" class="col-sm-2 control-label">项目类型</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="type" name="type" placeholder="项目类型" value="<?php echo $data['type']?>">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="customer_id" class="col-sm-2 control-label">客户编号</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="customer_id" name="customer_id" placeholder="客户编号" value="<?php echo $data['customer_id']?>">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="croad_name" class="col-sm-2 control-label">施工高速名称</label>
+				<div class="col-sm-7">
+					<input type="" class="form-control" id="customer_id" name="road_name" placeholder="施工高速名称" value="<?php echo $data['road_name']?>">
+				</div>
+			</div>
+			<div class="form-group">
 				<label for="slop" class="col-sm-2 control-label"></label>
 				<div class="col-sm-7">
 					<div class='btn-group' role="group">
